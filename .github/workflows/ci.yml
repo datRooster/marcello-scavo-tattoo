@@ -28,7 +28,7 @@ jobs:
         tools: composer
     
     - name: Cache Composer dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: vendor
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
@@ -42,7 +42,7 @@ jobs:
       run: ./vendor/bin/phpcs --standard=phpcs.xml --report=checkstyle --report-file=phpcs-report.xml
     
     - name: Upload PHPCS report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: phpcs-report-php${{ matrix.php-version }}
@@ -52,7 +52,7 @@ jobs:
       run: ./vendor/bin/phpcs --standard=PHPCompatibilityWP --runtime-set testVersion 7.4- --report=checkstyle --report-file=phpcompat-report.xml
     
     - name: Upload PHP Compatibility report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: phpcompat-report-php${{ matrix.php-version }}
@@ -214,7 +214,7 @@ jobs:
         zip -r marcello-scavo-tattoo-staging.zip . -x "*.git*" "node_modules/*" "*.md" ".github/*" "tests/*"
     
     - name: Upload staging artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: staging-package
         path: marcello-scavo-tattoo-staging.zip
@@ -239,7 +239,7 @@ jobs:
         zip -r marcello-scavo-tattoo-production.zip . -x "*.git*" "node_modules/*" "vendor/bin/*" "vendor/*/tests/*"
     
     - name: Upload production artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: production-package
         path: marcello-scavo-tattoo-production.zip
