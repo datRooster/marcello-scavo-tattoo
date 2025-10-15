@@ -34,7 +34,24 @@ jobs:
     
     - name: Check PHP syntax
       run: |
-        find . -name "*.php" -not -path "./vendor/*" -exec php -l {} \; | grep -v "No syntax errors"
+        echo "🔍 Checking PHP syntax..."
+        syntax_errors=0
+        for file in $(find . -name "*.php" -not -path "./vendor/*"); do
+          if ! php -l "$file" > /dev/null 2>&1; then
+            echo "❌ Syntax error in: $file"
+            php -l "$file"
+            syntax_errors=$((syntax_errors + 1))
+          else
+            echo "✅ $file - OK"
+          fi
+        done
+        
+        if [ $syntax_errors -gt 0 ]; then
+          echo "❌ Found $syntax_errors syntax errors"
+          exit 1
+        else
+          echo "✅ All PHP files have valid syntax!"
+        fi
 
   basic-tests:
     name: Basic Theme Tests
