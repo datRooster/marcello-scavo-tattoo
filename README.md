@@ -1,8 +1,16 @@
 # 🎨 Marcello Scavo Tattoo - Professional WordPress Theme
 
+[![WordPress Theme Quality Check](https://github.com/datRooster/marcello-scavo-tattoo/actions/workflows/simple-ci.yml/badge.svg)](https://github.com/datRooster/marcello-scavo-tattoo/actions/workflows/simple-ci.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/datRooster/marcello-scavo-tattoo)](https://github.com/datRooster/marcello-scavo-tattoo/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/datRooster/marcello-scavo-tattoo)](https://github.com/datRooster/marcello-scavo-tattoo/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/datRooster/marcello-scavo-tattoo)](https://github.com/datRooster/marcello-scavo-tattoo/network/members)
+
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-blue.svg)](https://www.php.net/)
 [![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue.svg)](https://wordpress.org/)
 [![WordPress Coding Standards](https://img.shields.io/badge/WordPress-Coding%20Standards-green.svg)](https://github.com/WordPress/WordPress-Coding-Standards)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-PHPCS%20Compliant-brightgreen.svg)](https://github.com/WordPress/WordPress-Coding-Standards)
+[![Security](https://img.shields.io/badge/Security-Hardened-green.svg)](#-security-features)
+[![Performance](https://img.shields.io/badge/Performance-Optimized-brightgreen.svg)](#-performance-features)
 [![License](https://img.shields.io/badge/License-GPL%20v2%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
 A professional, performance-optimized WordPress theme designed specifically for tattoo artists and studios. Built with modern development practices, comprehensive code quality standards, and advanced performance optimizations.
