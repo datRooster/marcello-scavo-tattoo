@@ -1,0 +1,176 @@
+# Spanish translations for Marcello Scavo Tattoo Theme
+# Copyright (C) 2025 Marcello Scavo Tattoo Theme
+# This file is distributed under the same license as the Marcello Scavo Tattoo Theme package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Marcello Scavo Tattoo Theme 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/marcello-scavo-tattoo\n"
+"POT-Creation-Date: 2025-09-02 12:00+0000\n"
+"PO-Revision-Date: 2025-09-02 12:00+0000\n"
+"Last-Translator: Marcello Scavo <info@marcelloscavo.com>\n"
+"Language-Team: Spanish\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# Navigation and Header
+msgid "Menu Principale"
+msgstr "Menú Principal"
+
+msgid "Menu"
+msgstr "Menú"
+
+msgid "🇮🇹 IT"
+msgstr "🇮🇹 IT"
+
+msgid "🇺🇸 EN"
+msgstr "🇺🇸 EN"
+
+msgid "🇪🇸 ES"
+msgstr "🇪🇸 ES"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "About"
+msgstr "Acerca de"
+
+msgid "Portfolio"
+msgstr "Portafolio"
+
+msgid "Servizi"
+msgstr "Servicios"
+
+msgid "Shop"
+msgstr "Tienda"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Contatti"
+msgstr "Contacto"
+
+# Hero Section
+msgid "ARTE IN MOVIMENTO"
+msgstr "ARTE EN MOVIMIENTO"
+
+msgid "Scopri l'essenza dei"
+msgstr "Descubre la esencia de"
+
+msgid "miei tatuaggi e opere"
+msgstr "mis tatuajes y obras"
+
+msgid "d'arte."
+msgstr "de arte."
+
+msgid "Benvenuti nel mio mondo creativo, dove ogni storia racconta una storia, i miei tatuaggi e le opere d'arte nascono dall'ispirazione e dalla passione. Che tu stia cercando un tatuaggio personalizzato per il tuo corpo o un'opera unica per la tua parete, sei nel posto giusto. Esplora il mio portfolio e lasciati ispirare dalla fusione di arte e tatuaggio."
+msgstr "Bienvenidos a mi mundo creativo, donde cada historia cuenta una historia, mis tatuajes y obras de arte nacen de la inspiración y la pasión. Ya sea que estés buscando un tatuaje personalizado para tu cuerpo o una obra única para tu pared, estás en el lugar correcto. Explora mi portafolio y déjate inspirar por la fusión del arte y el tatuaje."
+
+msgid "Esplora Ora"
+msgstr "Explorar Ahora"
+
+# About Section
+msgid "L'arte di Marcello: un viaggio"
+msgstr "El Arte de Marcello: Un Viaje"
+
+msgid "Marcello è un artista che unisce passione e talento in ogni opera d'arte e tatuaggio. Fin da giovane, ha coltivato il suo amore per l'arte, esplorando tecniche diverse e affascinandosi sempre della vita che lo circonda. La sua evoluzione è evidente, non solo nei suoi lavori, ma anche nella continua ricerca di innovazione e stile. Ogni tatuaggio racconta una storia, un pezzo della personalità di chi lo indossa. Con la sua capacità di ascoltare e interpretare i desideri dei clienti, Marcello trasforma ogni foglio bianco in un'opera unica, creando un legame speciale con ognuno di loro."
+msgstr "Marcello es un artista que combina pasión y talento en cada obra de arte y tatuaje. Desde joven, ha cultivado su amor por el arte, explorando técnicas diferentes y siempre fascinándose con la vida que lo rodea. Su evolución es evidente, no solo en sus trabajos, sino también en la búsqueda continua de innovación y estilo. Cada tatuaje cuenta una historia, una pieza de la personalidad de quien lo lleva. Con su capacidad de escuchar e interpretar los deseos de los clientes, Marcello transforma cada hoja en blanco en una obra única, creando un vínculo especial con cada uno de ellos."
+
+msgid "La filosofia di Marcello si basa sull'ascolto attento delle esigenze del cliente e sulla traduzione delle loro idee in opere d'arte durature. Ogni sessione è un momento di creazione condivisa, dove l'esperienza e la creatività si fondono per dare vita a qualcosa di veramente speciale."
+msgstr "La filosofía de Marcello se basa en escuchar atentamente las necesidades del cliente y traducir sus ideas en obras de arte duraderas. Cada sesión es un momento de creación compartida, donde la experiencia y la creatividad se fusionan para dar vida a algo verdaderamente especial."
+
+# Services Section
+msgid "I nostri servizi"
+msgstr "Nuestros Servicios"
+
+msgid "Scopri le nostre offerte principali, pensate per soddisfare le tue passioni."
+msgstr "Descubre nuestras principales ofertas, diseñadas para satisfacer tus pasiones."
+
+msgid "Vendita opere d'arte"
+msgstr "Venta de Obras de Arte"
+
+msgid "Esplora la nostra collezione di opere d'arte uniche e porta a casa un pezzo di creatività."
+msgstr "Explora nuestra colección de obras de arte únicas y llévate a casa una pieza de creatividad."
+
+msgid "Mostra di tatuaggi"
+msgstr "Exhibición de Tatuajes"
+
+msgid "Assisti ai nostri eventi di tatuaggio, dove talenti internazionali mostrano le loro creazioni dal vivo."
+msgstr "Asiste a nuestros eventos de tatuajes, donde talentos internacionales muestran sus creaciones en vivo."
+
+msgid "Prenotazione tatuaggi"
+msgstr "Reserva de Tatuajes"
+
+msgid "Prenota il tuo tatuaggio direttamente online e realizza il tuo design personalizzato con noi."
+msgstr "Reserva tu tatuaje directamente en línea y crea tu diseño personalizado con nosotros."
+
+# Portfolio Section
+msgid "Scopri le mie creazioni artistiche"
+msgstr "Descubre Mis Creaciones Artísticas"
+
+msgid "Esplora una collezione di opere ispirate ai tatuaggi unici, che raccontano storie e emozioni."
+msgstr "Explora una colección de obras inspiradas en tatuajes únicos, que cuentan historias y emociones."
+
+# Social Section
+msgid "Seguimi sui Social"
+msgstr "Sígueme en Redes Sociales"
+
+msgid "Scopri il processo creativo dietro ogni tatuaggio e resta aggiornato sui miei ultimi lavori."
+msgstr "Descubre el proceso creativo detrás de cada tatuaje y mantente actualizado sobre mis últimos trabajos."
+
+# Widget Areas
+msgid "Menu Footer"
+msgstr "Menú del Pie"
+
+msgid "Social Media"
+msgstr "Redes Sociales"
+
+msgid "Sidebar Principale"
+msgstr "Barra Lateral Principal"
+
+msgid "Aggiungi widget qui per apparire nella sidebar."
+msgstr "Agregar widgets aquí para que aparezcan en la barra lateral."
+
+msgid "Footer Colonna 1"
+msgstr "Pie Columna 1"
+
+msgid "Widget per la prima colonna del footer."
+msgstr "Widgets para la primera columna del pie."
+
+msgid "Footer Colonna 2"
+msgstr "Pie Columna 2"
+
+msgid "Widget per la seconda colonna del footer."
+msgstr "Widgets para la segunda columna del pie."
+
+msgid "Footer Colonna 3"
+msgstr "Pie Columna 3"
+
+msgid "Widget per la terza colonna del footer."
+msgstr "Widgets para la tercera columna del pie."
+
+msgid "Area widget per contenuti social media (Instagram feed, etc.)."
+msgstr "Área de widgets para contenido de redes sociales (feed de Instagram, etc.)."
+
+msgid "Recensioni Clienti"
+msgstr "Reseñas de Clientes"
+
+msgid "Area widget per recensioni Google e testimonianze clienti."
+msgstr "Área de widgets para reseñas de Google y testimonios de clientes."
+
+msgid "Prenotazione Booking"
+msgstr "Reserva de Citas"
+
+msgid "Area widget per sistemi di prenotazione (Bookly, form contatti, etc.)."
+msgstr "Área de widgets para sistemas de reservas (Bookly, formularios de contacto, etc.)."
+
+msgid "Galleria Artistica"
+msgstr "Galería Artística"
+
+msgid "Area widget per mostrare la galleria dei lavori artistici e tatuaggi."
+msgstr "Área de widgets para mostrar la galería de trabajos artísticos y tatuajes."
+
+msgid "Uploader Sicuro"
+msgstr "Subida Segura"

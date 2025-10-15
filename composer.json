@@ -1,0 +1,59 @@
+{
+    "name": "marcello-scavo/tattoo-theme",
+    "description": "Professional WordPress theme for Marcello Scavo Tattoo Studio",
+    "type": "wordpress-theme",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Marcello Scavo",
+            "email": "info@marcelloscavo.com",
+            "homepage": "https://marcelloscavo.com"
+        }
+    ],
+    "keywords": [
+        "wordpress",
+        "theme",
+        "tattoo",
+        "portfolio",
+        "booking"
+    ],
+    "homepage": "https://marcelloscavo.com",
+    "support": {
+        "issues": "https://github.com/marcello-scavo/tattoo-theme/issues",
+        "source": "https://github.com/marcello-scavo/tattoo-theme"
+    },
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "php-stubs/wordpress-stubs": "^6.3",
+        "squizlabs/php_codesniffer": "^3.7",
+        "wp-coding-standards/wpcs": "^3.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "lint": "phpcs --standard=WordPress wp-content/themes/marcello-scavo-tattoo/",
+        "lint:fix": "phpcbf --standard=WordPress wp-content/themes/marcello-scavo-tattoo/",
+        "lint:compatibility": "phpcs --standard=PHPCompatibilityWP --runtime-set testVersion 7.4- wp-content/themes/marcello-scavo-tattoo/"
+    },
+    "scripts-descriptions": {
+        "lint": "Run WordPress Coding Standards check",
+        "lint:fix": "Fix WordPress Coding Standards issues automatically",
+        "lint:compatibility": "Check PHP compatibility for WordPress"
+    },
+    "extra": {
+        "installer-paths": {
+            "wp-content/themes/{$name}/": ["type:wordpress-theme"],
+            "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"]
+        }
+    }
+}

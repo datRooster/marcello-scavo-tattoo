@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<ruleset name="Marcello Scavo Tattoo Theme">
+    <description>WordPress Coding Standards for Marcello Scavo Tattoo Theme</description>
+    
+    <!-- Files to check -->
+    <file>./functions.php</file>
+    <file>./inc/</file>
+    
+    <!-- Exclude vendor directory -->
+    <exclude-pattern>./vendor/*</exclude-pattern>
+    <exclude-pattern>./node_modules/*</exclude-pattern>
+    <exclude-pattern>./assets/*</exclude-pattern>
+    <exclude-pattern>./backup/*</exclude-pattern>
+    <exclude-pattern>./docs/*</exclude-pattern>
+    <exclude-pattern>./style.css</exclude-pattern>
+    <exclude-pattern>./dev-tools.sh</exclude-pattern>
+    
+    <!-- Use WordPress Coding Standards -->
+    <rule ref="WordPress">
+        <!-- Allow short array syntax -->
+        <exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
+        <!-- Allow camelCase for JavaScript -->
+        <exclude name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase"/>
+        <!-- Allow template tags -->
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+        <!-- Allow theme files structure -->
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+    </rule>
+    
+    <!-- Use WordPress Extra standards -->
+    <rule ref="WordPress-Extra">
+        <!-- Exclude short echo tags rule -->
+        <exclude name="WordPress.Security.EscapeOutput.UnsafePrintingFunction"/>
+    </rule>
+    
+    <!-- Use WordPress Docs standards -->
+    <rule ref="WordPress-Docs"/>
+    
+    <!-- Check for PHP compatibility -->
+    <rule ref="PHPCompatibilityWP"/>
+    
+    <!-- Set minimum PHP version -->
+    <config name="testVersion" value="7.4-"/>
+    
+    <!-- Set text domain -->
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="marcello-scavo-tattoo"/>
+            </property>
+        </properties>
+    </rule>
+    
+    <!-- Allow theme specific exceptions -->
+    <rule ref="WordPress.Files.FileName">
+        <properties>
+            <property name="strict_class_file_names" value="false"/>
+        </properties>
+    </rule>
+    
+    <!-- Set WordPress prefixes -->
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array">
+                <element value="marcello_scavo"/>
+                <element value="MARCELLO_SCAVO"/>
+                <element value="MarcelloScavo"/>
+            </property>
+        </properties>
+        <!-- Exclude WordPress core function fallbacks -->
+        <exclude-pattern>*/functions.php</exclude-pattern>
+    </rule>
+    
+    <!-- Re-include prefixes for functions.php but exclude specific fallback functions -->
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound">
+        <exclude-pattern>*/functions.php</exclude-pattern>
+    </rule>
+    
+    <!-- Allow WordPress core constants -->
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound">
+        <exclude-pattern>*/functions.php</exclude-pattern>
+    </rule>
+    
+    <!-- Performance optimization settings -->
+    <config name="ignore_warnings_on_exit" value="1"/>
+    <config name="ignore_errors_on_exit" value="1"/>
+    <config name="show_progress" value="1"/>
+    <config name="colors" value="1"/>
+    
+    <!-- Set tab width -->
+    <arg name="tab-width" value="4"/>
+    
+    <!-- Show sniff codes in all reports -->
+    <arg value="sp"/>
+    
+    <!-- Use colors in output -->
+    <arg name="colors"/>
+    
+    <!-- Show progress -->
+    <arg value="p"/>
+</ruleset>

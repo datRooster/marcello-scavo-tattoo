@@ -1,0 +1,132 @@
+# WordPress Theme .gitignore
+
+# WordPress Core Files (not needed in theme)
+/wp-admin/
+/wp-includes/
+/wp-*.php
+/xmlrpc.php
+/.htaccess
+
+# WordPress Configuration
+wp-config.php
+wp-config-sample.php
+
+# WordPress Database Dumps
+*.sql
+*.sql.gz
+
+# Composer Dependencies (exclude from repo)
+vendor/
+composer.lock
+
+# Documentation backups (exclude large docs)
+docs/backup/
+docs/*-backup.md
+
+# Node.js Dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Build Files
+/build/
+/dist/
+*.min.js
+*.min.css
+!assets/js/*.min.js
+!assets/css/*.min.css
+
+# Development Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Log Files
+*.log
+error_log
+debug.log
+
+# Temporary Files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Cache Files
+.sass-cache/
+.cache/
+wp-content/cache/
+wp-content/uploads/cache/
+
+# Backup Files
+*.bak
+*.backup
+*.old
+
+# Security Files
+.env
+.env.local
+.env.production
+.env.staging
+
+# PHPCS Cache
+.phpcs.xml.cache
+
+# PHPStan Cache
+.phpstan.cache
+
+# Testing
+/tests/coverage/
+.phpunit.result.cache
+
+# WordPress Uploads (usually don't commit)
+# wp-content/uploads/
+
+# Plugin and Theme Development
+*.pot~
+*.po~
+
+# Deployment
+/deploy/
+/.deployment
+/publish.xml
+
+# IDE Files
+*.code-workspace
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+
+# Custom
+/documentation/build/
+/assets/src/
+
+# WordPress Specific
+wp-content/advanced-cache.php
+wp-content/backup-db/
+wp-content/backups/
+wp-content/blogs.dir/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/
+wp-content/wp-cache-config.php
+wp-content/plugins/hello.php
+
+# Development Tools Output
+performance-report.txt
+phpcs-report.xml
+phpstan-report.txt
