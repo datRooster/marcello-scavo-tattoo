@@ -19,9 +19,12 @@ wp-config-sample.php
 vendor/
 composer.lock
 
-# Documentation backups (exclude large docs)
-docs/backup/
-docs/*-backup.md
+# Archive and backup files (exclude from repo)
+.archive/
+*-backup.php
+*-backup.md
+*.old
+*.bak
 
 # Node.js Dependencies
 node_modules/

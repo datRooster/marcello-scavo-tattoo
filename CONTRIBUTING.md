@@ -1,44 +1,84 @@
-# Contributing to Marcello Scavo Tattoo Theme
+# Contributing to Marcello Scavo Tattoo Theme# Contributing to Marcello Scavo Tattoo Theme
 
-Thank you for your interest in contributing to the Marcello Scavo Tattoo Theme! This document provides guidelines and information for contributors.
 
-## 🔧 Development Setup
 
-### Prerequisites
+Thank you for your interest in contributing! 🎉Thank you for your interest in contributing to the Marcello Scavo Tattoo Theme! This document provides guidelines and information for contributors.
 
-- **PHP**: 7.4 or higher
+
+
+## 📖 Complete Contributing Guidelines## 🔧 Development Setup
+
+
+
+For detailed contributing guidelines, development setup, code standards, and pull request requirements, please see our **[Complete Documentation](DOCUMENTATION.md#contributing-guidelines)**.### Prerequisites
+
+
+
+## 🚀 Quick Start for Contributors- **PHP**: 7.4 or higher
+
 - **Composer**: 2.0 or higher
-- **Node.js**: 16 or higher (for asset compilation)
-- **WordPress**: 6.0 or higher (for testing)
 
-### Local Development Environment
+1. **Fork** the repository- **Node.js**: 16 or higher (for asset compilation)
 
-1. **Clone the repository**:
-   ```bash
+2. **Clone** your fork: `git clone https://github.com/YOUR-USERNAME/marcello-scavo-tattoo.git`- **WordPress**: 6.0 or higher (for testing)
+
+3. **Install dependencies**: `composer install`
+
+4. **Create feature branch**: `git checkout -b feature/amazing-feature`### Local Development Environment
+
+5. **Make changes** following WordPress Coding Standards
+
+6. **Run tests**: `./dev-tools.sh lint`1. **Clone the repository**:
+
+7. **Submit pull request**   ```bash
+
    git clone https://github.com/your-username/marcello-scavo-tattoo.git
-   cd marcello-scavo-tattoo
+
+## 📋 Code Quality Requirements   cd marcello-scavo-tattoo
+
    ```
 
-2. **Install PHP dependencies**:
-   ```bash
-   composer install --dev
-   ```
+- ✅ WordPress Coding Standards compliance
 
-3. **Set up WordPress environment**:
+- ✅ Security best practices (input sanitization, output escaping)2. **Install PHP dependencies**:
+
+- ✅ PHPDoc documentation for all functions   ```bash
+
+- ✅ Performance considerations   composer install --dev
+
+- ✅ Backward compatibility   ```
+
+
+
+## 🔒 Security Issues3. **Set up WordPress environment**:
+
    - Install the theme in a local WordPress installation
-   - Activate the theme in WordPress admin
 
-## 📋 Code Standards
+For security vulnerabilities, please email: **security@marcelloscavo.com**   - Activate the theme in WordPress admin
 
-### WordPress Coding Standards
 
-This project follows the [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/). All code must pass PHPCS analysis.
 
-#### Running Code Quality Checks
+**Do not create public issues for security problems.**## 📋 Code Standards
 
-```bash
+
+
+## 📚 Resources### WordPress Coding Standards
+
+
+
+- [Complete Documentation](DOCUMENTATION.md)This project follows the [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/). All code must pass PHPCS analysis.
+
+- [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/)
+
+- [Theme Development Handbook](https://developer.wordpress.org/themes/)#### Running Code Quality Checks
+
+
+
+---```bash
+
 # Check all files
-./vendor/bin/phpcs --standard=phpcs.xml
+
+**Questions?** Check our [Complete Documentation](DOCUMENTATION.md) or create a [GitHub Discussion](https://github.com/datRooster/marcello-scavo-tattoo/discussions)../vendor/bin/phpcs --standard=phpcs.xml
 
 # Check specific file
 ./vendor/bin/phpcs --standard=phpcs.xml path/to/file.php

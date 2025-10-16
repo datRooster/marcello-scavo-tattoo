@@ -15,6 +15,8 @@
 
 A professional, performance-optimized WordPress theme designed specifically for tattoo artists and studios. Built with modern development practices, comprehensive code quality standards, and advanced performance optimizations.
 
+📖 **[Complete Documentation](DOCUMENTATION.md)** | 🚀 **[Quick Start](#installation)** | 🤝 **[Contributing](#contributing)**
+
 ## ✨ Key Features
 
 ### 🏗️ **Modern Architecture**
