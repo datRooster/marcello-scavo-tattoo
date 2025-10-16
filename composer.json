@@ -60,5 +60,20 @@
             "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
             "wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"]
         }
+    },
+    "archive": {
+        "exclude": [
+            "dev-scripts/",
+            "docs/",
+            ".github/",
+            ".gitignore",
+            "composer.json",
+            "composer.lock",
+            "phpcs.xml",
+            "*.md",
+            "*.log",
+            "vendor/",
+            ".archive/"
+        ]
     }
 }

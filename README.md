@@ -15,7 +15,7 @@
 
 A professional, performance-optimized WordPress theme designed specifically for tattoo artists and studios. Built with modern development practices, comprehensive code quality standards, and advanced performance optimizations.
 
-📖 **[Complete Documentation](DOCUMENTATION.md)** | 🚀 **[Quick Start](#installation)** | 🤝 **[Contributing](#contributing)**
+📖 **[Complete Documentation](docs/DOCUMENTATION.md)** | 🚀 **[Quick Start](#installation)** | 🤝 **[Contributing](#contributing)**
 
 ## ✨ Key Features
 
@@ -364,19 +364,15 @@ The theme is fully translation-ready:
 
 ## 🤝 Contributing
 
-### Development Setup
+Per contribuire al progetto, consulta la [Guida Completa ai Contributi](docs/CONTRIBUTING.md).
+
+### Quick Development Setup
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch  
 3. Install dependencies: `composer install --dev`
 4. Make your changes
-5. Run tests: `./dev-tools.sh lint`
+5. Run tests: `composer run lint`
 6. Submit a pull request
-
-### Coding Standards
-- Follow WordPress Coding Standards
-- All code must pass PHPCS analysis
-- Include PHPDoc for all functions
-- Add unit tests for new features
 
 ### Pull Request Process
 1. Ensure all tests pass

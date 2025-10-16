@@ -19,6 +19,11 @@ wp-config-sample.php
 vendor/
 composer.lock
 
+# Development Scripts (local environment specific)
+dev-scripts/
+development-report.md
+*.log
+
 # Archive and backup files (exclude from repo)
 .archive/
 *-backup.php
