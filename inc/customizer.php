@@ -250,6 +250,82 @@ function marcello_scavo_customize_register( $wp_customize ) {
 			'type'        => 'textarea',
 		)
 	);
+
+	// Social Media Section.
+	$wp_customize->add_section(
+		'social_media_section',
+		array(
+			'title'       => __( '📱 Social Media', 'marcello-scavo-tattoo' ),
+			'priority'    => 160,
+			'description' => __( 'Configura i tuoi link social media.', 'marcello-scavo-tattoo' ),
+		)
+	);
+
+	// Social Media Links.
+	$social_platforms = array(
+		'facebook'  => __( 'Facebook', 'marcello-scavo-tattoo' ),
+		'instagram' => __( 'Instagram', 'marcello-scavo-tattoo' ),
+		'twitter'   => __( 'Twitter', 'marcello-scavo-tattoo' ),
+		'linkedin'  => __( 'LinkedIn', 'marcello-scavo-tattoo' ),
+		'youtube'   => __( 'YouTube', 'marcello-scavo-tattoo' ),
+		'tiktok'    => __( 'TikTok', 'marcello-scavo-tattoo' ),
+		'whatsapp'  => __( 'WhatsApp', 'marcello-scavo-tattoo' ),
+		'email'     => __( 'Email', 'marcello-scavo-tattoo' ),
+	);
+
+	foreach ( $social_platforms as $platform => $label ) {
+		$wp_customize->add_setting(
+			"social_{$platform}",
+			array(
+				'default'           => '',
+				'sanitize_callback' => 'esc_url_raw',
+			)
+		);
+
+		$description = '';
+		if ( 'whatsapp' === $platform ) {
+			$description = __( 'Inserisci il numero di telefono (es: +393331234567)', 'marcello-scavo-tattoo' );
+		} elseif ( 'email' === $platform ) {
+			$description = __( 'Inserisci l\'indirizzo email', 'marcello-scavo-tattoo' );
+		} else {
+			// translators: %s is the social media platform name.
+			$description = sprintf( __( 'URL completo del profilo %s', 'marcello-scavo-tattoo' ), $label );
+		}
+
+		$wp_customize->add_control(
+			"social_{$platform}",
+			array(
+				'label'       => $label,
+				'description' => $description,
+				'section'     => 'social_media_section',
+				'type'        => 'url',
+			)
+		);
+	}
+
+	// Social Media Style.
+	$wp_customize->add_setting(
+		'social_media_style',
+		array(
+			'default'           => 'modern',
+			'sanitize_callback' => 'marcello_scavo_sanitize_social_style',
+		)
+	);
+
+	$wp_customize->add_control(
+		'social_media_style',
+		array(
+			'label'   => __( 'Stile Social Media', 'marcello-scavo-tattoo' ),
+			'section' => 'social_media_section',
+			'type'    => 'select',
+			'choices' => array(
+				'modern'  => __( 'Moderno', 'marcello-scavo-tattoo' ),
+				'minimal' => __( 'Minimale', 'marcello-scavo-tattoo' ),
+				'buttons' => __( 'Bottoni', 'marcello-scavo-tattoo' ),
+				'cards'   => __( 'Cards', 'marcello-scavo-tattoo' ),
+			),
+		)
+	);
 }
 add_action( 'customize_register', 'marcello_scavo_customize_register' );
 
