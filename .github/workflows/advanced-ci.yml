@@ -1,0 +1,252 @@
+name: WordPress Theme Advanced Testing
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  wordpress-standards:
+    name: WordPress Coding Standards
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        php-version: [7.4, 8.0, 8.1, 8.2]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup PHP ${{ matrix.php-version }}
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        extensions: mbstring, intl, mysql
+        tools: composer
+    
+    - name: Cache Composer dependencies
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-composer-${{ matrix.php-version }}-${{ hashFiles('**/composer.json') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-${{ matrix.php-version }}-
+          ${{ runner.os }}-composer-
+    
+    - name: Install Composer dependencies
+      run: composer install --prefer-dist --no-progress --no-interaction
+    
+    - name: Run WordPress Coding Standards
+      run: |
+        echo "🔍 Running WordPress Coding Standards..."
+        ./vendor/bin/phpcs --standard=WordPress --report=summary --colors || true
+        echo ""
+        echo "📊 Detailed PHPCS Report:"
+        ./vendor/bin/phpcs --standard=phpcs.xml --report=full --colors
+    
+    - name: Run PHP Compatibility Check
+      run: |
+        echo "🧪 Testing PHP ${{ matrix.php-version }} compatibility..."
+        ./vendor/bin/phpcs --standard=PHPCompatibilityWP --runtime-set testVersion ${{ matrix.php-version }}- --report=summary --colors || true
+
+  wordpress-theme-check:
+    name: WordPress Theme Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        tools: composer, wp-cli
+    
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-interaction
+    
+    - name: Setup WordPress Test Environment
+      run: |
+        echo "🏗️ Setting up WordPress test environment..."
+        mkdir -p /tmp/wordpress
+        wp core download --path=/tmp/wordpress --allow-root
+        
+        # Copy theme to WordPress
+        mkdir -p /tmp/wordpress/wp-content/themes/marcello-scavo-tattoo
+        rsync -av --exclude='.git' --exclude='vendor' --exclude='node_modules' ./ /tmp/wordpress/wp-content/themes/marcello-scavo-tattoo/
+    
+    - name: WordPress Theme Structure Check
+      run: |
+        echo "📋 Checking WordPress theme structure..."
+        cd /tmp/wordpress/wp-content/themes/marcello-scavo-tattoo
+        
+        # Required files check
+        echo "✅ Required Files Check:"
+        [ -f "style.css" ] && echo "  ✅ style.css found" || echo "  ❌ style.css missing"
+        [ -f "index.php" ] && echo "  ✅ index.php found" || echo "  ❌ index.php missing"
+        [ -f "functions.php" ] && echo "  ✅ functions.php found" || echo "  ❌ functions.php missing"
+        
+        # Optional but recommended files
+        echo "📄 Recommended Files Check:"
+        [ -f "screenshot.png" ] && echo "  ✅ screenshot.png found" || echo "  ⚠️ screenshot.png missing (recommended)"
+        [ -f "readme.txt" ] && echo "  ✅ readme.txt found" || echo "  ⚠️ readme.txt missing (recommended)"
+        
+        # WordPress template hierarchy
+        echo "🎨 Template Files Found:"
+        find . -name "*.php" -maxdepth 1 | sed 's|./||' | sort
+    
+    - name: WordPress Function Usage Check
+      run: |
+        echo "🔍 Checking WordPress function usage..."
+        cd /tmp/wordpress/wp-content/themes/marcello-scavo-tattoo
+        
+        # Check for deprecated functions
+        echo "⚠️ Checking for deprecated functions..."
+        grep -r "mysql_" --include="*.php" . || echo "  ✅ No deprecated mysql_ functions found"
+        grep -r "eregi\|split\|ereg" --include="*.php" . || echo "  ✅ No deprecated regex functions found"
+        
+        # Check for WordPress best practices
+        echo "✅ WordPress Best Practices Check:"
+        grep -r "wp_enqueue_script\|wp_enqueue_style" --include="*.php" . > /dev/null && echo "  ✅ Proper asset enqueuing detected" || echo "  ⚠️ Consider using wp_enqueue_* functions"
+        grep -r "wp_nonce\|wp_verify_nonce" --include="*.php" . > /dev/null && echo "  ✅ Nonce usage detected" || echo "  ⚠️ Consider adding nonce verification"
+        grep -r "esc_html\|esc_attr\|esc_url" --include="*.php" . > /dev/null && echo "  ✅ Output escaping detected" || echo "  ⚠️ Ensure all outputs are escaped"
+
+  security-audit:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        tools: composer
+    
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-interaction
+    
+    - name: Security Scan
+      run: |
+        echo "🔒 Running security audit..."
+        
+        # Check for dangerous functions
+        echo "⚠️ Dangerous Function Check:"
+        grep -r "eval\|exec\|system\|shell_exec" --include="*.php" . || echo "  ✅ No dangerous functions found"
+        
+        # Check for direct $_GET/$_POST usage
+        echo "🛡️ Input Validation Check:"
+        grep -r "\$_GET\[" --include="*.php" . && echo "  ⚠️ Direct \$_GET usage found - ensure sanitization" || echo "  ✅ No direct \$_GET usage"
+        grep -r "\$_POST\[" --include="*.php" . && echo "  ⚠️ Direct \$_POST usage found - ensure sanitization" || echo "  ✅ No direct \$_POST usage"
+        
+        # Check for SQL injection patterns
+        echo "💉 SQL Injection Check:"
+        grep -r "\$wpdb->query.*\$" --include="*.php" . && echo "  ⚠️ Potential SQL injection risk - use \$wpdb->prepare()" || echo "  ✅ No obvious SQL injection patterns"
+        
+        # Check for XSS patterns
+        echo "🕷️ XSS Prevention Check:"
+        grep -r "echo.*\$" --include="*.php" . | head -5 | while read line; do
+          if [[ $line == *"esc_"* ]]; then
+            echo "  ✅ Escaped output: $line"
+          else
+            echo "  ⚠️ Unescaped output: $line"
+          fi
+        done
+
+  performance-analysis:
+    name: Performance Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Analyze File Sizes
+      run: |
+        echo "📊 File Size Analysis:"
+        echo "CSS Files:"
+        find assets -name "*.css" -exec ls -lh {} \; 2>/dev/null | awk '{print $5, $9}' || echo "No CSS files found"
+        
+        echo "JavaScript Files:"
+        find assets -name "*.js" -exec ls -lh {} \; 2>/dev/null | awk '{print $5, $9}' || echo "No JS files found"
+        
+        echo "Image Files:"
+        find assets -name "*.jpg" -o -name "*.png" -o -name "*.gif" -o -name "*.webp" -exec ls -lh {} \; 2>/dev/null | awk '{print $5, $9}' || echo "No image files found"
+    
+    - name: Code Complexity Analysis
+      run: |
+        echo "🧮 Code Complexity Analysis:"
+        echo "PHP Files:"
+        find . -name "*.php" -not -path "./vendor/*" | wc -l | xargs echo "Total PHP files:"
+        find . -name "*.php" -not -path "./vendor/*" -exec wc -l {} + | tail -1 | awk '{print $1}' | xargs echo "Total lines of code:"
+        
+        echo "Functions Analysis:"
+        grep -r "function " --include="*.php" . | wc -l | xargs echo "Total functions:"
+
+  theme-validation:
+    name: Theme Validation
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Validate Theme Headers
+      run: |
+        echo "📋 Validating theme headers..."
+        
+        # Check style.css header
+        if [ -f "style.css" ]; then
+          echo "✅ style.css header check:"
+          head -20 style.css | grep -E "(Theme Name|Description|Version|Author)" || echo "  ⚠️ Missing required theme headers"
+        fi
+        
+        # Check functions.php
+        if [ -f "functions.php" ]; then
+          echo "✅ functions.php validation:"
+          grep -q "<?php" functions.php && echo "  ✅ PHP opening tag found" || echo "  ❌ Missing PHP opening tag"
+          tail -1 functions.php | grep -q "?>" && echo "  ⚠️ PHP closing tag found (not recommended)" || echo "  ✅ No PHP closing tag (good practice)"
+        fi
+    
+    - name: Check Internationalization
+      run: |
+        echo "🌍 Internationalization Check:"
+        
+        # Check for text domain usage
+        grep -r "__(" --include="*.php" . > /dev/null && echo "  ✅ Translation functions found" || echo "  ⚠️ No translation functions found"
+        
+        # Check text domain consistency
+        if [ -f "style.css" ]; then
+          text_domain=$(grep "Text Domain:" style.css | cut -d: -f2 | xargs)
+          if [ ! -z "$text_domain" ]; then
+            echo "  📝 Text Domain: $text_domain"
+            grep -r "__.*$text_domain" --include="*.php" . > /dev/null && echo "  ✅ Text domain usage consistent" || echo "  ⚠️ Text domain not used in PHP files"
+          fi
+        fi
+
+  notify-results:
+    name: Test Results Summary
+    runs-on: ubuntu-latest
+    needs: [wordpress-standards, wordpress-theme-check, security-audit, performance-analysis, theme-validation]
+    if: always()
+    
+    steps:
+    - name: Summary
+      run: |
+        echo "📊 Test Results Summary:"
+        echo "WordPress Standards: ${{ needs.wordpress-standards.result }}"
+        echo "Theme Check: ${{ needs.wordpress-theme-check.result }}"
+        echo "Security Audit: ${{ needs.security-audit.result }}"
+        echo "Performance Analysis: ${{ needs.performance-analysis.result }}"
+        echo "Theme Validation: ${{ needs.theme-validation.result }}"
+        
+        if [[ "${{ needs.wordpress-standards.result }}" == "success" && "${{ needs.wordpress-theme-check.result }}" == "success" ]]; then
+          echo "🎉 Core quality checks passed!"
+        else
+          echo "⚠️ Some checks need attention"
+        fi

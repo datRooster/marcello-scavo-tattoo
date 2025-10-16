@@ -26,11 +26,12 @@
         "php": ">=7.4"
     },
     "require-dev": {
-        "php-stubs/wordpress-stubs": "^6.3",
+        "php-stubs/wordpress-stubs": "^6.8",
         "squizlabs/php_codesniffer": "^3.7",
         "wp-coding-standards/wpcs": "^3.0",
         "phpcompatibility/phpcompatibility-wp": "^2.1",
-        "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "automattic/vipwpcs": "^3.0"
     },
     "config": {
         "allow-plugins": {
@@ -40,9 +41,13 @@
         "sort-packages": true
     },
     "scripts": {
-        "lint": "phpcs --standard=WordPress wp-content/themes/marcello-scavo-tattoo/",
-        "lint:fix": "phpcbf --standard=WordPress wp-content/themes/marcello-scavo-tattoo/",
-        "lint:compatibility": "phpcs --standard=PHPCompatibilityWP --runtime-set testVersion 7.4- wp-content/themes/marcello-scavo-tattoo/"
+        "lint": "phpcs --standard=phpcs.xml",
+        "lint:fix": "phpcbf --standard=phpcs.xml",
+        "lint:wordpress": "phpcs --standard=WordPress *.php inc/",
+        "lint:compatibility": "phpcs --standard=PHPCompatibilityWP --runtime-set testVersion 7.4- *.php inc/",
+        "lint:vip": "phpcs --standard=WordPress-VIP-Go *.php inc/",
+        "test": "phpcs --standard=phpcs.xml --report=summary",
+        "test:full": "phpcs --standard=WordPress *.php inc/ --report=full"
     },
     "scripts-descriptions": {
         "lint": "Run WordPress Coding Standards check",
