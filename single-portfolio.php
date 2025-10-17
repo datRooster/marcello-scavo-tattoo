@@ -28,34 +28,34 @@ get_header(); ?>
                             <div class="meta-grid">
                                 <?php if ($client_name) : ?>
                                 <div class="meta-item">
-                                    <span class="meta-label"><?php _e('Cliente:', 'marcello-scavo'); ?></span>
+                                    <span class="meta-label"><?php _e('Cliente:', 'marcello-scavo-tattoo'); ?></span>
                                     <span class="meta-value"><?php echo esc_html($client_name); ?></span>
                                 </div>
                                 <?php endif; ?>
                                 
                                 <?php if ($project_date) : ?>
                                 <div class="meta-item">
-                                    <span class="meta-label"><?php _e('Data:', 'marcello-scavo'); ?></span>
+                                    <span class="meta-label"><?php _e('Data:', 'marcello-scavo-tattoo'); ?></span>
                                     <span class="meta-value"><?php echo esc_html(date('F Y', strtotime($project_date))); ?></span>
                                 </div>
                                 <?php endif; ?>
                                 
                                 <?php if ($project_location) : ?>
                                 <div class="meta-item">
-                                    <span class="meta-label"><?php _e('Luogo:', 'marcello-scavo'); ?></span>
+                                    <span class="meta-label"><?php _e('Luogo:', 'marcello-scavo-tattoo'); ?></span>
                                     <span class="meta-value"><?php echo esc_html(ucfirst($project_location)); ?></span>
                                 </div>
                                 <?php endif; ?>
                                 
                                 <?php if ($project_type) : ?>
                                 <div class="meta-item">
-                                    <span class="meta-label"><?php _e('Tipo:', 'marcello-scavo'); ?></span>
+                                    <span class="meta-label"><?php _e('Tipo:', 'marcello-scavo-tattoo'); ?></span>
                                     <span class="meta-value">
                                         <?php 
                                         $type_labels = array(
-                                            'tattoo' => __('Tatuaggio', 'marcello-scavo'),
-                                            'illustration' => __('Illustrazione', 'marcello-scavo'),
-                                            'graphic_design' => __('Grafica', 'marcello-scavo')
+                                            'tattoo' => __('Tatuaggio', 'marcello-scavo-tattoo'),
+                                            'illustration' => __('Illustrazione', 'marcello-scavo-tattoo'),
+                                            'graphic_design' => __('Grafica', 'marcello-scavo-tattoo')
                                         );
                                         echo esc_html($type_labels[$project_type] ?? $project_type);
                                         ?>
@@ -65,8 +65,8 @@ get_header(); ?>
                                 
                                 <?php if ($project_duration) : ?>
                                 <div class="meta-item">
-                                    <span class="meta-label"><?php _e('Durata:', 'marcello-scavo'); ?></span>
-                                    <span class="meta-value"><?php echo esc_html($project_duration); ?> <?php _e('ore', 'marcello-scavo'); ?></span>
+                                    <span class="meta-label"><?php _e('Durata:', 'marcello-scavo-tattoo'); ?></span>
+                                    <span class="meta-value"><?php echo esc_html($project_duration); ?> <?php _e('ore', 'marcello-scavo-tattoo'); ?></span>
                                 </div>
                                 <?php endif; ?>
                             </div>
@@ -78,7 +78,7 @@ get_header(); ?>
                                 if ($categories && !is_wp_error($categories)) :
                                 ?>
                                     <div class="portfolio-categories">
-                                        <span class="tax-label"><?php _e('Categorie:', 'marcello-scavo'); ?></span>
+                                        <span class="tax-label"><?php _e('Categorie:', 'marcello-scavo-tattoo'); ?></span>
                                         <?php foreach ($categories as $category) : ?>
                                             <a href="<?php echo get_term_link($category); ?>" class="category-tag"><?php echo esc_html($category->name); ?></a>
                                         <?php endforeach; ?>
@@ -90,7 +90,7 @@ get_header(); ?>
                                 if ($tags && !is_wp_error($tags)) :
                                 ?>
                                     <div class="portfolio-tags">
-                                        <span class="tax-label"><?php _e('Tag:', 'marcello-scavo'); ?></span>
+                                        <span class="tax-label"><?php _e('Tag:', 'marcello-scavo-tattoo'); ?></span>
                                         <?php foreach ($tags as $tag) : ?>
                                             <a href="<?php echo get_term_link($tag); ?>" class="portfolio-tag"><?php echo esc_html($tag->name); ?></a>
                                         <?php endforeach; ?>
@@ -102,10 +102,10 @@ get_header(); ?>
                     <div class="col-md-4">
                         <div class="portfolio-actions">
                             <a href="#booking" class="btn btn-primary btn-lg">
-                                <i class="fas fa-calendar-plus"></i> <?php _e('Prenota Simile', 'marcello-scavo'); ?>
+                                <i class="fas fa-calendar-plus"></i> <?php _e('Prenota Simile', 'marcello-scavo-tattoo'); ?>
                             </a>
                             <a href="<?php echo get_post_type_archive_link('portfolio'); ?>" class="btn btn-secondary">
-                                <i class="fas fa-arrow-left"></i> <?php _e('Torna al Portfolio', 'marcello-scavo'); ?>
+                                <i class="fas fa-arrow-left"></i> <?php _e('Torna al Portfolio', 'marcello-scavo-tattoo'); ?>
                             </a>
                         </div>
                     </div>
@@ -128,7 +128,7 @@ get_header(); ?>
             <div class="portfolio-description section">
                 <div class="row">
                     <div class="col-md-8 offset-md-2">
-                        <h2><?php _e('Descrizione del Progetto', 'marcello-scavo'); ?></h2>
+                        <h2><?php _e('Descrizione del Progetto', 'marcello-scavo-tattoo'); ?></h2>
                         <div class="portfolio-content">
                             <?php the_content(); ?>
                         </div>
@@ -142,41 +142,41 @@ get_header(); ?>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3><?php _e('Il Processo Creativo', 'marcello-scavo'); ?></h3>
-                            <p><?php _e('Ogni tatuaggio inizia con un\'idea e si trasforma attraverso un processo di collaborazione tra artista e cliente.', 'marcello-scavo'); ?></p>
+                            <h3><?php _e('Il Processo Creativo', 'marcello-scavo-tattoo'); ?></h3>
+                            <p><?php _e('Ogni tatuaggio inizia con un\'idea e si trasforma attraverso un processo di collaborazione tra artista e cliente.', 'marcello-scavo-tattoo'); ?></p>
                             
                             <div class="process-steps">
                                 <div class="process-step">
                                     <div class="step-number">1</div>
                                     <div class="step-content">
-                                        <h4><?php _e('Consultazione', 'marcello-scavo'); ?></h4>
-                                        <p><?php _e('Discutiamo la tua idea, il significato e le preferenze stilistiche.', 'marcello-scavo'); ?></p>
+                                        <h4><?php _e('Consultazione', 'marcello-scavo-tattoo'); ?></h4>
+                                        <p><?php _e('Discutiamo la tua idea, il significato e le preferenze stilistiche.', 'marcello-scavo-tattoo'); ?></p>
                                     </div>
                                 </div>
                                 
                                 <div class="process-step">
                                     <div class="step-number">2</div>
                                     <div class="step-content">
-                                        <h4><?php _e('Design', 'marcello-scavo'); ?></h4>
-                                        <p><?php _e('Creo un design personalizzato basato sulla nostra discussione.', 'marcello-scavo'); ?></p>
+                                        <h4><?php _e('Design', 'marcello-scavo-tattoo'); ?></h4>
+                                        <p><?php _e('Creo un design personalizzato basato sulla nostra discussione.', 'marcello-scavo-tattoo'); ?></p>
                                     </div>
                                 </div>
                                 
                                 <div class="process-step">
                                     <div class="step-number">3</div>
                                     <div class="step-content">
-                                        <h4><?php _e('Realizzazione', 'marcello-scavo'); ?></h4>
-                                        <p><?php _e('Realizziamo insieme il tatuaggio nel massimo comfort e sicurezza.', 'marcello-scavo'); ?></p>
+                                        <h4><?php _e('Realizzazione', 'marcello-scavo-tattoo'); ?></h4>
+                                        <p><?php _e('Realizziamo insieme il tatuaggio nel massimo comfort e sicurezza.', 'marcello-scavo-tattoo'); ?></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="cta-booking">
-                                <h3><?php _e('Ti piace questo stile?', 'marcello-scavo'); ?></h3>
-                                <p><?php _e('Prenota una consultazione per discutere il tuo prossimo tatuaggio.', 'marcello-scavo'); ?></p>
+                                <h3><?php _e('Ti piace questo stile?', 'marcello-scavo-tattoo'); ?></h3>
+                                <p><?php _e('Prenota una consultazione per discutere il tuo prossimo tatuaggio.', 'marcello-scavo-tattoo'); ?></p>
                                 <a href="#booking" class="btn btn-primary btn-lg">
-                                    <i class="fas fa-comments"></i> <?php _e('Inizia la Consultazione', 'marcello-scavo'); ?>
+                                    <i class="fas fa-comments"></i> <?php _e('Inizia la Consultazione', 'marcello-scavo-tattoo'); ?>
                                 </a>
                             </div>
                         </div>
@@ -187,7 +187,7 @@ get_header(); ?>
             <!-- Related Portfolio Items -->
             <div class="related-portfolio section">
                 <div class="container">
-                    <h3 class="text-center"><?php _e('Lavori Correlati', 'marcello-scavo'); ?></h3>
+                    <h3 class="text-center"><?php _e('Lavori Correlati', 'marcello-scavo-tattoo'); ?></h3>
                     
                     <?php
                     // Get related portfolio items

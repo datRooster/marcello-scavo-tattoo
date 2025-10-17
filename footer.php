@@ -21,8 +21,8 @@
                 <?php else : ?>
                     <!-- Default content for Footer 1 if no widgets -->
                     <div class="footer-section footer-about">
-                        <h3><?php _e('Marcello Scavo', 'marcello-scavo'); ?></h3>
-                        <p><?php _e('Artista del tatuaggio con base a Milano e Messina. Ogni tatuaggio è un\'opera d\'arte unica che racconta una storia.', 'marcello-scavo'); ?></p>
+                        <h3><?php _e('Marcello Scavo', 'marcello-scavo-tattoo'); ?></h3>
+                        <p><?php _e('Artista del tatuaggio con base a Milano e Messina. Ogni tatuaggio è un\'opera d\'arte unica che racconta una storia.', 'marcello-scavo-tattoo'); ?></p>
                         
                         <?php 
                         // Usa il nuovo sistema di social links
@@ -40,7 +40,7 @@
                     <?php else : ?>
                         <!-- Default content for Footer 2 if no widgets -->
                         <div class="footer-section footer-links">
-                            <h3><?php _e('Link Rapidi', 'marcello-scavo'); ?></h3>
+                            <h3><?php _e('Link Rapidi', 'marcello-scavo-tattoo'); ?></h3>
                             <?php
                             wp_nav_menu(array(
                                 'theme_location' => 'footer',
@@ -62,15 +62,15 @@
                     <?php else : ?>
                         <!-- Default content for Footer 3 if no widgets -->
                         <div class="footer-section footer-contact">
-                            <h3><?php _e('Contatti', 'marcello-scavo'); ?></h3>
+                            <h3><?php _e('Contatti', 'marcello-scavo-tattoo'); ?></h3>
                             
                             <div class="contact-location">
-                                <h4><i class="fas fa-map-marker-alt"></i> <?php _e('Milano', 'marcello-scavo'); ?></h4>
+                                <h4><i class="fas fa-map-marker-alt"></i> <?php _e('Milano', 'marcello-scavo-tattoo'); ?></h4>
                                 <p><?php echo nl2br(esc_html(get_theme_mod('contact_milano_address', 'Via Example, 123\n20121 Milano (MI)'))); ?></p>
                             </div>
                             
                             <div class="contact-location">
-                                <h4><i class="fas fa-map-marker-alt"></i> <?php _e('Messina', 'marcello-scavo'); ?></h4>
+                                <h4><i class="fas fa-map-marker-alt"></i> <?php _e('Messina', 'marcello-scavo-tattoo'); ?></h4>
                                 <p><?php echo nl2br(esc_html(get_theme_mod('contact_messina_address', 'Via Example, 456\n98121 Messina (ME)'))); ?></p>
                             </div>
                             
@@ -91,7 +91,7 @@
                     <?php else : ?>
                         <!-- Default content for Footer 4 if no widgets -->
                         <div class="footer-section footer-extra">
-                            <h3><?php _e('Seguici', 'marcello-scavo'); ?></h3>
+                            <h3><?php _e('Seguici', 'marcello-scavo-tattoo'); ?></h3>
                             <?php echo marcello_scavo_get_social_links($social_style); ?>
                         </div>
                     <?php endif; ?>
@@ -103,15 +103,15 @@
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <div class="copyright">
-                        <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. <?php _e('Tutti i diritti riservati.', 'marcello-scavo'); ?></p>
+                        <p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. <?php _e('Tutti i diritti riservati.', 'marcello-scavo-tattoo'); ?></p>
                     </div>
                     
                     <div class="footer-bottom-links">
-                        <a href="<?php echo esc_url(home_url('/privacy-policy')); ?>"><?php _e('Privacy Policy', 'marcello-scavo'); ?></a>
+                        <a href="<?php echo esc_url(home_url('/privacy-policy')); ?>"><?php _e('Privacy Policy', 'marcello-scavo-tattoo'); ?></a>
                         <span class="separator">|</span>
-                        <a href="<?php echo esc_url(home_url('/terms-of-service')); ?>"><?php _e('Termini di Servizio', 'marcello-scavo'); ?></a>
+                        <a href="<?php echo esc_url(home_url('/terms-of-service')); ?>"><?php _e('Termini di Servizio', 'marcello-scavo-tattoo'); ?></a>
                         <span class="separator">|</span>
-                        <a href="#" onclick="scrollToTop()"><?php _e('Torna su', 'marcello-scavo'); ?></a>
+                        <a href="#" onclick="scrollToTop()"><?php _e('Torna su', 'marcello-scavo-tattoo'); ?></a>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" class="back-to-top" aria-label="<?php _e('Torna su', 'marcello-scavo'); ?>">
+    <button id="back-to-top" class="back-to-top" aria-label="<?php _e('Torna su', 'marcello-scavo-tattoo'); ?>">
         <i class="fas fa-chevron-up"></i>
     </button>
 
@@ -127,7 +127,7 @@
     <div id="loading-overlay" class="loading-overlay">
         <div class="loading-spinner">
             <div class="spinner"></div>
-            <p><?php _e('Caricamento...', 'marcello-scavo'); ?></p>
+            <p><?php _e('Caricamento...', 'marcello-scavo-tattoo'); ?></p>
         </div>
     </div>
 
@@ -259,13 +259,13 @@ document.addEventListener('DOMContentLoaded', function() {
 function marcello_scavo_footer_menu_fallback() {
     ?>
     <ul class="footer-menu">
-        <li><a href="<?php echo esc_url(home_url('/')); ?>"><?php _e('Home', 'marcello-scavo'); ?></a></li>
-        <li><a href="#about"><?php _e('About', 'marcello-scavo'); ?></a></li>
-        <li><a href="#portfolio"><?php _e('Portfolio', 'marcello-scavo'); ?></a></li>
-        <li><a href="#services"><?php _e('Servizi', 'marcello-scavo'); ?></a></li>
-        <li><a href="<?php echo get_post_type_archive_link('shop_product'); ?>"><?php _e('Shop', 'marcello-scavo'); ?></a></li>
-        <li><a href="<?php echo get_permalink(get_option('page_for_posts')); ?>"><?php _e('Blog', 'marcello-scavo'); ?></a></li>
-        <li><a href="#contact"><?php _e('Contatti', 'marcello-scavo'); ?></a></li>
+        <li><a href="<?php echo esc_url(home_url('/')); ?>"><?php _e('Home', 'marcello-scavo-tattoo'); ?></a></li>
+        <li><a href="#about"><?php _e('About', 'marcello-scavo-tattoo'); ?></a></li>
+        <li><a href="#portfolio"><?php _e('Portfolio', 'marcello-scavo-tattoo'); ?></a></li>
+        <li><a href="#services"><?php _e('Servizi', 'marcello-scavo-tattoo'); ?></a></li>
+        <li><a href="<?php echo get_post_type_archive_link('shop_product'); ?>"><?php _e('Shop', 'marcello-scavo-tattoo'); ?></a></li>
+        <li><a href="<?php echo get_permalink(get_option('page_for_posts')); ?>"><?php _e('Blog', 'marcello-scavo-tattoo'); ?></a></li>
+        <li><a href="#contact"><?php _e('Contatti', 'marcello-scavo-tattoo'); ?></a></li>
     </ul>
     <?php
 }

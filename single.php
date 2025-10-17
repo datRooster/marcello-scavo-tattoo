@@ -27,7 +27,7 @@ get_header(); ?>
                                     
                                     <span class="post-author">
                                         <i class="fas fa-user"></i>
-                                        <?php _e('di', 'marcello-scavo'); ?> <?php the_author(); ?>
+                                        <?php _e('di', 'marcello-scavo-tattoo'); ?> <?php the_author(); ?>
                                     </span>
                                     
                                     <?php if (has_category()) : ?>
@@ -39,7 +39,7 @@ get_header(); ?>
                                     
                                     <span class="reading-time">
                                         <i class="fas fa-clock"></i>
-                                        <?php echo marcello_scavo_reading_time(); ?> <?php _e('min di lettura', 'marcello-scavo'); ?>
+                                        <?php echo marcello_scavo_reading_time(); ?> <?php _e('min di lettura', 'marcello-scavo-tattoo'); ?>
                                     </span>
                                 </div>
                                 
@@ -76,7 +76,7 @@ get_header(); ?>
                                     the_content();
                                     
                                     wp_link_pages(array(
-                                        'before' => '<div class="page-links">' . __('Pagine:', 'marcello-scavo'),
+                                        'before' => '<div class="page-links">' . __('Pagine:', 'marcello-scavo-tattoo'),
                                         'after'  => '</div>',
                                     ));
                                     ?>
@@ -85,7 +85,7 @@ get_header(); ?>
                                 <!-- Post Tags -->
                                 <?php if (has_tag()) : ?>
                                     <div class="post-tags">
-                                        <h4><?php _e('Tag:', 'marcello-scavo'); ?></h4>
+                                        <h4><?php _e('Tag:', 'marcello-scavo-tattoo'); ?></h4>
                                         <div class="tags-list">
                                             <?php the_tags('', ' ', ''); ?>
                                         </div>
@@ -94,7 +94,7 @@ get_header(); ?>
                                 
                                 <!-- Social Share -->
                                 <div class="post-share">
-                                    <h4><?php _e('Condividi questo articolo:', 'marcello-scavo'); ?></h4>
+                                    <h4><?php _e('Condividi questo articolo:', 'marcello-scavo-tattoo'); ?></h4>
                                     <div class="share-buttons">
                                         <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener" class="share-btn facebook">
                                             <i class="fab fa-facebook-f"></i>
@@ -118,7 +118,7 @@ get_header(); ?>
                                         
                                         <button class="share-btn copy-link" onclick="copyToClipboard('<?php echo get_permalink(); ?>')">
                                             <i class="fas fa-link"></i>
-                                            <span><?php _e('Copia Link', 'marcello-scavo'); ?></span>
+                                            <span><?php _e('Copia Link', 'marcello-scavo-tattoo'); ?></span>
                                         </button>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@ get_header(); ?>
                                             if ($author_bio) {
                                                 echo esc_html($author_bio);
                                             } else {
-                                                _e('Artista del tatuaggio con base a Milano e Messina. Ogni tatuaggio è un\'opera d\'arte unica che racconta una storia.', 'marcello-scavo');
+                                                _e('Artista del tatuaggio con base a Milano e Messina. Ogni tatuaggio è un\'opera d\'arte unica che racconta una storia.', 'marcello-scavo-tattoo');
                                             }
                                             ?>
                                         </p>
@@ -173,7 +173,7 @@ get_header(); ?>
                                 if ($prev_post) :
                                 ?>
                                     <div class="nav-post nav-prev">
-                                        <span class="nav-label"><?php _e('Articolo Precedente', 'marcello-scavo'); ?></span>
+                                        <span class="nav-label"><?php _e('Articolo Precedente', 'marcello-scavo-tattoo'); ?></span>
                                         <h4><a href="<?php echo get_permalink($prev_post); ?>"><?php echo get_the_title($prev_post); ?></a></h4>
                                     </div>
                                 <?php endif; ?>
@@ -184,7 +184,7 @@ get_header(); ?>
                                 if ($next_post) :
                                 ?>
                                     <div class="nav-post nav-next">
-                                        <span class="nav-label"><?php _e('Articolo Successivo', 'marcello-scavo'); ?></span>
+                                        <span class="nav-label"><?php _e('Articolo Successivo', 'marcello-scavo-tattoo'); ?></span>
                                         <h4><a href="<?php echo get_permalink($next_post); ?>"><?php echo get_the_title($next_post); ?></a></h4>
                                     </div>
                                 <?php endif; ?>
@@ -196,7 +196,7 @@ get_header(); ?>
                 <!-- Related Posts -->
                 <div class="related-posts section" style="background-color: var(--light-gray);">
                     <div class="container">
-                        <h3 class="text-center"><?php _e('Articoli Correlati', 'marcello-scavo'); ?></h3>
+                        <h3 class="text-center"><?php _e('Articoli Correlati', 'marcello-scavo-tattoo'); ?></h3>
                         
                         <?php
                         $categories = get_the_category();
@@ -238,7 +238,7 @@ get_header(); ?>
                                                     <?php the_excerpt(); ?>
                                                 </div>
                                                 <a href="<?php the_permalink(); ?>" class="blog-read-more">
-                                                    <?php _e('Leggi di più', 'marcello-scavo'); ?> <i class="fas fa-arrow-right"></i>
+                                                    <?php _e('Leggi di più', 'marcello-scavo-tattoo'); ?> <i class="fas fa-arrow-right"></i>
                                                 </a>
                                             </div>
                                         </article>

@@ -14,10 +14,10 @@
             </div>
         <?php else : ?>
             <div class="section-header">
-                <h2 class="section-title"><?php _e('I miei lavori recenti', 'marcello-scavo'); ?></h2>
+                <h2 class="section-title"><?php _e('I miei lavori recenti', 'marcello-scavo-tattoo'); ?></h2>
                 <div class="section-divider"></div>
                 <p class="section-subtitle">
-                    <?php _e('Una selezione dei lavori più recenti, tra tradizione e innovazione artistica.', 'marcello-scavo'); ?>
+                    <?php _e('Una selezione dei lavori più recenti, tra tradizione e innovazione artistica.', 'marcello-scavo-tattoo'); ?>
                 </p>
             </div>age MarcelloScavoTattoo
  */
@@ -48,7 +48,7 @@ $term_description = $current_term->description;
                     <?php echo $term_description ? esc_html($term_description) : 'Esplora questa collezione unica di opere d\'arte e tatuaggi selezionati con cura.'; ?>
                 </p>
                 <div class="portfolio-hero-cta">
-                    <a href="#galleria" class="btn btn-outline-light btn-hero"><?php _e('Esplora la Collezione', 'marcello-scavo'); ?></a>
+                    <a href="#galleria" class="btn btn-outline-light btn-hero"><?php _e('Esplora la Collezione', 'marcello-scavo-tattoo'); ?></a>
                 </div>
             </div>
         <?php endif; ?>
@@ -106,7 +106,7 @@ $term_description = $current_term->description;
                                                 </div>
                                             <?php endif; ?>
                                             
-                                            <a href="<?php the_permalink(); ?>" class="portfolio-showcase-link"><?php _e('Visualizza', 'marcello-scavo'); ?></a>
+                                            <a href="<?php the_permalink(); ?>" class="portfolio-showcase-link"><?php _e('Visualizza', 'marcello-scavo-tattoo'); ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -124,8 +124,8 @@ $term_description = $current_term->description;
                 <?php 
                 // Pagination
                 $pagination = paginate_links(array(
-                    'prev_text' => '‹ ' . __('Precedente', 'marcello-scavo'),
-                    'next_text' => __('Successivo', 'marcello-scavo') . ' ›',
+                    'prev_text' => '‹ ' . __('Precedente', 'marcello-scavo-tattoo'),
+                    'next_text' => __('Successivo', 'marcello-scavo-tattoo') . ' ›',
                     'mid_size' => 2,
                     'type' => 'array'
                 ));
@@ -145,10 +145,10 @@ $term_description = $current_term->description;
                     <div class="empty-state-icon">
                         <span class="dashicons dashicons-format-image"></span>
                     </div>
-                    <h3><?php _e('Nessuna opera trovata', 'marcello-scavo'); ?></h3>
-                    <p><?php _e('Non ci sono ancora opere in questa categoria. Torna presto per vedere nuovi lavori!', 'marcello-scavo'); ?></p>
+                    <h3><?php _e('Nessuna opera trovata', 'marcello-scavo-tattoo'); ?></h3>
+                    <p><?php _e('Non ci sono ancora opere in questa categoria. Torna presto per vedere nuovi lavori!', 'marcello-scavo-tattoo'); ?></p>
                     <a href="<?php echo home_url('/portfolio'); ?>" class="btn btn-primary">
-                        <?php _e('Esplora tutto il Portfolio', 'marcello-scavo'); ?>
+                        <?php _e('Esplora tutto il Portfolio', 'marcello-scavo-tattoo'); ?>
                     </a>
                 </div>
             <?php endif; ?>
@@ -159,10 +159,10 @@ $term_description = $current_term->description;
 <section class="portfolio-latest-section">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title"><?php _e('I miei lavori recenti', 'marcello-scavo'); ?></h2>
+            <h2 class="section-title"><?php _e('I miei lavori recenti', 'marcello-scavo-tattoo'); ?></h2>
             <div class="section-divider"></div>
             <p class="section-subtitle">
-                <?php _e('Una selezione dei lavori più recenti, tra tradizione e innovazione artistica.', 'marcello-scavo'); ?>
+                <?php _e('Una selezione dei lavori più recenti, tra tradizione e innovazione artistica.', 'marcello-scavo-tattoo'); ?>
             </p>
         </div>
         
@@ -220,7 +220,7 @@ $term_description = $current_term->description;
                                         <span class="portfolio-latest-date"><?php echo get_the_date(); ?></span>
                                     </div>
                                     
-                                    <a href="<?php the_permalink(); ?>" class="portfolio-latest-link"><?php _e('Visualizza', 'marcello-scavo'); ?></a>
+                                    <a href="<?php the_permalink(); ?>" class="portfolio-latest-link"><?php _e('Visualizza', 'marcello-scavo-tattoo'); ?></a>
                                 </div>
                             </div>
                         </div>
@@ -235,8 +235,8 @@ $term_description = $current_term->description;
                                 <span class="dashicons dashicons-format-image"></span>
                             </div>
                             <div class="placeholder-content">
-                                <h3><?php _e('Tatuaggio Tribale', 'marcello-scavo'); ?></h3>
-                                <p><?php _e('Descrizione breve del tatuaggio tribale, stile e significato.', 'marcello-scavo'); ?></p>
+                                <h3><?php _e('Tatuaggio Tribale', 'marcello-scavo-tattoo'); ?></h3>
+                                <p><?php _e('Descrizione breve del tatuaggio tribale, stile e significato.', 'marcello-scavo-tattoo'); ?></p>
                                 <span class="placeholder-date"><?php echo date('d M Y'); ?></span>
                             </div>
                         </div>
@@ -256,9 +256,9 @@ $term_description = $current_term->description;
             </div>
         <?php else : ?>
             <div class="section-header">
-                <h2 class="section-title"><?php _e('Cosa pensano i nostri clienti', 'marcello-scavo'); ?></h2>
+                <h2 class="section-title"><?php _e('Cosa pensano i nostri clienti', 'marcello-scavo-tattoo'); ?></h2>
                 <div class="section-divider"></div>
-                <p class="section-subtitle"><?php _e('Le parole di chi ha vissuto l\'esperienza del tatuaggio con noi', 'marcello-scavo'); ?></p>
+                <p class="section-subtitle"><?php _e('Le parole di chi ha vissuto l\'esperienza del tatuaggio con noi', 'marcello-scavo-tattoo'); ?></p>
             </div>
         
         <div class="testimonials-grid">
@@ -266,15 +266,15 @@ $term_description = $current_term->description;
                 <div class="testimonial-content">
                     <div class="testimonial-quote">
                         <span class="quote-icon">❝</span>
-                        <p><?php _e('"Esperienza straordinaria! Marcello ha saputo trasformare la mia idea in un\'opera d\'arte sulla pelle. Professionalità e creatività ai massimi livelli."', 'marcello-scavo'); ?></p>
+                        <p><?php _e('"Esperienza straordinaria! Marcello ha saputo trasformare la mia idea in un\'opera d\'arte sulla pelle. Professionalità e creatività ai massimi livelli."', 'marcello-scavo-tattoo'); ?></p>
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">
                             <span class="dashicons dashicons-admin-users"></span>
                         </div>
                         <div class="author-info">
-                            <h4><?php _e('Maria Rossi', 'marcello-scavo'); ?></h4>
-                            <span><?php _e('Cliente soddisfatta', 'marcello-scavo'); ?></span>
+                            <h4><?php _e('Maria Rossi', 'marcello-scavo-tattoo'); ?></h4>
+                            <span><?php _e('Cliente soddisfatta', 'marcello-scavo-tattoo'); ?></span>
                             <div class="testimonial-rating">★★★★★</div>
                         </div>
                     </div>
@@ -285,15 +285,15 @@ $term_description = $current_term->description;
                 <div class="testimonial-content">
                     <div class="testimonial-quote">
                         <span class="quote-icon">❝</span>
-                        <p><?php _e('"Ambiente accogliente, massima igiene e un artista che sa davvero ascoltare. Il mio tatuaggio ha superato ogni aspettativa!"', 'marcello-scavo'); ?></p>
+                        <p><?php _e('"Ambiente accogliente, massima igiene e un artista che sa davvero ascoltare. Il mio tatuaggio ha superato ogni aspettativa!"', 'marcello-scavo-tattoo'); ?></p>
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">
                             <span class="dashicons dashicons-admin-users"></span>
                         </div>
                         <div class="author-info">
-                            <h4><?php _e('Luca Bianchi', 'marcello-scavo'); ?></h4>
-                            <span><?php _e('Cliente fidelizzato', 'marcello-scavo'); ?></span>
+                            <h4><?php _e('Luca Bianchi', 'marcello-scavo-tattoo'); ?></h4>
+                            <span><?php _e('Cliente fidelizzato', 'marcello-scavo-tattoo'); ?></span>
                             <div class="testimonial-rating">★★★★★</div>
                         </div>
                     </div>
@@ -304,15 +304,15 @@ $term_description = $current_term->description;
                 <div class="testimonial-content">
                     <div class="testimonial-quote">
                         <span class="quote-icon">❝</span>
-                        <p><?php _e('"Tecnica impeccabile e un occhio artistico incredibile. Marcello è riuscito a catturare perfettamente il significato del mio tatuaggio."', 'marcello-scavo'); ?></p>
+                        <p><?php _e('"Tecnica impeccabile e un occhio artistico incredibile. Marcello è riuscito a catturare perfettamente il significato del mio tatuaggio."', 'marcello-scavo-tattoo'); ?></p>
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">
                             <span class="dashicons dashicons-admin-users"></span>
                         </div>
                         <div class="author-info">
-                            <h4><?php _e('Anna Verdi', 'marcello-scavo'); ?></h4>
-                            <span><?php _e('Artista', 'marcello-scavo'); ?></span>
+                            <h4><?php _e('Anna Verdi', 'marcello-scavo-tattoo'); ?></h4>
+                            <span><?php _e('Artista', 'marcello-scavo-tattoo'); ?></span>
                             <div class="testimonial-rating">★★★★★</div>
                         </div>
                     </div>
@@ -339,16 +339,16 @@ $term_description = $current_term->description;
         <?php else : ?>
             <!-- Fallback content con prenotazione integrata -->
             <div class="portfolio-cta-content">
-                <h2 class="cta-title"><?php _e('Prenota il tuo appuntamento ora', 'marcello-scavo'); ?></h2>
+                <h2 class="cta-title"><?php _e('Prenota il tuo appuntamento ora', 'marcello-scavo-tattoo'); ?></h2>
                 <div class="cta-divider"></div>
                 <p class="cta-description">
-                    <?php _e('Trasforma la tua idea in arte. Prenota una consulenza gratuita e scopri come possiamo dare vita al tuo tatuaggio perfetto.', 'marcello-scavo'); ?>
+                    <?php _e('Trasforma la tua idea in arte. Prenota una consulenza gratuita e scopri come possiamo dare vita al tuo tatuaggio perfetto.', 'marcello-scavo-tattoo'); ?>
                 </p>
                 
                 <!-- Booking prompt -->
                 <div class="cta-booking-section">
                     <div class="booking-prompt">
-                        <p><?php _e('💡 Per attivare il sistema di prenotazione online, aggiungi il widget Bookly nell\'area "Prenotazioni Portfolio".', 'marcello-scavo'); ?></p>
+                        <p><?php _e('💡 Per attivare il sistema di prenotazione online, aggiungi il widget Bookly nell\'area "Prenotazioni Portfolio".', 'marcello-scavo-tattoo'); ?></p>
                     </div>
                 </div>
                 
@@ -359,7 +359,7 @@ $term_description = $current_term->description;
                             <span class="dashicons dashicons-phone"></span>
                         </div>
                         <div class="booking-action-text">
-                            <h4><?php _e('Chiamaci', 'marcello-scavo'); ?></h4>
+                            <h4><?php _e('Chiamaci', 'marcello-scavo-tattoo'); ?></h4>
                             <p>+39 333 1234567</p>
                         </div>
                     </div>
@@ -368,7 +368,7 @@ $term_description = $current_term->description;
                             <span class="dashicons dashicons-email"></span>
                         </div>
                         <div class="booking-action-text">
-                            <h4><?php _e('Scrivici', 'marcello-scavo'); ?></h4>
+                            <h4><?php _e('Scrivici', 'marcello-scavo-tattoo'); ?></h4>
                             <p>info@marcelloscavo.it</p>
                         </div>
                     </div>
@@ -377,8 +377,8 @@ $term_description = $current_term->description;
                             <span class="dashicons dashicons-location-alt"></span>
                         </div>
                         <div class="booking-action-text">
-                            <h4><?php _e('Contattaci', 'marcello-scavo'); ?></h4>
-                            <p><?php _e('Vai alla sezione contatti', 'marcello-scavo'); ?></p>
+                            <h4><?php _e('Contattaci', 'marcello-scavo-tattoo'); ?></h4>
+                            <p><?php _e('Vai alla sezione contatti', 'marcello-scavo-tattoo'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -393,21 +393,21 @@ $term_description = $current_term->description;
                     ?>
                     <a href="<?php echo esc_url($whatsapp_url); ?>" target="_blank" class="btn btn-primary btn-large">
                         <i class="fab fa-whatsapp"></i>
-                        <?php _e('Prenota Consulenza', 'marcello-scavo'); ?>
+                        <?php _e('Prenota Consulenza', 'marcello-scavo-tattoo'); ?>
                     </a>
                 </div>
                 <div class="cta-features">
                     <div class="cta-feature">
                         <span class="feature-icon">🎨</span>
-                        <span><?php _e('Consulenza gratuita', 'marcello-scavo'); ?></span>
+                        <span><?php _e('Consulenza gratuita', 'marcello-scavo-tattoo'); ?></span>
                     </div>
                     <div class="cta-feature">
                         <span class="feature-icon">✨</span>
-                        <span><?php _e('Design personalizzato', 'marcello-scavo'); ?></span>
+                        <span><?php _e('Design personalizzato', 'marcello-scavo-tattoo'); ?></span>
                     </div>
                     <div class="cta-feature">
                         <span class="feature-icon">🏆</span>
-                        <span><?php _e('Qualità professionale', 'marcello-scavo'); ?></span>
+                        <span><?php _e('Qualità professionale', 'marcello-scavo-tattoo'); ?></span>
                     </div>
                 </div>
             </div>
@@ -425,18 +425,18 @@ $term_description = $current_term->description;
         <?php else : ?>
             <div class="portfolio-why-content">
                 <div class="why-text-content">
-                    <h2 class="section-title"><?php _e('Perché Sceglierci?', 'marcello-scavo'); ?></h2>
+                    <h2 class="section-title"><?php _e('Perché Sceglierci?', 'marcello-scavo-tattoo'); ?></h2>
                     <div class="section-divider"></div>
                     <p class="why-description">
-                        <?php _e('Scegliere Marcello Scavo significa affidarsi a professionalità, esperienza e passione per l\'arte. Ogni cliente è unico e ogni progetto viene seguito con cura e attenzione ai dettagli.', 'marcello-scavo'); ?>
+                        <?php _e('Scegliere Marcello Scavo significa affidarsi a professionalità, esperienza e passione per l\'arte. Ogni cliente è unico e ogni progetto viene seguito con cura e attenzione ai dettagli.', 'marcello-scavo-tattoo'); ?>
                     </p>
                     <ul class="why-features-list">
-                        <li><span class="feature-bullet">✓</span> <?php _e('Materiali certificati e sicuri', 'marcello-scavo'); ?></li>
-                        <li><span class="feature-bullet">✓</span> <?php _e('Studio accogliente e igienizzato', 'marcello-scavo'); ?></li>
-                        <li><span class="feature-bullet">✓</span> <?php _e('Consulenza personalizzata', 'marcello-scavo'); ?></li>
-                        <li><span class="feature-bullet">✓</span> <?php _e('Portfolio ricco e variegato', 'marcello-scavo'); ?></li>
-                        <li><span class="feature-bullet">✓</span> <?php _e('Esperienza decennale nel settore', 'marcello-scavo'); ?></li>
-                        <li><span class="feature-bullet">✓</span> <?php _e('Stili artistici diversificati', 'marcello-scavo'); ?></li>
+                        <li><span class="feature-bullet">✓</span> <?php _e('Materiali certificati e sicuri', 'marcello-scavo-tattoo'); ?></li>
+                        <li><span class="feature-bullet">✓</span> <?php _e('Studio accogliente e igienizzato', 'marcello-scavo-tattoo'); ?></li>
+                        <li><span class="feature-bullet">✓</span> <?php _e('Consulenza personalizzata', 'marcello-scavo-tattoo'); ?></li>
+                        <li><span class="feature-bullet">✓</span> <?php _e('Portfolio ricco e variegato', 'marcello-scavo-tattoo'); ?></li>
+                        <li><span class="feature-bullet">✓</span> <?php _e('Esperienza decennale nel settore', 'marcello-scavo-tattoo'); ?></li>
+                        <li><span class="feature-bullet">✓</span> <?php _e('Stili artistici diversificati', 'marcello-scavo-tattoo'); ?></li>
                     </ul>
                 </div>
                 <div class="why-images-content">

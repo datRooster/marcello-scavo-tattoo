@@ -60,17 +60,17 @@ get_header(); ?>
             </div>
             <h2 class="section-title">
                 <span data-translatable="true" data-original-text="L'arte di Marcello: un viaggio">
-                    <?php _e('L\'arte di Marcello: un viaggio', 'marcello-scavo'); ?>
+                    <?php _e('L\'arte di Marcello: un viaggio', 'marcello-scavo-tattoo'); ?>
                 </span>
             </h2>
             <p class="about-text-flag">
                 <span data-translatable="true" data-original-text="Marcello è un artista che unisce passione e talento in ogni opera d'arte e tatuaggio. Fin da giovane, ha coltivato il suo amore per l'arte, esplorando tecniche diverse e affascinandosi sempre della vita che lo circonda. La sua evoluzione è evidente, non solo nei suoi lavori, ma anche nella continua ricerca di innovazione e stile. Ogni tatuaggio racconta una storia, un pezzo della personalità di chi lo indossa. Con la sua capacità di ascoltare e interpretare i desideri dei clienti, Marcello trasforma ogni foglio bianco in un'opera unica, creando un legame speciale con ognuno di loro.">
-                    <?php _e('Marcello è un artista che unisce passione e talento in ogni opera d\'arte e tatuaggio. Fin da giovane, ha coltivato il suo amore per l\'arte, esplorando tecniche diverse e affascinandosi sempre della vita che lo circonda. La sua evoluzione è evidente, non solo nei suoi lavori, ma anche nella continua ricerca di innovazione e stile. Ogni tatuaggio racconta una storia, un pezzo della personalità di chi lo indossa. Con la sua capacità di ascoltare e interpretare i desideri dei clienti, Marcello trasforma ogni foglio bianco in un\'opera unica, creando un legame speciale con ognuno di loro.', 'marcello-scavo'); ?>
+                    <?php _e('Marcello è un artista che unisce passione e talento in ogni opera d\'arte e tatuaggio. Fin da giovane, ha coltivato il suo amore per l\'arte, esplorando tecniche diverse e affascinandosi sempre della vita che lo circonda. La sua evoluzione è evidente, non solo nei suoi lavori, ma anche nella continua ricerca di innovazione e stile. Ogni tatuaggio racconta una storia, un pezzo della personalità di chi lo indossa. Con la sua capacità di ascoltare e interpretare i desideri dei clienti, Marcello trasforma ogni foglio bianco in un\'opera unica, creando un legame speciale con ognuno di loro.', 'marcello-scavo-tattoo'); ?>
                 </span>
             </p>
             <p class="about-text-flag">
                 <span data-translatable="true" data-original-text="La filosofia di Marcello si basa sull'ascolto attento delle esigenze del cliente e sulla traduzione delle loro idee in opere d'arte durature. Ogni sessione è un momento di creazione condivisa, dove l'esperienza e la creatività si fondono per dare vita a qualcosa di veramente speciale.">
-                    <?php _e('La filosofia di Marcello si basa sull\'ascolto attento delle esigenze del cliente e sulla traduzione delle loro idee in opere d\'arte durature. Ogni sessione è un momento di creazione condivisa, dove l\'esperienza e la creatività si fondono per dare vita a qualcosa di veramente speciale.', 'marcello-scavo'); ?>
+                    <?php _e('La filosofia di Marcello si basa sull\'ascolto attento delle esigenze del cliente e sulla traduzione delle loro idee in opere d\'arte durature. Ogni sessione è un momento di creazione condivisa, dove l\'esperienza e la creatività si fondono per dare vita a qualcosa di veramente speciale.', 'marcello-scavo-tattoo'); ?>
                 </span>
             </p>
         </div>
@@ -102,8 +102,8 @@ get_header(); ?>
         <?php else : ?>
             <!-- Fallback: Solo avviso chiaro -->
             <div class="theme-widget-info" style="background:#fffbe6;border:1px solid #c9b05f;padding:32px 24px;margin:40px auto 40px auto;border-radius:12px;color:#273a59;max-width:600px;text-align:center;font-size:1.15rem;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-                <strong style="font-size:1.2em;display:block;margin-bottom:8px;"><?php _e('Suggerimento:', 'marcello-scavo'); ?></strong>
-                <?php _e('Questa sezione può essere personalizzata aggiungendo il widget <b>Galleria Portfolio</b> dal Customizer o dalla sezione Widget di WordPress.<br>Vai su <b>Aspetto &gt; Personalizza</b> oppure <b>Aspetto &gt; Widget</b> e attiva <b>Gallery Showcase</b> per mostrare la tua galleria personalizzata.', 'marcello-scavo'); ?>
+                <strong style="font-size:1.2em;display:block;margin-bottom:8px;"><?php _e('Suggerimento:', 'marcello-scavo-tattoo'); ?></strong>
+                <?php _e('Questa sezione può essere personalizzata aggiungendo il widget <b>Galleria Portfolio</b> dal Customizer o dalla sezione Widget di WordPress.<br>Vai su <b>Aspetto &gt; Personalizza</b> oppure <b>Aspetto &gt; Widget</b> e attiva <b>Gallery Showcase</b> per mostrare la tua galleria personalizzata.', 'marcello-scavo-tattoo'); ?>
             </div>
         <?php endif; ?>
     </div>
@@ -113,8 +113,8 @@ get_header(); ?>
 <section id="instagram" class="section instagram-section">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title"><?php _e('Seguimi sui Social', 'marcello-scavo'); ?></h2>
-            <p class="section-subtitle"><?php _e('Scopri il processo creativo dietro ogni tatuaggio e resta aggiornato sui miei ultimi lavori.', 'marcello-scavo'); ?></p>
+            <h2 class="section-title"><?php _e('Seguimi sui Social', 'marcello-scavo-tattoo'); ?></h2>
+            <p class="section-subtitle"><?php _e('Scopri il processo creativo dietro ogni tatuaggio e resta aggiornato sui miei ultimi lavori.', 'marcello-scavo-tattoo'); ?></p>
         </div>
         
         <!-- Social Media Widget Area -->
@@ -126,7 +126,7 @@ get_header(); ?>
             <!-- Fallback: contenuto predefinito se nessun widget è presente -->
             <div class="instagram-widget-container">
                 <div class="theme-widget-info" style="background:#fffbe6;border:1px solid #c9b05f;padding:16px;margin:24px 0 0 0;border-radius:8px;color:#273a59;">
-                    <strong><?php _e('Suggerimento:', 'marcello-scavo'); ?></strong> <?php _e('Puoi mostrare il feed Instagram personalizzato aggiungendo il widget "Social Media" dal Customizer o dalla sezione Widget di WordPress. Vai su <b>Aspetto &gt; Personalizza</b> oppure <b>Aspetto &gt; Widget</b> e attiva "Social Media" per visualizzare i tuoi social.', 'marcello-scavo'); ?>
+                    <strong><?php _e('Suggerimento:', 'marcello-scavo-tattoo'); ?></strong> <?php _e('Puoi mostrare il feed Instagram personalizzato aggiungendo il widget "Social Media" dal Customizer o dalla sezione Widget di WordPress. Vai su <b>Aspetto &gt; Personalizza</b> oppure <b>Aspetto &gt; Widget</b> e attiva "Social Media" per visualizzare i tuoi social.', 'marcello-scavo-tattoo'); ?>
                 </div>
                 <?php
                 // Display Instagram widget with safety check
@@ -237,7 +237,7 @@ get_header(); ?>
             <!-- Fallback: Default testimonials content -->
             <div class="testimonials-content">
                 <div class="theme-widget-info" style="background:#fffbe6;border:1px solid #c9b05f;padding:16px;margin:24px 0 16px 0;border-radius:8px;color:#273a59;">
-                    <strong><?php _e('Suggerimento:', 'marcello-scavo'); ?></strong> <?php _e('Puoi mostrare le recensioni Google aggiungendo il widget "Recensioni Google" dal Customizer o dalla sezione Widget di WordPress. Vai su <b>Aspetto &gt; Personalizza</b> oppure <b>Aspetto &gt; Widget</b> e attiva "Reviews Section" per visualizzare le testimonianze dei tuoi clienti.', 'marcello-scavo'); ?>
+                    <strong><?php _e('Suggerimento:', 'marcello-scavo-tattoo'); ?></strong> <?php _e('Puoi mostrare le recensioni Google aggiungendo il widget "Recensioni Google" dal Customizer o dalla sezione Widget di WordPress. Vai su <b>Aspetto &gt; Personalizza</b> oppure <b>Aspetto &gt; Widget</b> e attiva "Reviews Section" per visualizzare le testimonianze dei tuoi clienti.', 'marcello-scavo-tattoo'); ?>
                 </div>
                 <div class="testimonials-label">La soddisfazione clienti</div>
                 <h2>Cosa dicono di noi i nostri clienti soddisfatti</h2>
@@ -263,12 +263,12 @@ get_header(); ?>
         <div class="section-header">
             <h2 class="section-title">
                 <span data-translatable="true" data-original-text="I nostri servizi">
-                    <?php _e('I nostri servizi', 'marcello-scavo'); ?>
+                    <?php _e('I nostri servizi', 'marcello-scavo-tattoo'); ?>
                 </span>
             </h2>
             <p class="section-subtitle">
                 <span data-translatable="true" data-original-text="Scopri le nostre offerte principali, pensate per soddisfare le tue passioni.">
-                    <?php _e('Scopri le nostre offerte principali, pensate per soddisfare le tue passioni.', 'marcello-scavo'); ?>
+                    <?php _e('Scopri le nostre offerte principali, pensate per soddisfare le tue passioni.', 'marcello-scavo-tattoo'); ?>
                 </span>
             </p>
         </div>
@@ -281,12 +281,12 @@ get_header(); ?>
                 <div class="service-content">
                     <h3>
                         <span data-translatable="true" data-original-text="Vendita opere d'arte">
-                            <?php _e('Vendita opere d\'arte', 'marcello-scavo'); ?>
+                            <?php _e('Vendita opere d\'arte', 'marcello-scavo-tattoo'); ?>
                         </span>
                     </h3>
                     <p>
                         <span data-translatable="true" data-original-text="Esplora la nostra collezione di opere d'arte uniche e porta a casa un pezzo di creatività.">
-                            <?php _e('Esplora la nostra collezione di opere d\'arte uniche e porta a casa un pezzo di creatività.', 'marcello-scavo'); ?>
+                            <?php _e('Esplora la nostra collezione di opere d\'arte uniche e porta a casa un pezzo di creatività.', 'marcello-scavo-tattoo'); ?>
                         </span>
                     </p>
                 </div>
@@ -299,12 +299,12 @@ get_header(); ?>
                 <div class="service-content">
                     <h3>
                         <span data-translatable="true" data-original-text="Mostra di tatuaggi">
-                            <?php _e('Mostra di tatuaggi', 'marcello-scavo'); ?>
+                            <?php _e('Mostra di tatuaggi', 'marcello-scavo-tattoo'); ?>
                         </span>
                     </h3>
                     <p>
                         <span data-translatable="true" data-original-text="Assisti ai nostri eventi di tatuaggio, dove talenti internazionali mostrano le loro creazioni dal vivo.">
-                            <?php _e('Assisti ai nostri eventi di tatuaggio, dove talenti internazionali mostrano le loro creazioni dal vivo.', 'marcello-scavo'); ?>
+                            <?php _e('Assisti ai nostri eventi di tatuaggio, dove talenti internazionali mostrano le loro creazioni dal vivo.', 'marcello-scavo-tattoo'); ?>
                         </span>
                     </p>
                 </div>
@@ -317,12 +317,12 @@ get_header(); ?>
                 <div class="service-content">
                     <h3>
                         <span data-translatable="true" data-original-text="Prenotazione tatuaggi">
-                            <?php _e('Prenotazione tatuaggi', 'marcello-scavo'); ?>
+                            <?php _e('Prenotazione tatuaggi', 'marcello-scavo-tattoo'); ?>
                         </span>
                     </h3>
                     <p>
                         <span data-translatable="true" data-original-text="Prenota il tuo tatuaggio direttamente online e realizza il tuo design personalizzato con noi.">
-                            <?php _e('Prenota il tuo tatuaggio direttamente online e realizza il tuo design personalizzato con noi.', 'marcello-scavo'); ?>
+                            <?php _e('Prenota il tuo tatuaggio direttamente online e realizza il tuo design personalizzato con noi.', 'marcello-scavo-tattoo'); ?>
                         </span>
                     </p>
                 </div>
@@ -346,12 +346,12 @@ get_header(); ?>
             <div class="cta-content">
                 <h2>
                     <span data-translatable="true" data-original-text="Prenota il tuo tatuaggio oggi!">
-                        <?php _e('Prenota il tuo tatuaggio oggi!', 'marcello-scavo'); ?>
+                        <?php _e('Prenota il tuo tatuaggio oggi!', 'marcello-scavo-tattoo'); ?>
                     </span>
                 </h2>
                 <p>
                     <span data-translatable="true" data-original-text="Scopri l'arte del tatuaggio e prenota il tuo appuntamento per un'esperienza unica.">
-                        <?php _e('Scopri l\'arte del tatuaggio e prenota il tuo appuntamento per un\'esperienza unica.', 'marcello-scavo'); ?>
+                        <?php _e('Scopri l\'arte del tatuaggio e prenota il tuo appuntamento per un\'esperienza unica.', 'marcello-scavo-tattoo'); ?>
                     </span>
                 </p>
                 
@@ -361,19 +361,19 @@ get_header(); ?>
                         <a href="tel:+393401234567" class="btn btn-primary">
                             <i class="fas fa-phone"></i>
                             <span data-translatable="true" data-original-text="Chiama Ora">
-                                <?php _e('Chiama Ora', 'marcello-scavo'); ?>
+                                <?php _e('Chiama Ora', 'marcello-scavo-tattoo'); ?>
                             </span>
                         </a>
                         <a href="https://wa.me/393401234567" target="_blank" class="btn btn-outline-primary">
                             <i class="fab fa-whatsapp"></i>
                             <span data-translatable="true" data-original-text="WhatsApp">
-                                <?php _e('WhatsApp', 'marcello-scavo'); ?>
+                                <?php _e('WhatsApp', 'marcello-scavo-tattoo'); ?>
                             </span>
                         </a>
                         <a href="mailto:info@marcelloscavo.com" class="btn btn-outline-primary">
                             <i class="fas fa-envelope"></i>
                             <span data-translatable="true" data-original-text="Email">
-                                <?php _e('Email', 'marcello-scavo'); ?>
+                                <?php _e('Email', 'marcello-scavo-tattoo'); ?>
                             </span>
                         </a>
                     </div>
@@ -382,7 +382,7 @@ get_header(); ?>
                     <div class="booking-alternative-contact">
                         <p>
                             <span data-translatable="true" data-original-text="Preferisci un contatto diretto? Siamo disponibili per consultazioni personalizzate.">
-                                <?php _e('Preferisci un contatto diretto? Siamo disponibili per consultazioni personalizzate.', 'marcello-scavo'); ?>
+                                <?php _e('Preferisci un contatto diretto? Siamo disponibili per consultazioni personalizzate.', 'marcello-scavo-tattoo'); ?>
                             </span>
                         </p>
                     </div>

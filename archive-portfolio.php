@@ -12,8 +12,8 @@ get_header(); ?>
     <section class="archive-header section" style="background: linear-gradient(135deg, var(--primary-blue), var(--dark-gray)); color: var(--white); padding-top: calc(var(--spacing-xl) + 80px);">
         <div class="container">
             <div class="text-center">
-                <h1 class="archive-title"><?php _e('Portfolio Completo', 'marcello-scavo'); ?></h1>
-                <p class="archive-subtitle"><?php _e('Una collezione dei miei lavori più significativi', 'marcello-scavo'); ?></p>
+                <h1 class="archive-title"><?php _e('Portfolio Completo', 'marcello-scavo-tattoo'); ?></h1>
+                <p class="archive-subtitle"><?php _e('Una collezione dei miei lavori più significativi', 'marcello-scavo-tattoo'); ?></p>
                 
                 <!-- Portfolio Stats -->
                 <div class="portfolio-stats">
@@ -23,7 +23,7 @@ get_header(); ?>
                     ?>
                     <div class="stat-item">
                         <span class="stat-number"><?php echo esc_html($total_published); ?></span>
-                        <span class="stat-label"><?php _e('Progetti Completati', 'marcello-scavo'); ?></span>
+                        <span class="stat-label"><?php _e('Progetti Completati', 'marcello-scavo-tattoo'); ?></span>
                     </div>
                     
                     <?php
@@ -42,7 +42,7 @@ get_header(); ?>
                     ?>
                     <div class="stat-item">
                         <span class="stat-number"><?php echo $tattoo_count->found_posts; ?></span>
-                        <span class="stat-label"><?php _e('Tatuaggi', 'marcello-scavo'); ?></span>
+                        <span class="stat-label"><?php _e('Tatuaggi', 'marcello-scavo-tattoo'); ?></span>
                     </div>
                     
                     <?php
@@ -60,7 +60,7 @@ get_header(); ?>
                     ?>
                     <div class="stat-item">
                         <span class="stat-number"><?php echo $illustration_count->found_posts; ?></span>
-                        <span class="stat-label"><?php _e('Illustrazioni', 'marcello-scavo'); ?></span>
+                        <span class="stat-label"><?php _e('Illustrazioni', 'marcello-scavo-tattoo'); ?></span>
                     </div>
                 </div>
             </div>
@@ -75,31 +75,31 @@ get_header(); ?>
                 <div class="filter-row">
                     <!-- Type Filter -->
                     <div class="filter-group">
-                        <label for="type-filter"><?php _e('Tipo:', 'marcello-scavo'); ?></label>
+                        <label for="type-filter"><?php _e('Tipo:', 'marcello-scavo-tattoo'); ?></label>
                         <select id="type-filter" class="filter-select">
-                            <option value=""><?php _e('Tutti i Tipi', 'marcello-scavo'); ?></option>
-                            <option value="tattoo"><?php _e('Tatuaggi', 'marcello-scavo'); ?></option>
-                            <option value="illustration"><?php _e('Illustrazioni', 'marcello-scavo'); ?></option>
-                            <option value="graphic_design"><?php _e('Grafica', 'marcello-scavo'); ?></option>
+                            <option value=""><?php _e('Tutti i Tipi', 'marcello-scavo-tattoo'); ?></option>
+                            <option value="tattoo"><?php _e('Tatuaggi', 'marcello-scavo-tattoo'); ?></option>
+                            <option value="illustration"><?php _e('Illustrazioni', 'marcello-scavo-tattoo'); ?></option>
+                            <option value="graphic_design"><?php _e('Grafica', 'marcello-scavo-tattoo'); ?></option>
                         </select>
                     </div>
                     
                     <!-- Location Filter -->
                     <div class="filter-group">
-                        <label for="location-filter"><?php _e('Luogo:', 'marcello-scavo'); ?></label>
+                        <label for="location-filter"><?php _e('Luogo:', 'marcello-scavo-tattoo'); ?></label>
                         <select id="location-filter" class="filter-select">
-                            <option value=""><?php _e('Tutti i Luoghi', 'marcello-scavo'); ?></option>
-                            <option value="milano"><?php _e('Milano', 'marcello-scavo'); ?></option>
-                            <option value="messina"><?php _e('Messina', 'marcello-scavo'); ?></option>
-                            <option value="altro"><?php _e('Altro', 'marcello-scavo'); ?></option>
+                            <option value=""><?php _e('Tutti i Luoghi', 'marcello-scavo-tattoo'); ?></option>
+                            <option value="milano"><?php _e('Milano', 'marcello-scavo-tattoo'); ?></option>
+                            <option value="messina"><?php _e('Messina', 'marcello-scavo-tattoo'); ?></option>
+                            <option value="altro"><?php _e('Altro', 'marcello-scavo-tattoo'); ?></option>
                         </select>
                     </div>
                     
                     <!-- Category Filter -->
                     <div class="filter-group">
-                        <label for="category-filter"><?php _e('Categoria:', 'marcello-scavo'); ?></label>
+                        <label for="category-filter"><?php _e('Categoria:', 'marcello-scavo-tattoo'); ?></label>
                         <select id="category-filter" class="filter-select">
-                            <option value=""><?php _e('Tutte le Categorie', 'marcello-scavo'); ?></option>
+                            <option value=""><?php _e('Tutte le Categorie', 'marcello-scavo-tattoo'); ?></option>
                             <?php
                             $categories = get_terms(array(
                                 'taxonomy' => 'portfolio_category',
@@ -119,19 +119,19 @@ get_header(); ?>
                     
                     <!-- Sort Filter -->
                     <div class="filter-group">
-                        <label for="sort-filter"><?php _e('Ordina per:', 'marcello-scavo'); ?></label>
+                        <label for="sort-filter"><?php _e('Ordina per:', 'marcello-scavo-tattoo'); ?></label>
                         <select id="sort-filter" class="filter-select">
-                            <option value="date_desc"><?php _e('Più Recenti', 'marcello-scavo'); ?></option>
-                            <option value="date_asc"><?php _e('Più Vecchi', 'marcello-scavo'); ?></option>
-                            <option value="title_asc"><?php _e('Titolo A-Z', 'marcello-scavo'); ?></option>
-                            <option value="title_desc"><?php _e('Titolo Z-A', 'marcello-scavo'); ?></option>
+                            <option value="date_desc"><?php _e('Più Recenti', 'marcello-scavo-tattoo'); ?></option>
+                            <option value="date_asc"><?php _e('Più Vecchi', 'marcello-scavo-tattoo'); ?></option>
+                            <option value="title_asc"><?php _e('Titolo A-Z', 'marcello-scavo-tattoo'); ?></option>
+                            <option value="title_desc"><?php _e('Titolo Z-A', 'marcello-scavo-tattoo'); ?></option>
                         </select>
                     </div>
                     
                     <!-- Clear Filters -->
                     <div class="filter-group">
                         <button id="clear-filters" class="btn btn-secondary">
-                            <i class="fas fa-times"></i> <?php _e('Pulisci Filtri', 'marcello-scavo'); ?>
+                            <i class="fas fa-times"></i> <?php _e('Pulisci Filtri', 'marcello-scavo-tattoo'); ?>
                         </button>
                     </div>
                 </div>
@@ -139,7 +139,7 @@ get_header(); ?>
             
             <!-- Results Count -->
             <div class="results-info">
-                <span id="results-count"><?php echo $wp_query->found_posts; ?></span> <?php _e('progetti trovati', 'marcello-scavo'); ?>
+                <span id="results-count"><?php echo $wp_query->found_posts; ?></span> <?php _e('progetti trovati', 'marcello-scavo-tattoo'); ?>
             </div>
             
             <!-- Portfolio Grid -->
@@ -205,12 +205,12 @@ get_header(); ?>
                                         
                                         <div class="portfolio-actions">
                                             <a href="<?php the_permalink(); ?>" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-eye"></i> <?php _e('Visualizza', 'marcello-scavo'); ?>
+                                                <i class="fas fa-eye"></i> <?php _e('Visualizza', 'marcello-scavo-tattoo'); ?>
                                             </a>
                                             
                                             <?php if ($project_type === 'tattoo') : ?>
                                                 <a href="#booking" class="btn btn-secondary btn-sm">
-                                                    <i class="fas fa-calendar-plus"></i> <?php _e('Prenota', 'marcello-scavo'); ?>
+                                                    <i class="fas fa-calendar-plus"></i> <?php _e('Prenota', 'marcello-scavo-tattoo'); ?>
                                                 </a>
                                             <?php endif; ?>
                                         </div>
@@ -219,9 +219,9 @@ get_header(); ?>
                                         <div class="type-badge type-<?php echo esc_attr($project_type); ?>">
                                             <?php
                                             $type_labels = array(
-                                                'tattoo' => __('Tatuaggio', 'marcello-scavo'),
-                                                'illustration' => __('Illustrazione', 'marcello-scavo'),
-                                                'graphic_design' => __('Grafica', 'marcello-scavo')
+                                                'tattoo' => __('Tatuaggio', 'marcello-scavo-tattoo'),
+                                                'illustration' => __('Illustrazione', 'marcello-scavo-tattoo'),
+                                                'graphic_design' => __('Grafica', 'marcello-scavo-tattoo')
                                             );
                                             echo esc_html($type_labels[$project_type] ?? $project_type);
                                             ?>
@@ -236,8 +236,8 @@ get_header(); ?>
                     <div class="no-portfolio">
                         <div class="no-results">
                             <i class="fas fa-search"></i>
-                            <h3><?php _e('Nessun progetto trovato', 'marcello-scavo'); ?></h3>
-                            <p><?php _e('Prova a modificare i filtri di ricerca o torna più tardi per vedere nuovi progetti.', 'marcello-scavo'); ?></p>
+                            <h3><?php _e('Nessun progetto trovato', 'marcello-scavo-tattoo'); ?></h3>
+                            <p><?php _e('Prova a modificare i filtri di ricerca o torna più tardi per vedere nuovi progetti.', 'marcello-scavo-tattoo'); ?></p>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -247,7 +247,7 @@ get_header(); ?>
             <?php if ($wp_query->max_num_pages > 1) : ?>
                 <div class="load-more-container text-center">
                     <button id="load-more-portfolio" class="btn btn-primary" data-page="1" data-max="<?php echo $wp_query->max_num_pages; ?>">
-                        <i class="fas fa-plus"></i> <?php _e('Carica Altri Progetti', 'marcello-scavo'); ?>
+                        <i class="fas fa-plus"></i> <?php _e('Carica Altri Progetti', 'marcello-scavo-tattoo'); ?>
                     </button>
                 </div>
             <?php endif; ?>
@@ -257,15 +257,15 @@ get_header(); ?>
     <!-- Call to Action -->
     <section class="portfolio-cta section" style="background: linear-gradient(135deg, var(--primary-blue), var(--dark-gray)); color: var(--white);">
         <div class="container text-center">
-            <h2><?php _e('Ti piace quello che vedi?', 'marcello-scavo'); ?></h2>
-            <p><?php _e('Iniziamo a creare insieme il tuo prossimo tatuaggio unico.', 'marcello-scavo'); ?></p>
+            <h2><?php _e('Ti piace quello che vedi?', 'marcello-scavo-tattoo'); ?></h2>
+            <p><?php _e('Iniziamo a creare insieme il tuo prossimo tatuaggio unico.', 'marcello-scavo-tattoo'); ?></p>
             
             <div class="cta-buttons">
                 <a href="#booking" class="btn btn-primary btn-lg">
-                    <i class="fas fa-calendar-plus"></i> <?php _e('Prenota Consultazione', 'marcello-scavo'); ?>
+                    <i class="fas fa-calendar-plus"></i> <?php _e('Prenota Consultazione', 'marcello-scavo-tattoo'); ?>
                 </a>
                 <a href="#contact" class="btn btn-secondary btn-lg">
-                    <i class="fas fa-envelope"></i> <?php _e('Contattami', 'marcello-scavo'); ?>
+                    <i class="fas fa-envelope"></i> <?php _e('Contattami', 'marcello-scavo-tattoo'); ?>
                 </a>
             </div>
         </div>
