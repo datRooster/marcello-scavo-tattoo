@@ -6187,7 +6187,7 @@ body.translating::after {
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     z-index: 1;
 }
 
@@ -7197,91 +7197,6 @@ body.translating::after {
     height: 1px;
     background: linear-gradient(to right, transparent, var(--primary-color), transparent);
     opacity: 0.3;
-}
-
-/* Stili specifici per Reviews Widget Area nel Portfolio */
-.portfolio-testimonials-section .reviews-widget-area {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.portfolio-testimonials-section .reviews-widget-area .widget {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-}
-
-.portfolio-testimonials-section .reviews-widget-area .reviews-title {
-    text-align: center;
-    color: var(--white);
-    font-family: var(--heading-font);
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: var(--spacing-lg);
-    padding: 0;
-    border: none;
-}
-
-/* FORZA stili per card recensioni nel portfolio - DEVE essere identico alla homepage */
-.portfolio-testimonials-section .google-business-info {
-    display: flex !important;
-    align-items: center !important; 
-    justify-content: center !important;
-    gap: var(--spacing-md) !important;
-    margin-bottom: var(--spacing-xl) !important;
-    padding: var(--spacing-lg) !important;
-    background: var(--primary-blue) !important;
-    border-radius: var(--border-radius-lg) !important;
-    box-shadow: var(--shadow-lg) !important;
-}
-
-.portfolio-testimonials-section .review-card {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    opacity: 0 !important;
-    transform: translateX(30px) !important;
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    border-radius: var(--border-radius-lg) !important;
-    padding: var(--spacing-lg) !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
-    backdrop-filter: blur(10px) !important;
-    color: var(--text-dark) !important;
-}
-
-.portfolio-testimonials-section .review-card.active {
-    opacity: 1 !important;
-    transform: translateX(0) !important;
-}
-
-.portfolio-testimonials-section .review-card * {
-    color: var(--text-dark) !important;
-}
-
-.portfolio-testimonials-section .reviews-carousel {
-    position: relative !important;
-    height: 200px !important;
-    margin-bottom: var(--spacing-lg) !important;
-}
-
-/* Protezione per tutti gli elementi delle recensioni */
-.portfolio-testimonials-section .reviews-widget-area * {
-    color: inherit !important;
-}
-
-.portfolio-testimonials-section .review-content p {
-    color: var(--text-dark) !important;
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-}
-
-.portfolio-testimonials-section .reviewer-info h5 {
-    color: var(--text-dark) !important;
-    font-weight: 600 !important;
 }
 
 /* Enhanced widget areas */
