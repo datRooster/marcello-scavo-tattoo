@@ -111,21 +111,6 @@
 					}
 					?>
 					<li class="menu-item">
-						<a href="#services">
-							<span data-translatable="true" data-original-text="Servizi">Servizi</span>
-						</a>
-					</li>
-					<li class="menu-item">
-						<a href="<?php echo get_post_type_archive_link('shop_product'); ?>">
-							<span data-translatable="true" data-original-text="Shop">Shop</span>
-						</a>
-					</li>
-					<li class="menu-item">
-						<a href="<?php echo get_permalink(get_option('page_for_posts')); ?>">
-							<span data-translatable="true" data-original-text="Blog">Blog</span>
-						</a>
-					</li>
-					<li class="menu-item">
 						<a href="#contact">
 							<span data-translatable="true" data-original-text="Contatti">Contatti</span>
 						</a>
