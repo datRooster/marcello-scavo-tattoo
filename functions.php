@@ -118,6 +118,19 @@ function marcello_scavo_scripts()
 	// Backup Font Awesome from jsDelivr CDN
 	wp_enqueue_style('font-awesome-backup', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css', array(), '6.4.0');
 
+	// 3D Gallery CSS per categorie specifiche
+	if (is_tax('portfolio_category')) {
+		$current_term = get_queried_object();
+		$target_categories = array('illustrazioni', 'disegni', 'quadri', 'arte', 'paintings', 'drawings');
+
+		if (in_array($current_term->slug, $target_categories)) {
+			if (file_exists(get_template_directory() . '/assets/css/3d-gallery.css')) {
+				$gallery_css_version = filemtime(get_template_directory() . '/assets/css/3d-gallery.css');
+				wp_enqueue_style('marcello-scavo-3d-gallery', get_template_directory_uri() . '/assets/css/3d-gallery.css', array('marcello-scavo-style'), $gallery_css_version);
+			}
+		}
+	}
+
 	// Add integrity check for Font Awesome
 	add_filter('style_loader_tag', function ($html, $handle) {
 		if ($handle === 'font-awesome') {
@@ -134,6 +147,19 @@ function marcello_scavo_scripts()
 
 	// Enqueue Portfolio Slider JavaScript
 	wp_enqueue_script('portfolio-slider', get_template_directory_uri() . '/assets/js/portfolio-slider.js', array(), time(), true);
+
+	// Enqueue 3D Gallery JavaScript per categorie specifiche
+	if (is_tax('portfolio_category')) {
+		$current_term = get_queried_object();
+		$target_categories = array('illustrazioni', 'disegni', 'quadri', 'arte', 'paintings', 'drawings');
+
+		if (in_array($current_term->slug, $target_categories)) {
+			if (file_exists(get_template_directory() . '/assets/js/3d-gallery.js')) {
+				$gallery_js_version = filemtime(get_template_directory() . '/assets/js/3d-gallery.js');
+				wp_enqueue_script('marcello-scavo-3d-gallery', get_template_directory_uri() . '/assets/js/3d-gallery.js', array('jquery'), $gallery_js_version, true);
+			}
+		}
+	}
 
 	// Enqueue Instafeed.js from CDN for the Instagram widget
 	wp_enqueue_script('instafeed', 'https://unpkg.com/instafeed.js@2.0.0-rc2/dist/instafeed.min.js', array('jquery'), '2.0.0', true);
@@ -6352,6 +6378,23 @@ function marcello_scavo_register_taxonomy_portfolio_widgets()
 add_action('widgets_init', 'marcello_scavo_register_taxonomy_portfolio_widgets', 35);
 
 /**
+ * Register 3D Gallery Widget Areas
+ */
+function marcello_scavo_register_3d_gallery_widget_areas()
+{
+	register_sidebar(array(
+		'name'          => __('🎨 3D Gallery Hero (Categoria Portfolio)', 'marcello-scavo-tattoo'),
+		'id'            => 'taxonomy-portfolio-3d-hero',
+		'description'   => __('Area widget per galleria 3D nelle categorie "Illustrazioni", "Disegni", "Quadri" e "Arte". Utilizza il widget "🎨 3D Gallery Hero" per creare un\'esperienza immersiva.', 'marcello-scavo-tattoo'),
+		'before_widget' => '',
+		'after_widget'  => '',
+		'before_title'  => '',
+		'after_title'   => '',
+	));
+}
+add_action('widgets_init', 'marcello_scavo_register_3d_gallery_widget_areas', 40);
+
+/**
  * Enqueue lazy loading script for portfolio gallery images
  */
 function marcello_scavo_enqueue_lazy_loading_script()
@@ -6397,3 +6440,8 @@ function marcello_scavo_enqueue_lazy_loading_script()
 	}
 }
 add_action('wp_enqueue_scripts', 'marcello_scavo_enqueue_lazy_loading_script');
+
+/**
+ * Include 3D Gallery Widget
+ */
+require_once get_template_directory() . '/inc/3d-gallery-widget.php';

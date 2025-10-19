@@ -14,33 +14,52 @@ $term_name = $current_term->name;
 $term_description = $current_term->description;
 ?>
 
-<!-- Hero Section con stile homepage -->
-<section class="hero-section">
-	<div class="container">
-		<div class="hero-content">
-			<div class="hero-label">
-				<span data-translatable="true" data-original-text="CATEGORIA <?php echo strtoupper($term_name); ?>">
-					<?php printf(__('CATEGORIA %s', 'marcello-scavo-tattoo'), strtoupper($term_name)); ?>
-				</span>
-			</div>
-			<h1 class="hero-title">
-				<span data-translatable="true" data-original-text="<?php echo esc_attr($term_name); ?>">
-					<?php echo esc_html($term_name); ?>
-				</span>
-			</h1>
-			<p class="hero-description">
-				<span data-translatable="true" data-original-text="<?php echo esc_attr($term_description ? $term_description : 'Esplora questa collezione unica di opere d\'arte e tatuaggi selezionati con cura.'); ?>">
-					<?php echo $term_description ? esc_html($term_description) : __('Esplora questa collezione unica di opere d\'arte e tatuaggi selezionati con cura.', 'marcello-scavo-tattoo'); ?>
-				</span>
-			</p>
-			<a href="#portfolio" class="btn btn-gold">
-				<span data-translatable="true" data-original-text="Esplora la Collezione">
-					<?php _e('Esplora la Collezione', 'marcello-scavo-tattoo'); ?>
-				</span>
-			</a>
-		</div>
+<!-- Hero Section con stile homepage o 3D Gallery -->
+<?php
+// Controllo se c'è il widget 3D Gallery attivo per questa categoria
+$has_3d_gallery = false;
+$target_categories = array('illustrazioni', 'disegni', 'quadri', 'arte', 'paintings', 'drawings');
+
+if (in_array($current_term->slug, $target_categories) && is_active_sidebar('taxonomy-portfolio-3d-hero')) {
+	$has_3d_gallery = true;
+}
+?>
+
+<?php if ($has_3d_gallery) : ?>
+	<!-- 3D Gallery Hero Widget Area -->
+	<div class="taxonomy-portfolio-3d-hero-widget-area">
+		<?php dynamic_sidebar('taxonomy-portfolio-3d-hero'); ?>
 	</div>
-</section>
+<?php else : ?>
+	<!-- Standard Hero Section -->
+	<section class="hero-section">
+		<div class="container">
+			<div class="hero-content">
+				<div class="hero-label">
+					<span data-translatable="true" data-original-text="CATEGORIA <?php echo strtoupper($term_name); ?>">
+						<?php printf(__('CATEGORIA %s', 'marcello-scavo-tattoo'), strtoupper($term_name)); ?>
+					</span>
+				</div>
+				<h1 class="hero-title">
+					<span data-translatable="true" data-original-text="<?php echo esc_attr($term_name); ?>">
+						<?php echo esc_html($term_name); ?>
+					</span>
+				</h1>
+				<p class="hero-description">
+					<span data-translatable="true" data-original-text="<?php echo esc_attr($term_description ? $term_description : 'Esplora questa collezione unica di opere d\'arte e tatuaggi selezionati con cura.'); ?>">
+						<?php echo $term_description ? esc_html($term_description) : __('Esplora questa collezione unica di opere d\'arte e tatuaggi selezionati con cura.', 'marcello-scavo-tattoo'); ?>
+					</span>
+				</p>
+				<a href="#portfolio" class="btn btn-gold">
+					<span data-translatable="true" data-original-text="Esplora la Collezione">
+						<?php _e('Esplora la Collezione', 'marcello-scavo-tattoo'); ?>
+					</span>
+				</a>
+			</div>
+		</div>
+		</div>
+	</section>
+<?php endif; ?>
 
 <!-- Portfolio/Gallery Section -->
 <section id="portfolio" class="section portfolio-section">
