@@ -2650,15 +2650,15 @@ body {
 }
 
 .booking-fallback .btn-primary {
-    background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold));
-    color: var(--dark-gray);
-    border-color: var(--primary-gold);
+    background: var(--gold-color);
+    color: var(--navy-color);
+    border-color: var(--gold-color);
 }
 
 .booking-fallback .btn-outline-primary {
     background: transparent;
-    color: var(--primary-gold);
-    border-color: var(--primary-gold);
+    color: var(--navy-color);
+    border-color: var(--navy-color);
 }
 
 .booking-fallback .btn:hover {
@@ -2667,17 +2667,36 @@ body {
 }
 
 .booking-fallback .btn-primary:hover {
-    background: var(--primary-gold);
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    background: var(--navy-color);
+    color: var(--gold-color);
+    border-color: var(--navy-color);
+    box-shadow: 0 4px 12px rgba(39, 58, 89, 0.2);
 }
 
 .booking-fallback .btn-outline-primary:hover {
-    background: var(--primary-gold);
-    color: var(--dark-gray);
+    background: var(--navy-color);
+    color: var(--white);
+    border-color: var(--navy-color);
 }
 
 .booking-fallback .btn i {
     font-size: 1.2rem;
+}
+
+/* Booking Alternative Contact */
+.booking-alternative-contact {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: #f9fafb;
+    border-radius: var(--border-radius);
+    border: 1px solid #e5e7eb;
+}
+
+.booking-alternative-contact p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 @media (max-width: 480px) {
@@ -3623,15 +3642,15 @@ body.modal-open {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    background: var(--gold-color);
 }
 
 .social-card.tiktok-card::before {
-    background: linear-gradient(135deg, var(--navy-color), var(--gold-color));
+    background: var(--gold-color);
 }
 
 .social-card.youtube-card::before {
-    background: linear-gradient(135deg, var(--gold-color), var(--navy-color));
+    background: var(--gold-color);
 }
 
 .social-card:hover {
@@ -4705,27 +4724,30 @@ body.modal-open {
 .booking-fallback {
     text-align: center;
     padding: var(--spacing-xl);
-    background: rgba(39, 58, 89, 0.05);
-    border-radius: var(--border-radius);
-    border: 2px dashed rgba(201, 176, 95, 0.3);
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid #e5e7eb;
+    border-top: 4px solid var(--gold-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .booking-fallback-content h3 {
-    color: var(--secondary-color);
+    color: var(--navy-color);
     font-size: 1.3rem;
     margin-bottom: var(--spacing-md);
+    font-weight: 700;
 }
 
 .booking-fallback-content p {
-    color: var(--light-text);
+    color: #6b7280;
     margin-bottom: var(--spacing-lg);
 }
 
 .booking-info {
-    background: rgba(255, 255, 255, 0.8);
+    background: #f9fafb;
     padding: var(--spacing-md);
     border-radius: var(--border-radius);
-    border-left: 4px solid var(--primary-color);
+    border-left: 4px solid var(--gold-color);
 }
 
 .booking-info code {
@@ -7569,7 +7591,7 @@ html {
 /* Portfolio Booking Section */
 .portfolio-booking-section {
     padding: var(--spacing-xl) 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: #fafbfc;
     position: relative;
 }
 
@@ -7580,8 +7602,8 @@ html {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
-    opacity: 0.6;
+    background: #e5e7eb;
+    opacity: 0.8;
 }
 
 .portfolio-booking-content {
@@ -7594,8 +7616,9 @@ html {
     background: var(--white);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-xl);
-    box-shadow: 0 8px 30px rgba(39, 58, 89, 0.1);
-    border: 2px solid rgba(201, 176, 95, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    border-top: 4px solid var(--gold-color);
     margin-top: var(--spacing-lg);
 }
 
@@ -7606,43 +7629,47 @@ html {
 .booking-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--gold-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto var(--spacing-lg);
-    color: var(--white);
+    color: var(--navy-color);
     font-size: 2.5rem;
-    box-shadow: 0 8px 25px rgba(201, 176, 95, 0.3);
+    box-shadow: 0 4px 12px rgba(201, 176, 95, 0.25);
 }
 
 .booking-fallback-content h3 {
-    color: var(--secondary-color);
+    color: var(--navy-color);
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: var(--spacing-md);
+    font-family: var(--font-accent);
 }
 
 .booking-fallback-content p {
-    color: var(--text-color);
-    font-size: 1.1rem;
-    line-height: 1.6;
+    color: #6b7280;
+    font-size: 1.05rem;
+    line-height: 1.7;
     margin-bottom: var(--spacing-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .booking-info {
-    background: rgba(201, 176, 95, 0.1);
+    background: #f9fafb;
     padding: var(--spacing-md);
     border-radius: var(--border-radius);
-    border-left: 4px solid var(--primary-color);
+    border-left: 4px solid var(--gold-color);
     margin: var(--spacing-lg) 0;
 }
 
 .booking-info p {
     margin: 0;
     font-weight: 600;
-    color: var(--secondary-color);
+    color: var(--navy-color);
 }
 
 .fallback-actions {
@@ -7650,6 +7677,9 @@ html {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--spacing-md);
     margin-top: var(--spacing-lg);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .fallback-actions .btn {
@@ -7664,32 +7694,35 @@ html {
     transition: all 0.3s ease;
     border: 2px solid;
     min-height: 50px;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
 }
 
 .fallback-actions .btn-primary {
-    background: var(--primary-color);
-    color: var(--white);
-    border-color: var(--primary-color);
+    background: var(--gold-color);
+    color: var(--navy-color);
+    border-color: var(--gold-color);
 }
 
 .fallback-actions .btn-primary:hover {
-    background: var(--secondary-color);
-    border-color: var(--secondary-color);
+    background: var(--navy-color);
+    border-color: var(--navy-color);
+    color: var(--gold-color);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(39, 58, 89, 0.2);
+    box-shadow: 0 4px 12px rgba(201, 176, 95, 0.3);
 }
 
 .fallback-actions .btn-outline-primary {
     background: transparent;
-    color: var(--primary-color);
-    border-color: var(--primary-color);
+    color: var(--navy-color);
+    border-color: var(--navy-color);
 }
 
 .fallback-actions .btn-outline-primary:hover {
-    background: var(--primary-color);
+    background: var(--navy-color);
     color: var(--white);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(201, 176, 95, 0.2);
+    box-shadow: 0 4px 12px rgba(39, 58, 89, 0.2);
 }
 
 /* Portfolio Contact Section - NUOVA VERSIONE COMPLETAMENTE RIDISEGNATA */
