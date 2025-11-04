@@ -18,7 +18,7 @@
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image">
 	<meta property="twitter:url" content="<?php echo esc_url(home_url('/')); ?>">
-	<meta property="twitter:title" content="<?php echo wp_get_document_title(); ?>">"
+	<meta property="twitter:title" content="<?php echo wp_get_document_title(); ?>">
 	<meta property="twitter:description" content="<?php bloginfo('description'); ?>">
 	<meta property="twitter:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/og-image.jpg">
 
