@@ -2,6 +2,15 @@
  * Gallery 2D - Stili Puliti
  */
 
+/* Nascondi elementi superflui del vecchio sistema */
+.hero-label,
+.hero-text-content,
+.gallery-loading,
+.canvas-3d-container,
+.parallax-layers {
+    display: none !important;
+}
+
 .gallery-2d-container {
     width: 100%;
     min-height: 100vh;
@@ -11,9 +20,10 @@
 /* Room Selection */
 .room-selection {
     display: none;
-    padding: 40px 20px;
-    max-width: 1200px;
+    padding: 60px 20px;
+    max-width: 1400px;
     margin: 0 auto;
+    min-height: 100vh;
 }
 
 .room-selection.active {
@@ -22,67 +32,84 @@
 
 .room-selection .header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .room-selection .header h2 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: #273a59;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .room-selection .header p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #666;
+    font-weight: 400;
 }
 
 .rooms-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 35px;
+    padding-bottom: 40px;
 }
 
 .room-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .room-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    border-color: #c9b05f;
 }
 
 .room-card img {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
+    display: block;
 }
 
 .room-card h3 {
-    padding: 15px;
+    padding: 20px 20px 16px 20px;
     margin: 0;
     color: #273a59;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.4;
+    flex: 1;
 }
 
 .room-card .btn-select-room {
     width: 100%;
-    padding: 12px;
+    padding: 16px 20px;
     background: #c9b05f;
     color: white;
     border: none;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
 }
 
 .room-card .btn-select-room:hover {
     background: #b39d4d;
+    transform: none;
 }
 
 /* Design Area */
@@ -326,13 +353,39 @@
 
 /* Tablet (768px - 1024px) */
 @media screen and (max-width: 1024px) {
+    .room-selection {
+        padding: 40px 20px;
+    }
+    
+    .room-selection .header {
+        margin-bottom: 40px;
+    }
+    
     .room-selection .header h2 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+    }
+    
+    .room-selection .header p {
+        font-size: 1.1rem;
     }
     
     .rooms-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+    
+    .room-card img {
+        height: 200px;
+    }
+    
+    .room-card h3 {
+        font-size: 1.2rem;
+        padding: 18px 18px 14px 18px;
+    }
+    
+    .room-card .btn-select-room {
+        padding: 14px 18px;
+        font-size: 1rem;
     }
     
     .design-layout {
@@ -383,34 +436,43 @@
     }
     
     .room-selection {
-        padding: 20px 10px;
+        padding: 30px 15px;
+    }
+    
+    .room-selection .header {
+        margin-bottom: 30px;
     }
     
     .room-selection .header h2 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
     
     .room-selection .header p {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
     
     .rooms-grid {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 20px;
+        padding-bottom: 30px;
+    }
+    
+    .room-card {
+        border-radius: 12px;
     }
     
     .room-card img {
-        height: 180px;
+        height: 200px;
     }
     
     .room-card h3 {
-        font-size: 1.1rem;
-        padding: 12px;
+        font-size: 1.15rem;
+        padding: 16px 16px 12px 16px;
     }
     
     .room-card .btn-select-room {
-        padding: 10px;
-        font-size: 0.9rem;
+        padding: 14px 16px;
+        font-size: 0.95rem;
     }
     
     /* Design Area Mobile */

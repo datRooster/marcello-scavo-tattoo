@@ -64,18 +64,7 @@ if (in_array($current_term->slug, $target_categories) && is_active_sidebar('taxo
 <!-- Portfolio/Gallery Section -->
 <section id="portfolio" class="section portfolio-section">
 	<div class="container">
-		<div class="section-header">
-			<h2 class="section-title">
-				<span data-translatable="true" data-original-text="<?php echo esc_attr($term_name); ?>">
-					<?php echo esc_html($term_name); ?>
-				</span>
-			</h2>
-			<p class="section-subtitle">
-				<span data-translatable="true" data-original-text="<?php echo esc_attr($term_description ? $term_description : 'Scopri questa raccolta selezionata di opere d\'arte e tatuaggi unici.'); ?>">
-					<?php echo $term_description ? esc_html($term_description) : __('Scopri questa raccolta selezionata di opere d\'arte e tatuaggi unici.', 'marcello-scavo-tattoo'); ?>
-				</span>
-			</p>
-		</div>
+		<!-- Section header rimossa - già presente nel widget Gallery 2D -->
 
 		<div class="portfolio-category-gallery">
 			<?php if (have_posts()) : ?>
