@@ -210,6 +210,60 @@ class Gallery2D {
                 <span>${artwork.title}</span>
             </div>
         `).join('');
+        
+        // Aggiungi supporto touch per ogni artwork item
+        setTimeout(() => {
+            document.querySelectorAll('.artwork-item').forEach(item => {
+                this.addArtworkItemTouchSupport(item);
+            });
+        }, 100);
+    }
+    
+    addArtworkItemTouchSupport(item) {
+        let touchStartX, touchStartY;
+        let isDraggingFromSidebar = false;
+        
+        item.addEventListener('touchstart', (e) => {
+            if (this.resizeMode) return;
+            
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            isDraggingFromSidebar = true;
+            
+            this.draggedArtwork = {
+                artworkIndex: item.dataset.artworkIndex
+            };
+            
+            item.style.opacity = '0.5';
+        });
+        
+        item.addEventListener('touchmove', (e) => {
+            if (!isDraggingFromSidebar) return;
+            e.preventDefault();
+        }, { passive: false });
+        
+        item.addEventListener('touchend', (e) => {
+            if (!isDraggingFromSidebar || !this.draggedArtwork) return;
+            
+            const touch = e.changedTouches[0];
+            const canvas = document.getElementById('drop-canvas');
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            // Verifica se il touch è finito sul canvas
+            if (touch.clientX >= canvasRect.left && touch.clientX <= canvasRect.right &&
+                touch.clientY >= canvasRect.top && touch.clientY <= canvasRect.bottom) {
+                
+                const x = ((touch.clientX - canvasRect.left) / canvasRect.width) * 100;
+                const y = ((touch.clientY - canvasRect.top) / canvasRect.height) * 100;
+                
+                this.placeArtwork(this.draggedArtwork, x, y);
+            }
+            
+            this.draggedArtwork = null;
+            isDraggingFromSidebar = false;
+            item.style.opacity = '1';
+        });
     }
     
     placeArtwork(artworkData, xPercent, yPercent) {
@@ -247,14 +301,86 @@ class Gallery2D {
             }
         });
         
-        // Drag per spostare
+        // Drag per spostare (desktop)
         artworkEl.addEventListener('mousedown', (e) => {
             if (e.target.classList.contains('resize-handle') || this.resizeMode) return;
             this.startDrag(e, artworkEl);
         });
         
+        // Touch support per mobile
+        this.addTouchSupport(artworkEl);
+        
         canvas.appendChild(artworkEl);
         this.artworks.push(artworkEl);
+    }
+    
+    addTouchSupport(artworkEl) {
+        let touchStartX, touchStartY, initialLeft, initialTop;
+        let isTouchMoving = false;
+        let touchStartTime = 0;
+        
+        artworkEl.addEventListener('touchstart', (e) => {
+            touchStartTime = Date.now();
+            
+            // Se in resize mode, solo selezione
+            if (this.resizeMode) {
+                this.selectArtwork(artworkEl);
+                return;
+            }
+            
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            
+            const rect = artworkEl.getBoundingClientRect();
+            const canvas = document.getElementById('drop-canvas');
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            initialLeft = ((rect.left + rect.width/2 - canvasRect.left) / canvasRect.width) * 100;
+            initialTop = ((rect.top + rect.height/2 - canvasRect.top) / canvasRect.height) * 100;
+            
+            isTouchMoving = true;
+            artworkEl.style.opacity = '0.7';
+            artworkEl.style.zIndex = '999';
+        }, { passive: true });
+        
+        artworkEl.addEventListener('touchmove', (e) => {
+            if (!isTouchMoving || this.resizeMode) return;
+            
+            const touch = e.touches[0];
+            const deltaX = touch.clientX - touchStartX;
+            const deltaY = touch.clientY - touchStartY;
+            
+            const canvas = document.getElementById('drop-canvas');
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            const deltaXPercent = (deltaX / canvasRect.width) * 100;
+            const deltaYPercent = (deltaY / canvasRect.height) * 100;
+            
+            const newLeft = Math.max(0, Math.min(100, initialLeft + deltaXPercent));
+            const newTop = Math.max(0, Math.min(100, initialTop + deltaYPercent));
+            
+            artworkEl.style.left = newLeft + '%';
+            artworkEl.style.top = newTop + '%';
+            
+            e.preventDefault();
+        }, { passive: false });
+        
+        artworkEl.addEventListener('touchend', (e) => {
+            if (!isTouchMoving) return;
+            
+            const touchDuration = Date.now() - touchStartTime;
+            
+            // Se è stato un tap veloce (< 200ms) e non si è mosso molto
+            if (touchDuration < 200 && this.resizeMode) {
+                e.stopPropagation();
+                this.selectArtwork(artworkEl);
+            }
+            
+            isTouchMoving = false;
+            artworkEl.style.opacity = '1';
+            artworkEl.style.zIndex = '10';
+        });
     }
     
     selectArtwork(artwork) {
@@ -273,30 +399,44 @@ class Gallery2D {
         positions.forEach(pos => {
             const handle = document.createElement('div');
             handle.className = `resize-handle resize-handle-${pos}`;
+            
+            // Mouse events (desktop)
             handle.addEventListener('mousedown', (e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 this.startResize(e, artwork, pos);
             });
+            
+            // Touch events (mobile)
+            handle.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                const touch = e.touches[0];
+                this.startResize(touch, artwork, pos, true);
+            }, { passive: false });
+            
             artwork.appendChild(handle);
         });
     }
     
-    startResize(e, artwork, position) {
+    startResize(e, artwork, position, isTouch = false) {
         const canvas = document.getElementById('drop-canvas');
         const canvasRect = canvas.getBoundingClientRect();
         const startRect = artwork.getBoundingClientRect();
         
-        const startX = e.clientX;
-        const startY = e.clientY;
+        const startX = isTouch ? e.clientX : e.clientX;
+        const startY = isTouch ? e.clientY : e.clientY;
         const startWidth = startRect.width;
         const startHeight = startRect.height;
         const startLeft = startRect.left - canvasRect.left;
         const startTop = startRect.top - canvasRect.top;
         
         const onMove = (e) => {
-            const dx = e.clientX - startX;
-            const dy = e.clientY - startY;
+            const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+            const clientY = isTouch ? e.touches[0].clientY : e.clientY;
+            
+            const dx = clientX - startX;
+            const dy = clientY - startY;
             
             let newWidth = startWidth;
             let newHeight = startHeight;
@@ -314,7 +454,10 @@ class Gallery2D {
                 newTop = startTop + dy;
             }
             
-            if (newWidth > 50 && newHeight > 50) {
+            // Dimensioni minime
+            const minSize = window.innerWidth < 768 ? 80 : 50;
+            
+            if (newWidth > minSize && newHeight > minSize) {
                 artwork.style.width = `${newWidth}px`;
                 artwork.style.height = `${newHeight}px`;
                 artwork.style.left = `${newLeft}px`;
@@ -323,12 +466,22 @@ class Gallery2D {
         };
         
         const onUp = () => {
-            document.removeEventListener('mousemove', onMove);
-            document.removeEventListener('mouseup', onUp);
+            if (isTouch) {
+                document.removeEventListener('touchmove', onMove);
+                document.removeEventListener('touchend', onUp);
+            } else {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+            }
         };
         
-        document.addEventListener('mousemove', onMove);
-        document.addEventListener('mouseup', onUp);
+        if (isTouch) {
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchend', onUp);
+        } else {
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+        }
     }
     
     startDrag(e, artwork) {

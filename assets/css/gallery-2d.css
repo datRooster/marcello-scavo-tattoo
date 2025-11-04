@@ -319,3 +319,314 @@
     font-size: 0.85rem;
     margin-top: 2px;
 }
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    .room-selection .header h2 {
+        font-size: 2rem;
+    }
+    
+    .rooms-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .design-layout {
+        flex-direction: column;
+    }
+    
+    .artwork-sidebar {
+        width: 100%;
+        max-height: 250px;
+        border-left: none;
+        border-top: 1px solid #ddd;
+    }
+    
+    .artwork-list {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 10px;
+    }
+    
+    .artwork-item {
+        min-width: 120px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .artwork-item img {
+        width: 100%;
+        height: 100px;
+    }
+    
+    .toolbar {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px 15px;
+    }
+    
+    .toolbar button {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile (max 767px) */
+@media screen and (max-width: 767px) {
+    .gallery-2d-container {
+        min-height: 100vh;
+    }
+    
+    .room-selection {
+        padding: 20px 10px;
+    }
+    
+    .room-selection .header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .room-selection .header p {
+        font-size: 0.95rem;
+    }
+    
+    .rooms-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .room-card img {
+        height: 180px;
+    }
+    
+    .room-card h3 {
+        font-size: 1.1rem;
+        padding: 12px;
+    }
+    
+    .room-card .btn-select-room {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    /* Design Area Mobile */
+    .design-area {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .design-layout {
+        flex-direction: column-reverse;
+    }
+    
+    .canvas-container {
+        padding: 10px;
+        flex: none;
+        min-height: 400px;
+    }
+    
+    #drop-canvas {
+        min-height: 400px !important;
+    }
+    
+    .artwork-sidebar {
+        width: 100%;
+        max-height: 200px;
+        padding: 15px 10px;
+        border-left: none;
+        border-bottom: 1px solid #ddd;
+        order: -1;
+    }
+    
+    .artwork-sidebar h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    
+    .artwork-list {
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .artwork-item {
+        min-width: 100px;
+        flex-direction: column;
+        padding: 8px;
+        text-align: center;
+    }
+    
+    .artwork-item img {
+        width: 80px;
+        height: 100px;
+    }
+    
+    .artwork-item span {
+        font-size: 0.8rem;
+        margin-top: 5px;
+    }
+    
+    /* Placed Artwork - più piccole di default su mobile */
+    .placed-artwork {
+        max-width: 150px !important;
+    }
+    
+    /* Resize handles più grandi per touch */
+    .resize-handle {
+        width: 20px;
+        height: 20px;
+        border-width: 3px;
+    }
+    
+    .resize-handle-nw { top: -10px; left: -10px; }
+    .resize-handle-n  { top: -10px; }
+    .resize-handle-ne { top: -10px; right: -10px; }
+    .resize-handle-e  { right: -10px; }
+    .resize-handle-se { bottom: -10px; right: -10px; }
+    .resize-handle-s  { bottom: -10px; }
+    .resize-handle-sw { bottom: -10px; left: -10px; }
+    .resize-handle-w  { left: -10px; }
+    
+    /* Toolbar Mobile */
+    .toolbar {
+        flex-direction: column;
+        padding: 10px;
+        gap: 8px;
+    }
+    
+    .toolbar button {
+        width: 100%;
+        padding: 12px;
+        justify-content: center;
+        font-size: 0.95rem;
+    }
+    
+    /* Save Menu Mobile */
+    .save-menu {
+        position: fixed !important;
+        bottom: 80px !important;
+        left: 10px !important;
+        right: 10px !important;
+        width: auto !important;
+    }
+    
+    .save-menu-option {
+        padding: 15px;
+    }
+    
+    .save-menu-option i {
+        font-size: 1.4rem;
+    }
+    
+    .save-menu-option span {
+        font-size: 1rem;
+    }
+}
+
+/* Extra Small Mobile (max 480px) */
+@media screen and (max-width: 480px) {
+    .room-selection .header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .room-card img {
+        height: 150px;
+    }
+    
+    .canvas-container {
+        min-height: 300px;
+    }
+    
+    #drop-canvas {
+        min-height: 300px !important;
+    }
+    
+    .artwork-sidebar {
+        max-height: 180px;
+    }
+    
+    .artwork-item {
+        min-width: 90px;
+    }
+    
+    .artwork-item img {
+        width: 70px;
+        height: 90px;
+    }
+    
+    .placed-artwork {
+        max-width: 120px !important;
+    }
+    
+    .toolbar button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape orientation su mobile */
+@media screen and (max-width: 767px) and (orientation: landscape) {
+    .design-layout {
+        flex-direction: row;
+    }
+    
+    .canvas-container {
+        flex: 1;
+    }
+    
+    .artwork-sidebar {
+        width: 200px;
+        max-height: none;
+        border-bottom: none;
+        border-left: 1px solid #ddd;
+        order: 0;
+    }
+    
+    .artwork-list {
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    
+    .artwork-item {
+        min-width: auto;
+        flex-direction: row;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .room-card:hover {
+        transform: none;
+    }
+    
+    .room-card:active {
+        transform: scale(0.98);
+    }
+    
+    .room-card .btn-select-room:active {
+        background: #a68a45;
+    }
+    
+    .artwork-item:hover {
+        background: #f9f9f9;
+    }
+    
+    .artwork-item:active {
+        background: #e8e8e8;
+    }
+    
+    .toolbar button:hover {
+        background: inherit;
+    }
+    
+    .toolbar button:active {
+        opacity: 0.8;
+    }
+}
