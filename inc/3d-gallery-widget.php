@@ -166,14 +166,16 @@ class Marcello_Scavo_3D_Gallery_Widget extends WP_Widget
                             </p>
 
                             <div class="hero-actions">
-                                <button class="btn btn-gold btn-3d" id="toggle-3d-mode">
+                                <!-- Pulsante 3D nascosto - Gallery sempre in modalità 2D -->
+                                <button class="btn btn-gold btn-3d" id="toggle-3d-mode" style="display: none;">
                                     <i class="fas fa-cube"></i>
                                     <span data-translatable="true" data-original-text="Esplora in 3D">
                                         <?php _e('Esplora in 3D', 'marcello-scavo-tattoo'); ?>
                                     </span>
                                 </button>
 
-                                <button class="btn btn-outline-light btn-gallery-tour" id="start-gallery-tour">
+                                <!-- Tour guidato nascosto per modalità 2D -->
+                                <button class="btn btn-outline-light btn-gallery-tour" id="start-gallery-tour" style="display: none;">
                                     <i class="fas fa-route"></i>
                                     <span data-translatable="true" data-original-text="Tour Guidato">
                                         <?php _e('Tour Guidato', 'marcello-scavo-tattoo'); ?>
@@ -188,8 +190,8 @@ class Marcello_Scavo_3D_Gallery_Widget extends WP_Widget
                                     <span class="stat-label"><?php _e('Opere Esposte', 'marcello-scavo-tattoo'); ?></span>
                                 </div>
                                 <div class="stat-item">
-                                    <span class="stat-number">360°</span>
-                                    <span class="stat-label"><?php _e('Esperienza', 'marcello-scavo-tattoo'); ?></span>
+                                    <span class="stat-number">2D</span>
+                                    <span class="stat-label"><?php _e('Visualizzazione', 'marcello-scavo-tattoo'); ?></span>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-number">HD</span>

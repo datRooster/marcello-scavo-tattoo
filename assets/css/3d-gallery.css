@@ -59,15 +59,20 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-    pointer-events: auto; /* Assicura che il canvas riceva i click */
+    z-index: -1;
+    pointer-events: none !important; /* Canvas 3D disabilitato completamente */
+    display: none !important; /* Container 3D sempre nascosto */
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
 #gallery-3d-canvas {
     width: 100%;
     height: 100%;
-    display: block;
-    pointer-events: auto; /* Importante: canvas deve ricevere eventi mouse */
+    display: none !important; /* Canvas 3D sempre nascosto - Modalità 2D attiva */
+    pointer-events: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
 /* 3D Controls */
@@ -76,10 +81,11 @@
     bottom: 30px;
     left: 30px;
     z-index: 10;
-    display: flex;
+    display: none !important; /* Controlli 3D nascosti - Modalità 2D attiva */
     flex-direction: column;
     gap: 10px;
-    pointer-events: auto; /* Assicura che i controlli siano cliccabili */
+    pointer-events: none !important;
+    visibility: hidden !important;
 }
 
 .control-hint {

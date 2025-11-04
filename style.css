@@ -9730,6 +9730,17 @@ body.canva-2d-active .canvas-3d-container {
     z-index: -1 !important;
 }
 
+/* MODALITÀ 2D PERMANENTE - Canvas 3D sempre nascosto */
+#gallery-3d-canvas,
+.canvas-3d-container,
+.gallery-3d-controls {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    z-index: -9999 !important;
+}
+
 /* Header stile Canva */
 .canva-header {
     position: sticky;

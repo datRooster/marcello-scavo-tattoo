@@ -75,6 +75,25 @@ class Gallery3D {
     }
 
     async init() {
+        // MODALITÀ 2D FORZATA - Il 3D è completamente disabilitato
+        console.log('🎨 Inizializzazione Gallery in modalità 2D...');
+        
+        this.hideLoading();
+        
+        // Attiva direttamente la modalità 2D Canva
+        setTimeout(() => {
+            this.activate2DCanvaMode();
+            this.enableParallaxEffects();
+            this.initParallaxOnly();
+            console.log('✅ Gallery 2D pronta e attiva');
+        }, 500);
+        
+        // Setup event listeners base (senza 3D)
+        this.setupEventListeners();
+        
+        return;
+        
+        /* 3D DISABILITATO - Codice mantenuto per riferimento
         if (!this.galleryData || !this.galleryData.settings.enable3D) {
             this.hideLoading();
             this.initParallaxOnly();
@@ -106,6 +125,7 @@ class Gallery3D {
             this.hideLoading();
             this.initParallaxOnly();
         }
+        */
     }
 
     async loadThreeJS() {
