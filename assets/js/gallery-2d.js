@@ -573,69 +573,140 @@ class Gallery2D {
     }
     
     async saveAsPNG() {
-        const canvas = document.getElementById('drop-canvas');
-        if (!canvas) return;
+        const dropCanvas = document.getElementById('drop-canvas');
+        if (!dropCanvas) return;
         
         console.log('Gallery2D: Saving as PNG...');
         
-        // Nascondi temporaneamente i resize handles
-        const handles = canvas.querySelectorAll('.resize-handle');
-        handles.forEach(h => h.style.display = 'none');
-        
         try {
-            // Usa html2canvas per convertire il canvas in immagine
-            const html2canvas = await this.loadHtml2Canvas();
-            const canvasImg = await html2canvas(canvas, {
-                backgroundColor: null,
-                scale: 2, // Qualità alta
-                useCORS: true,
-                allowTaint: true
-            });
+            // Crea un canvas HTML5 per disegnare manualmente
+            const exportCanvas = document.createElement('canvas');
+            const ctx = exportCanvas.getContext('2d');
+            
+            // Ottieni dimensioni del drop-canvas
+            const rect = dropCanvas.getBoundingClientRect();
+            const scale = 2; // Alta qualità
+            exportCanvas.width = rect.width * scale;
+            exportCanvas.height = rect.height * scale;
+            ctx.scale(scale, scale);
+            
+            // Sfondo bianco
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, rect.width, rect.height);
+            
+            // Carica e disegna l'immagine di sfondo della stanza
+            const bgStyle = window.getComputedStyle(dropCanvas);
+            const bgImage = bgStyle.backgroundImage;
+            if (bgImage && bgImage !== 'none') {
+                const bgUrl = bgImage.slice(5, -2); // Rimuove 'url("' e '")'
+                await this.drawImageOnCanvas(ctx, bgUrl, 0, 0, rect.width, rect.height);
+            }
+            
+            // Disegna ogni artwork nella posizione corretta
+            const artworks = dropCanvas.querySelectorAll('.placed-artwork');
+            for (const artwork of artworks) {
+                const img = artwork.querySelector('img');
+                if (!img) continue;
+                
+                const artworkRect = artwork.getBoundingClientRect();
+                const x = artworkRect.left - rect.left;
+                const y = artworkRect.top - rect.top;
+                const width = artworkRect.width;
+                const height = artworkRect.height;
+                
+                await this.drawImageOnCanvas(ctx, img.src, x, y, width, height);
+            }
             
             // Download
             const link = document.createElement('a');
             link.download = `galleria-${Date.now()}.png`;
-            link.href = canvasImg.toDataURL('image/png');
+            link.href = exportCanvas.toDataURL('image/png', 1.0);
             link.click();
             
             console.log('Gallery2D: PNG saved successfully');
         } catch (error) {
             console.error('Gallery2D: Error saving PNG', error);
-            alert('Errore nel salvataggio PNG. Riprova.');
-        } finally {
-            // Ripristina i handles
-            handles.forEach(h => h.style.display = '');
+            alert('Errore nel salvataggio PNG: ' + error.message);
         }
     }
     
+    drawImageOnCanvas(ctx, src, x, y, width, height) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            
+            img.onload = () => {
+                ctx.drawImage(img, x, y, width, height);
+                resolve();
+            };
+            
+            img.onerror = (error) => {
+                console.warn('Failed to load image:', src, error);
+                // Disegna un placeholder se l'immagine fallisce
+                ctx.fillStyle = '#cccccc';
+                ctx.fillRect(x, y, width, height);
+                ctx.fillStyle = '#666666';
+                ctx.font = '14px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Immagine non caricata', x + width/2, y + height/2);
+                resolve();
+            };
+            
+            img.src = src;
+        });
+    }
+    
     async saveAsPDF() {
-        const canvas = document.getElementById('drop-canvas');
-        if (!canvas) return;
+        const dropCanvas = document.getElementById('drop-canvas');
+        if (!dropCanvas) return;
         
         console.log('Gallery2D: Saving as PDF...');
         
-        // Nascondi temporaneamente i resize handles
-        const handles = canvas.querySelectorAll('.resize-handle');
-        handles.forEach(h => h.style.display = 'none');
-        
         try {
-            // Carica le librerie necessarie
-            const [html2canvas, jsPDF] = await Promise.all([
-                this.loadHtml2Canvas(),
-                this.loadJsPDF()
-            ]);
+            // Carica jsPDF
+            const jsPDF = await this.loadJsPDF();
             
-            // Converti in canvas
-            const canvasImg = await html2canvas(canvas, {
-                backgroundColor: '#ffffff',
-                scale: 2,
-                useCORS: true,
-                allowTaint: true
-            });
+            // Crea un canvas HTML5 per disegnare manualmente
+            const exportCanvas = document.createElement('canvas');
+            const ctx = exportCanvas.getContext('2d');
             
-            // Crea PDF in formato landscape per gallerie larghe
-            const imgWidth = canvasImg.width;
-            const imgHeight = canvasImg.height;
+            // Ottieni dimensioni del drop-canvas
+            const rect = dropCanvas.getBoundingClientRect();
+            const scale = 2; // Alta qualità
+            exportCanvas.width = rect.width * scale;
+            exportCanvas.height = rect.height * scale;
+            ctx.scale(scale, scale);
+            
+            // Sfondo bianco
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, rect.width, rect.height);
+            
+            // Carica e disegna l'immagine di sfondo della stanza
+            const bgStyle = window.getComputedStyle(dropCanvas);
+            const bgImage = bgStyle.backgroundImage;
+            if (bgImage && bgImage !== 'none') {
+                const bgUrl = bgImage.slice(5, -2);
+                await this.drawImageOnCanvas(ctx, bgUrl, 0, 0, rect.width, rect.height);
+            }
+            
+            // Disegna ogni artwork nella posizione corretta
+            const artworks = dropCanvas.querySelectorAll('.placed-artwork');
+            for (const artwork of artworks) {
+                const img = artwork.querySelector('img');
+                if (!img) continue;
+                
+                const artworkRect = artwork.getBoundingClientRect();
+                const x = artworkRect.left - rect.left;
+                const y = artworkRect.top - rect.top;
+                const width = artworkRect.width;
+                const height = artworkRect.height;
+                
+                await this.drawImageOnCanvas(ctx, img.src, x, y, width, height);
+            }
+            
+            // Crea PDF
+            const imgWidth = exportCanvas.width / scale;
+            const imgHeight = exportCanvas.height / scale;
             const ratio = imgWidth / imgHeight;
             
             let pdfWidth, pdfHeight, orientation;
@@ -650,7 +721,7 @@ class Gallery2D {
             }
             
             const pdf = new jsPDF.jsPDF(orientation, 'mm', 'a4');
-            const imgData = canvasImg.toDataURL('image/jpeg', 0.95);
+            const imgData = exportCanvas.toDataURL('image/jpeg', 0.95);
             
             pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
             pdf.save(`galleria-${Date.now()}.pdf`);
@@ -658,10 +729,7 @@ class Gallery2D {
             console.log('Gallery2D: PDF saved successfully');
         } catch (error) {
             console.error('Gallery2D: Error saving PDF', error);
-            alert('Errore nel salvataggio PDF. Riprova.');
-        } finally {
-            // Ripristina i handles
-            handles.forEach(h => h.style.display = '');
+            alert('Errore nel salvataggio PDF: ' + error.message);
         }
     }
     
