@@ -118,18 +118,7 @@ function marcello_scavo_scripts()
 	// Backup Font Awesome from jsDelivr CDN
 	wp_enqueue_style('font-awesome-backup', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css', array(), '6.4.0');
 
-	// 3D Gallery CSS per categorie specifiche
-	if (is_tax('portfolio_category')) {
-		$current_term = get_queried_object();
-		$target_categories = array('illustrazioni', 'disegni', 'quadri', 'arte', 'paintings', 'drawings');
-
-		if (in_array($current_term->slug, $target_categories)) {
-			if (file_exists(get_template_directory() . '/assets/css/3d-gallery.css')) {
-				$gallery_css_version = filemtime(get_template_directory() . '/assets/css/3d-gallery.css');
-				wp_enqueue_style('marcello-scavo-3d-gallery', get_template_directory_uri() . '/assets/css/3d-gallery.css', array('marcello-scavo-style'), $gallery_css_version);
-			}
-		}
-	}
+	// 3D Gallery CSS RIMOSSO - ora usiamo gallery-2d.css
 
 	// Add integrity check for Font Awesome
 	add_filter('style_loader_tag', function ($html, $handle) {
@@ -148,15 +137,51 @@ function marcello_scavo_scripts()
 	// Enqueue Portfolio Slider JavaScript
 	wp_enqueue_script('portfolio-slider', get_template_directory_uri() . '/assets/js/portfolio-slider.js', array(), time(), true);
 
-	// Enqueue 3D Gallery JavaScript per categorie specifiche
+	// Enqueue Gallery 2D JavaScript e CSS per categorie specifiche
 	if (is_tax('portfolio_category')) {
 		$current_term = get_queried_object();
 		$target_categories = array('illustrazioni', 'disegni', 'quadri', 'arte', 'paintings', 'drawings');
 
 		if (in_array($current_term->slug, $target_categories)) {
-			if (file_exists(get_template_directory() . '/assets/js/3d-gallery.js')) {
-				$gallery_js_version = filemtime(get_template_directory() . '/assets/js/3d-gallery.js');
-				wp_enqueue_script('marcello-scavo-3d-gallery', get_template_directory_uri() . '/assets/js/3d-gallery.js', array('jquery'), $gallery_js_version, true);
+			// Enqueue CSS Gallery 2D
+			if (file_exists(get_template_directory() . '/assets/css/gallery-2d.css')) {
+				$gallery_css_version = filemtime(get_template_directory() . '/assets/css/gallery-2d.css');
+				wp_enqueue_style('gallery-2d-style', get_template_directory_uri() . '/assets/css/gallery-2d.css', array(), $gallery_css_version);
+			}
+
+			// Enqueue JS Gallery 2D
+			if (file_exists(get_template_directory() . '/assets/js/gallery-2d.js')) {
+				$gallery_js_version = filemtime(get_template_directory() . '/assets/js/gallery-2d.js');
+				wp_enqueue_script('gallery-2d-script', get_template_directory_uri() . '/assets/js/gallery-2d.js', array('jquery'), $gallery_js_version, true);
+
+				// Prepara dati stanze per Gallery 2D
+				$rooms_dir = get_template_directory() . '/assets/images/rooms/';
+				$rooms_url = get_template_directory_uri() . '/assets/images/rooms/';
+				$available_rooms_2d = array();
+
+				if (is_dir($rooms_dir)) {
+					$files = scandir($rooms_dir);
+					foreach ($files as $file) {
+						if (preg_match('/\.(jpg|jpeg|png|webp|gif)$/i', $file)) {
+							$room_id = pathinfo($file, PATHINFO_FILENAME);
+							$room_name = str_replace(array('_', '-'), ' ', $room_id);
+							$room_name = ucwords($room_name);
+
+							$available_rooms_2d[] = array(
+								'id' => sanitize_title($room_id),
+								'name' => $room_name,
+								'filename' => $file,
+								'url' => $rooms_url . $file
+							);
+						}
+					}
+				}
+
+				// Passa roomsData al gallery-2d-script
+				wp_localize_script('gallery-2d-script', 'roomsData', array(
+					'available_rooms' => $available_rooms_2d,
+					'theme_path' => get_template_directory_uri()
+				));
 			}
 		}
 	}
@@ -164,10 +189,42 @@ function marcello_scavo_scripts()
 	// Enqueue Instafeed.js from CDN for the Instagram widget
 	wp_enqueue_script('instafeed', 'https://unpkg.com/instafeed.js@2.0.0-rc2/dist/instafeed.min.js', array('jquery'), '2.0.0', true);
 
+	// Leggi dinamicamente le stanze dalla cartella assets/images/rooms/
+	$rooms_dir = get_template_directory() . '/assets/images/rooms/';
+	$rooms_url = get_template_directory_uri() . '/assets/images/rooms/';
+	$available_rooms = array();
+
+	if (is_dir($rooms_dir)) {
+		$files = scandir($rooms_dir);
+		foreach ($files as $file) {
+			if (preg_match('/\.(jpg|jpeg|png|webp|gif)$/i', $file)) {
+				// Estrai il nome base del file (senza estensione)
+				$room_id = pathinfo($file, PATHINFO_FILENAME);
+
+				// Converti nome file in nome leggibile (es: "Galleria_2" -> "Galleria 2")
+				$room_name = str_replace(array('_', '-'), ' ', $room_id);
+				$room_name = ucwords($room_name);
+
+				$available_rooms[] = array(
+					'id' => sanitize_title($room_id),
+					'name' => $room_name,
+					'filename' => $file,
+					'url' => $rooms_url . $file
+				);
+			}
+		}
+	}
+
 	// Localize script for AJAX
 	wp_localize_script('marcello-scavo-script', 'ajax_object', array(
 		'ajax_url' => admin_url('admin-ajax.php'),
 		'nonce' => wp_create_nonce('marcello_scavo_nonce')
+	));
+
+	// Passa le stanze disponibili a JavaScript
+	wp_localize_script('marcello-scavo-script', 'roomsData', array(
+		'available_rooms' => $available_rooms,
+		'theme_path' => get_template_directory_uri()
 	));
 
 	// Add inline script to check Font Awesome loading

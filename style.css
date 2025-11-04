@@ -8688,6 +8688,18 @@ html {
     margin: 0 auto;
 }
 
+.no-rooms-message {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f9fafb;
+    border-radius: 12px;
+    color: #6b7280;
+    font-size: 1.1rem;
+    border: 2px dashed #d1d5db;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
 .room-card {
     background: #ffffff;
     border-radius: 16px;
@@ -8869,9 +8881,13 @@ html {
 .room-mockup-canvas {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: 100%;
+    min-height: 600px;
     height: auto;
     background: white;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     overflow: hidden;
@@ -9587,9 +9603,12 @@ html {
 }
 
 .room-mockup-canvas {
-    background: white !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
     position: relative;
     z-index: 0;
+    min-height: 600px;
 }
 
 .artwork-drop-zones {
@@ -9605,11 +9624,150 @@ html {
 .artwork-drop-zone {
     pointer-events: all;
     z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* Quando la drop zone contiene un'artwork, rimuove il bordo visibile */
+.artwork-drop-zone.has-artwork {
+    border: none !important;
+    background: transparent !important;
+}
+
+/* Quando si fa hover su una zona con artwork, mostra un sottile bordo oro */
+.artwork-drop-zone.has-artwork:hover {
+    border: 2px solid rgba(201, 176, 95, 0.5) !important;
 }
 
 .placed-artwork {
     z-index: 3;
     position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+}
+
+/* FREE DROP SYSTEM - Artwork posizionate liberamente */
+.placed-artwork-free {
+    position: absolute;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.2s ease;
+    user-select: none;
+}
+
+.placed-artwork-free img {
+    pointer-events: none;
+    user-select: none;
+    display: block;
+}
+
+.placed-artwork-free:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.placed-artwork-free.selected-for-resize {
+    box-shadow: 0 0 0 3px var(--gold-color), 0 8px 24px rgba(0, 0, 0, 0.5);
+    z-index: 100 !important;
+    cursor: default;
+}
+
+/* RESIZE HANDLES */
+.resize-handle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--gold-color);
+    border: 2px solid white;
+    border-radius: 50%;
+    z-index: 101;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: all;
+    user-select: none;
+}
+
+.selected-for-resize .resize-handle {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.resize-handle:hover {
+    transform: scale(1.3);
+    background: #d4af37;
+    cursor: inherit;
+}
+
+/* Posizioni degli handle */
+.resize-handle-nw {
+    top: -6px;
+    left: -6px;
+    cursor: nw-resize;
+}
+
+.resize-handle-n {
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: n-resize;
+}
+
+.resize-handle-ne {
+    top: -6px;
+    right: -6px;
+    cursor: ne-resize;
+}
+
+.resize-handle-e {
+    top: 50%;
+    right: -6px;
+    transform: translateY(-50%);
+    cursor: e-resize;
+}
+
+.resize-handle-se {
+    bottom: -6px;
+    right: -6px;
+    cursor: se-resize;
+}
+
+.resize-handle-s {
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: s-resize;
+}
+
+.resize-handle-sw {
+    bottom: -6px;
+    left: -6px;
+    cursor: sw-resize;
+}
+
+.resize-handle-w {
+    top: 50%;
+    left: -6px;
+    transform: translateY(-50%);
+    cursor: w-resize;
+}
+
+/* Canvas in modalità free drop */
+.free-canvas {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+.free-canvas.tool-select {
+    cursor: default;
+}
+
+.free-canvas.tool-move {
+    cursor: grab;
+}
+
+.free-canvas.tool-resize {
+    cursor: default;
 }
 
 /* Hover states migliorati */

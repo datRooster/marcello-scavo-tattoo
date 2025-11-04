@@ -64,188 +64,36 @@ class Marcello_Scavo_3D_Gallery_Widget extends WP_Widget
         echo $args['before_widget'];
 ?>
 
-        <div class="hero-3d-gallery" data-room-style="<?php echo esc_attr($room_style); ?>" data-category="<?php echo esc_attr($category_slug); ?>">
-            <!-- Loading Screen -->
-            <div class="gallery-loading">
-                <div class="loading-spinner"></div>
-                <p><?php _e('Caricamento galleria 3D...', 'marcello-scavo-tattoo'); ?></p>
-            </div>
-
-            <!-- 3D Canvas Container -->
-            <?php if ($enable_3d) : ?>
-                <div class="canvas-3d-container">
-                    <canvas id="gallery-3d-canvas"></canvas>
-
-                    <!-- 3D Controls Overlay -->
-                    <div class="gallery-3d-controls">
-                        <div class="control-hint">
-                            <i class="fas fa-mouse-pointer"></i>
-                            <span><?php _e('Trascina per guardare intorno', 'marcello-scavo-tattoo'); ?></span>
-                        </div>
-                        <div class="control-hint">
-                            <i class="fas fa-search-plus"></i>
-                            <span><?php _e('Scroll per zoom', 'marcello-scavo-tattoo'); ?></span>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-
-            <!-- Parallax Hero Section -->
-            <div class="hero-3d-content <?php echo $enable_3d ? 'with-3d' : 'parallax-only'; ?>">
-
-                <!-- Parallax Background Layers -->
-                <?php if ($enable_parallax) : ?>
-                    <div class="parallax-layers">
-                        <div class="parallax-layer" data-speed="0.1">
-                            <div class="room-back-wall"></div>
-                        </div>
-                        <div class="parallax-layer" data-speed="0.3">
-                            <div class="room-side-walls"></div>
-                        </div>
-                        <div class="parallax-layer" data-speed="0.5">
-                            <div class="room-floor"></div>
-                        </div>
-                    </div>
-                <?php endif; ?>
-
-                <!-- Gallery Frames Overlay - DISABILITATO per test 3D skeleton -->
-                <div class="gallery-frames-container" style="display: none;">
-                    <?php
-                    /*
-                    // Temporaneamente disabilitato per testare skeleton 3D
-                    $frame_positions = array(
-                        array('left' => '15%', 'top' => '20%', 'size' => 'large'),
-                        array('left' => '60%', 'top' => '15%', 'size' => 'medium'),
-                        array('left' => '35%', 'top' => '40%', 'size' => 'small'),
-                        array('left' => '75%', 'top' => '45%', 'size' => 'medium'),
-                        array('left' => '10%', 'top' => '60%', 'size' => 'small'),
-                        array('left' => '50%', 'top' => '70%', 'size' => 'large'),
-                    );
-
-                    foreach ($gallery_posts as $index => $post) :
-                        if ($index >= count($frame_positions)) break;
-                        $position = $frame_positions[$index];
-                        $image_url = get_the_post_thumbnail_url($post->ID, 'large');
-                    ?>
-                        <div class="gallery-frame frame-<?php echo esc_attr($position['size']); ?>"
-                            style="left: <?php echo $position['left']; ?>; top: <?php echo $position['top']; ?>;"
-                            data-parallax-speed="<?php echo 0.8 + ($index * 0.1); ?>">
-                            <div class="frame-border">
-                                <img src="<?php echo esc_url($image_url); ?>"
-                                    alt="<?php echo esc_attr($post->post_title); ?>"
-                                    loading="lazy">
-                                <div class="frame-glass-effect"></div>
-                            </div>
-                            <div class="frame-spotlight"></div>
-                        </div>
-                    <?php endforeach; */
-                    ?>
-                </div>
-
-                <!-- Hero Text Content -->
-                <div class="hero-text-content">
-                    <div class="container">
-                        <div class="hero-content-inner">
-                            <div class="hero-label">
-                                <span class="gallery-icon">🎨</span>
-                                <span data-translatable="true" data-original-text="GALLERIA VIRTUALE">
-                                    <?php _e('GALLERIA VIRTUALE', 'marcello-scavo-tattoo'); ?>
-                                </span>
-                            </div>
-
-                            <h1 class="hero-title">
-                                <span data-translatable="true" data-original-text="<?php echo esc_attr($title); ?>">
-                                    <?php echo esc_html($title); ?>
-                                </span>
-                            </h1>
-
-                            <p class="hero-description">
-                                <span data-translatable="true" data-original-text="<?php echo esc_attr($subtitle); ?>">
-                                    <?php echo esc_html($subtitle); ?>
-                                </span>
-                            </p>
-
-                            <div class="hero-actions">
-                                <!-- Pulsante 3D nascosto - Gallery sempre in modalità 2D -->
-                                <button class="btn btn-gold btn-3d" id="toggle-3d-mode" style="display: none;">
-                                    <i class="fas fa-cube"></i>
-                                    <span data-translatable="true" data-original-text="Esplora in 3D">
-                                        <?php _e('Esplora in 3D', 'marcello-scavo-tattoo'); ?>
-                                    </span>
-                                </button>
-
-                                <!-- Tour guidato nascosto per modalità 2D -->
-                                <button class="btn btn-outline-light btn-gallery-tour" id="start-gallery-tour" style="display: none;">
-                                    <i class="fas fa-route"></i>
-                                    <span data-translatable="true" data-original-text="Tour Guidato">
-                                        <?php _e('Tour Guidato', 'marcello-scavo-tattoo'); ?>
-                                    </span>
-                                </button>
-                            </div>
-
-                            <!-- Gallery Stats -->
-                            <div class="gallery-stats">
-                                <div class="stat-item">
-                                    <span class="stat-number"><?php echo count($gallery_posts); ?></span>
-                                    <span class="stat-label"><?php _e('Opere Esposte', 'marcello-scavo-tattoo'); ?></span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">2D</span>
-                                    <span class="stat-label"><?php _e('Visualizzazione', 'marcello-scavo-tattoo'); ?></span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-number">HD</span>
-                                    <span class="stat-label"><?php _e('Qualità', 'marcello-scavo-tattoo'); ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ambient Lighting Effects -->
-                <div class="ambient-lighting">
-                    <div class="light-beam light-1"></div>
-                    <div class="light-beam light-2"></div>
-                    <div class="light-beam light-3"></div>
-                </div>
-
-                <!-- Audio Controls (Optional) -->
-                <div class="gallery-audio-controls">
-                    <button id="toggle-ambient-sound" class="audio-toggle">
-                        <i class="fas fa-volume-up"></i>
-                        <span><?php _e('Suoni Ambientali', 'marcello-scavo-tattoo'); ?></span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Gallery Data for JS -->
-            <script type="application/json" id="gallery-data">
-                <?php
-                $images_data = array();
-                foreach ($gallery_posts as $post) {
-                    $images_data[] = array(
-                        'id' => $post->ID,
-                        'title' => $post->post_title,
-                        'url' => get_the_post_thumbnail_url($post->ID, 'full'),
-                        'medium' => get_the_post_thumbnail_url($post->ID, 'medium'),
-                        'permalink' => get_permalink($post->ID)
-                    );
-                }
-
-                $gallery_data = array(
-                    'category' => $category_slug,
-                    'images' => $images_data,
-                    'settings' => array(
-                        'roomStyle' => $room_style,
-                        'enableParallax' => $enable_parallax,
-                        'enable3D' => $enable_3d
-                    )
-                );
-
-                echo json_encode($gallery_data, JSON_PRETTY_PRINT);
-                ?>
-            </script>
+        <!-- Gallery 2D Container - Il JavaScript Gallery2D creerà l'interfaccia qui -->
+        <div class="hero-3d-content" data-category="<?php echo esc_attr($category_slug); ?>">
+            <!-- L'interfaccia completa verrà generata da gallery-2d.js -->
         </div>
+
+        <!-- Gallery Data for JS -->
+        <script type="application/json" id="gallery-data">
+            <?php
+            $images_data = array();
+            foreach ($gallery_posts as $post) {
+                $images_data[] = array(
+                    'id' => $post->ID,
+                    'title' => $post->post_title,
+                    'url' => get_the_post_thumbnail_url($post->ID, 'full'),
+                    'medium' => get_the_post_thumbnail_url($post->ID, 'medium'),
+                    'permalink' => get_permalink($post->ID)
+                );
+            }
+
+            $gallery_data = array(
+                'category' => $category_slug,
+                'images' => $images_data,
+                'settings' => array(
+                    'roomStyle' => $room_style
+                )
+            );
+
+            echo json_encode($gallery_data, JSON_PRETTY_PRINT);
+            ?>
+        </script>
 
     <?php
         echo $args['after_widget'];

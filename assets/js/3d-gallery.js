@@ -85,11 +85,13 @@ class Gallery3D {
             this.activate2DCanvaMode();
             this.enableParallaxEffects();
             this.initParallaxOnly();
+            
+            // CRITICAL: Setup event listeners DOPO aver nascosto il canvas 3D
+            // Così il controllo this.canvas.style.display !== 'none' funziona correttamente
+            this.setupEventListeners();
+            
             console.log('✅ Gallery 2D pronta e attiva');
         }, 500);
-        
-        // Setup event listeners base (senza 3D)
-        this.setupEventListeners();
         
         return;
         
@@ -2206,9 +2208,10 @@ class Gallery3D {
         // Resize
         window.addEventListener('resize', () => this.onWindowResize());
         
-        // Mouse interaction
-        if (this.canvas) {
-            console.log('✅ Aggiungendo event listeners al canvas');
+        // CRITICAL: Non aggiungere event listener al canvas 3D se è nascosto
+        // In modalità 2D, il canvas 3D ha display: none e non dovrebbe ricevere eventi
+        if (this.canvas && this.canvas.style.display !== 'none') {
+            console.log('✅ Aggiungendo event listeners al canvas 3D');
             console.log('Canvas element:', this.canvas);
             console.log('Canvas z-index:', window.getComputedStyle(this.canvas).zIndex);
             console.log('Canvas pointer-events:', window.getComputedStyle(this.canvas).pointerEvents);
@@ -2225,7 +2228,7 @@ class Gallery3D {
             // Test: aggiungi stile visivo per debug
             this.canvas.style.cursor = 'grab';
         } else {
-            console.error('❌ Canvas non trovato per gli event listeners!');
+            console.log('⚠️ Canvas 3D nascosto o non presente - Skip event listeners 3D');
         }
 
         // Tour guidato
@@ -3019,10 +3022,7 @@ class Gallery3D {
                     <i class="fas fa-chevron-right"></i>
                     <span class="breadcrumb-item">Posiziona Arte</span>
                 </div>
-                <button class="btn-back-to-3d">
-                    <i class="fas fa-cube"></i>
-                    <span>Torna al 3D</span>
-                </button>
+                <!-- Pulsante "Torna al 3D" rimosso - Modalità 2D permanente -->
             </div>
 
             <!-- Contenuto principale -->
@@ -3165,13 +3165,7 @@ class Gallery3D {
                 }
             });
 
-            // Pulsante ritorna a 3D
-            const backTo3DBtn = document.querySelector('.btn-back-to-3d');
-            if (backTo3DBtn) {
-                backTo3DBtn.addEventListener('click', () => {
-                    this.toggle3DMode();
-                });
-            }
+            // Pulsante "Torna al 3D" rimosso - non più necessario
             
             console.log('✅ Event listeners setup completato');
         }, 500); // Aspetta che il DOM sia completamente renderizzato
@@ -3212,43 +3206,18 @@ class Gallery3D {
     }
 
     generateRoomOptions() {
-        // Definisci le stanze disponibili (come in Canva)
-        const rooms = [
-            {
-                id: 'modern-gallery',
-                name: 'Galleria Moderna',
-                description: 'Spazio minimalista con pareti bianche',
-                thumbnail: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjhmOWZhIi8+PHJlY3QgeD0iNTAiIHk9IjUwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2U5ZWNlZiIgc3Ryb2tlPSIjZGVlMmU2IiBzdHJva2Utd2lkdGg9IjIiLz48L3N2Zz4=',
-                popular: true
-            },
-            {
-                id: 'classic-salon',
-                name: 'Salone Classico',
-                description: 'Ambiente elegante con cornici dorate',
-                thumbnail: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmM2VmIi8+PHJlY3QgeD0iNDAiIHk9IjQwIiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjEyMCIgZmlsbD0iI2M5YjA1ZiIgc3Ryb2tlPSIjYjhhMDUwIiBzdHJva2Utd2lkdGg9IjMiLz48L3N2Zz4=',
-                popular: false
-            },
-            {
-                id: 'industrial-loft',
-                name: 'Loft Industriale',
-                description: 'Stile urbano con mattoni e metallo',
-                thumbnail: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNDM0MzQzIi8+PHJlY3QgeD0iNjAiIHk9IjYwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjNmM3NTdkIiBzdHJva2U9IiM0OTUwNTciIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==',
-                popular: false
-            },
-            {
-                id: 'contemporary-space',
-                name: 'Spazio Contemporaneo',
-                description: 'Design moderno con illuminazione LED',
-                thumbnail: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmOGY5ZmE7Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZTllY2VmOyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZykiLz48cmVjdCB4PSI1MCIgeT0iNDAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMTIwIiBmaWxsPSJub25lIiBzdHJva2U9IiNjOWIwNWYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWRhc2hhcnJheT0iMTAsNSIvPjwvc3ZnPg==',
-                popular: true
-            }
-        ];
+        // Usa le stanze disponibili passate da PHP (dinamiche dalla cartella rooms/)
+        const rooms = this.getAvailableRooms();
+        
+        if (!rooms || rooms.length === 0) {
+            return '<div class="no-rooms-message">Nessuna stanza disponibile. Aggiungi immagini nella cartella assets/images/rooms/</div>';
+        }
 
-        return rooms.map(room => `
-            <div class="room-card ${room.popular ? 'popular' : ''}" data-room-id="${room.id}">
-                ${room.popular ? '<div class="popular-badge"><i class="fas fa-star"></i> Popolare</div>' : ''}
+        return rooms.map((room, index) => `
+            <div class="room-card ${index === 0 ? 'popular' : ''}" data-room-id="${room.id}">
+                ${index === 0 ? '<div class="popular-badge"><i class="fas fa-star"></i> Popolare</div>' : ''}
                 <div class="room-thumbnail">
-                    <img src="${room.thumbnail}" alt="${room.name}">
+                    <img src="${room.url}" alt="${room.name}" loading="lazy">
                     <div class="room-overlay">
                         <button class="btn-select-room">
                             <i class="fas fa-paint-brush"></i>
@@ -3258,7 +3227,7 @@ class Gallery3D {
                 </div>
                 <div class="room-info">
                     <h3>${room.name}</h3>
-                    <p>${room.description}</p>
+                    <p>Stanza con cornici per le tue opere</p>
                     <div class="room-features">
                         <span class="feature"><i class="fas fa-palette"></i> Personalizzabile</span>
                         <span class="feature"><i class="fas fa-download"></i> HD Export</span>
@@ -3266,6 +3235,17 @@ class Gallery3D {
                 </div>
             </div>
         `).join('');
+    }
+    
+    getAvailableRooms() {
+        // Recupera le stanze disponibili da WordPress (passate via wp_localize_script)
+        if (typeof roomsData !== 'undefined' && roomsData.available_rooms) {
+            console.log(`🏠 ${roomsData.available_rooms.length} stanze disponibili dalla cartella rooms/`);
+            return roomsData.available_rooms;
+        }
+        
+        console.warn('⚠️ roomsData non disponibile, usa configurazione di fallback');
+        return [];
     }
 
     create2DGridContainer() {
@@ -3410,194 +3390,466 @@ class Gallery3D {
             return;
         }
         
-        // Genera mockup SVG basato sull'ID stanza
-        const mockupSVG = this.generateRoomMockupSVG(roomId);
+        // Trova la stanza dalle stanze disponibili
+        const rooms = this.getAvailableRooms();
+        const room = rooms.find(r => r.id === roomId);
         
+        if (!room) {
+            console.error(`❌ Stanza ${roomId} non trovata`);
+            return;
+        }
+        
+        console.log(`🖼️ Caricamento stanza: ${room.name}`);
+        console.log(`📸 Immagine background: ${room.url}`);
+        
+        // Crea il canvas con l'immagine di background - TUTTA LA STANZA È UNA DROP ZONE
         mockupContainer.innerHTML = `
-            <div class="room-mockup-canvas" data-room="${roomId}">
-                ${mockupSVG}
-                <div class="artwork-drop-zones" id="artwork-zones">
-                    <!-- Zone di drop per artwork verranno generate qui -->
-                </div>
+            <div class="room-mockup-canvas free-canvas" 
+                 data-room="${roomId}"
+                 id="free-drop-canvas"
+                 style="
+                    background-image: url('${room.url}');
+                    background-size: cover !important;
+                    background-position: center !important;
+                    background-repeat: no-repeat !important;
+                    position: relative;
+                    width: 100%;
+                    min-height: 600px;
+                    height: auto;
+                    cursor: crosshair;
+                ">
+                <!-- Le immagini verranno droppate liberamente qui -->
             </div>
         `;
         
-        // Genera zone di drop
-        this.generateArtworkDropZones(roomId);
-    }
-
-    generateRoomMockupSVG(roomId) {
-        const mockups = {
-            'modern-gallery': `
-                <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Pavimento -->
-                    <rect width="800" height="150" y="450" fill="#f8f9fa"/>
-                    
-                    <!-- Parete centrale -->
-                    <rect width="800" height="450" fill="linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%)"/>
-                    
-                    <!-- Battiscopa -->
-                    <rect width="800" height="10" y="440" fill="#e9ecef"/>
-                    
-                    <!-- Illuminazione -->
-                    <circle cx="200" cy="50" r="5" fill="#fff3cd" opacity="0.8"/>
-                    <circle cx="400" cy="50" r="5" fill="#fff3cd" opacity="0.8"/>
-                    <circle cx="600" cy="50" r="5" fill="#fff3cd" opacity="0.8"/>
-                    
-                    <!-- Pareti laterali (prospettiva) -->
-                    <polygon points="0,0 100,80 100,520 0,450" fill="#f1f3f4"/>
-                    <polygon points="800,0 700,80 700,520 800,450" fill="#f1f3f4"/>
-                </svg>
-            `,
-            'classic-salon': `
-                <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Pavimento parquet -->
-                    <rect width="800" height="150" y="450" fill="url(#parquet)"/>
-                    
-                    <!-- Parete con boiserie -->
-                    <rect width="800" height="450" fill="#f5f3ef"/>
-                    <rect width="800" height="150" y="300" fill="#e8dcc0"/>
-                    
-                    <!-- Cornice decorativa -->
-                    <rect width="800" height="20" y="280" fill="#c9b05f"/>
-                    
-                    <!-- Lampadari -->
-                    <g transform="translate(400,40)">
-                        <ellipse cx="0" cy="0" rx="30" ry="15" fill="#ffd700"/>
-                        <circle cx="0" cy="15" r="8" fill="#ffed4a"/>
-                    </g>
-                    
-                    <defs>
-                        <pattern id="parquet" x="0" y="0" width="40" height="20" patternUnits="userSpaceOnUse">
-                            <rect width="40" height="20" fill="#8B4513"/>
-                            <rect width="38" height="18" x="1" y="1" fill="#A0522D"/>
-                        </pattern>
-                    </defs>
-                </svg>
-            `,
-            'industrial-loft': `
-                <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Pavimento cemento -->
-                    <rect width="800" height="150" y="450" fill="#6c757d"/>
-                    
-                    <!-- Parete mattoni -->
-                    <rect width="800" height="450" fill="url(#brick)"/>
-                    
-                    <!-- Travi metalliche -->
-                    <rect width="800" height="15" y="40" fill="#495057"/>
-                    <rect width="800" height="15" y="120" fill="#495057"/>
-                    
-                    <!-- Illuminazione industriale -->
-                    <g transform="translate(200,45)">
-                        <rect x="-15" y="0" width="30" height="40" fill="#343a40"/>
-                        <ellipse cx="0" cy="40" rx="25" ry="10" fill="#fff3cd" opacity="0.6"/>
-                    </g>
-                    
-                    <defs>
-                        <pattern id="brick" x="0" y="0" width="80" height="40" patternUnits="userSpaceOnUse">
-                            <rect width="80" height="40" fill="#8B4513"/>
-                            <rect width="78" height="18" x="1" y="1" fill="#A0522D"/>
-                            <rect width="78" height="18" x="1" y="21" fill="#CD853F"/>
-                        </pattern>
-                    </defs>
-                </svg>
-            `,
-            'contemporary-space': `
-                <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Pavimento resina -->
-                    <rect width="800" height="150" y="450" fill="url(#resin)"/>
-                    
-                    <!-- Parete con illuminazione LED -->
-                    <rect width="800" height="450" fill="linear-gradient(90deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%)"/>
-                    
-                    <!-- Strisce LED -->
-                    <rect width="800" height="3" y="100" fill="#00ff88" opacity="0.7"/>
-                    <rect width="800" height="3" y="350" fill="#00ff88" opacity="0.7"/>
-                    
-                    <!-- Elementi geometrici -->
-                    <polygon points="0,200 50,180 50,280 0,300" fill="#e9ecef"/>
-                    <polygon points="800,200 750,180 750,280 800,300" fill="#e9ecef"/>
-                    
-                    <defs>
-                        <pattern id="resin" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                            <rect width="100" height="100" fill="#dee2e6"/>
-                            <circle cx="50" cy="50" r="20" fill="#ced4da" opacity="0.3"/>
-                        </pattern>
-                    </defs>
-                </svg>
-            `
+        // Pre-carica l'immagine per assicurarsi che sia disponibile
+        const img = new Image();
+        img.onload = () => {
+            console.log('✅ Immagine stanza caricata con successo');
+            // Inizializza il sistema di free drop
+            this.initializeFreeDropSystem();
         };
-        
-        return mockups[roomId] || mockups['modern-gallery'];
-    }
-
-    generateArtworkDropZones(roomId) {
-        const zonesContainer = document.getElementById('artwork-zones');
-        if (!zonesContainer) return;
-        
-        // CRITICAL: Pulisci container prima di generare nuove zone
-        zonesContainer.innerHTML = '';
-        
-        // Zone predefinite per ogni tipo di stanza
-        const zones = {
-            'modern-gallery': [
-                { x: 20, y: 25, width: 15, height: 20, id: 'zone-1' },
-                { x: 40, y: 25, width: 20, height: 25, id: 'zone-2' },
-                { x: 65, y: 25, width: 15, height: 20, id: 'zone-3' }
-            ],
-            'classic-salon': [
-                { x: 15, y: 20, width: 25, height: 30, id: 'zone-1' },
-                { x: 55, y: 20, width: 25, height: 30, id: 'zone-2' }
-            ],
-            'industrial-loft': [
-                { x: 25, y: 30, width: 20, height: 25, id: 'zone-1' },
-                { x: 55, y: 30, width: 20, height: 25, id: 'zone-2' }
-            ],
-            'contemporary-space': [
-                { x: 20, y: 25, width: 18, height: 22, id: 'zone-1' },
-                { x: 42, y: 25, width: 18, height: 22, id: 'zone-2' },
-                { x: 64, y: 25, width: 18, height: 22, id: 'zone-3' }
-            ]
+        img.onerror = () => {
+            console.error('❌ Errore caricamento immagine stanza:', room.url);
         };
+        img.src = room.url;
+    }
+    
+    initializeFreeDropSystem() {
+        console.log('🎨 Inizializzazione sistema free drop...');
         
-        const roomZones = zones[roomId] || zones['modern-gallery'];
+        const canvas = document.getElementById('free-drop-canvas');
+        if (!canvas) {
+            console.error('❌ Canvas non trovato');
+            return;
+        }
         
-        roomZones.forEach(zone => {
-            const dropZone = document.createElement('div');
-            dropZone.className = 'artwork-drop-zone';
-            dropZone.dataset.zoneId = zone.id;
-            
-            // CRITICAL: Stili CSS fissi per evitare spostamenti
-            dropZone.style.cssText = `
-                position: absolute !important;
-                left: ${zone.x}% !important;
-                top: ${zone.y}% !important;
-                width: ${zone.width}% !important;
-                height: ${zone.height}% !important;
-                border: 2px dashed #007bff;
-                border-radius: 8px;
-                background: rgba(0, 123, 255, 0.1);
-                opacity: 0;
-                transition: opacity 0.3s ease;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                z-index: 2;
-                box-sizing: border-box;
-            `;
-            
-            dropZone.innerHTML = `
-                <div class="drop-zone-content">
-                    <i class="fas fa-plus"></i>
-                    <span>Trascina qui</span>
-                </div>
-            `;
-            
-            zonesContainer.appendChild(dropZone);
+        // Stato del sistema
+        this.placedArtworks = []; // Array di artwork posizionate
+        this.selectedArtwork = null; // Artwork selezionata per ridimensionamento
+        this.resizeMode = false; // Modalità ridimensionamento attiva/disattiva
+        this.resizeHandle = null; // Handle di resize attivo
+        
+        // Event listeners per il canvas
+        canvas.addEventListener('dragover', (e) => this.handleFreeCanvasDragOver(e));
+        canvas.addEventListener('drop', (e) => this.handleFreeCanvasDrop(e));
+        
+        console.log('✅ Sistema free drop inizializzato');
+    }
+    
+    handleFreeCanvasDragOver(e) {
+        // BLOCCA drag & drop se siamo in modalità resize
+        if (this.resizeMode) {
+            console.log('🚫 Drag & drop BLOCCATO - modalità resize attiva');
+            return;
+        }
+        
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+        
+        // Feedback visivo
+        const canvas = e.currentTarget;
+        canvas.style.opacity = '0.9';
+    }
+    
+    handleFreeCanvasDrop(e) {
+        // BLOCCA drag & drop se siamo in modalità resize
+        if (this.resizeMode) {
+            console.log('🚫 Drop BLOCCATO - modalità resize attiva');
+            return;
+        }
+        
+        e.preventDefault();
+        
+        const canvas = e.currentTarget;
+        canvas.style.opacity = '1';
+        
+        if (!this.draggedArtwork) return;
+        
+        // Calcola posizione relativa al canvas
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Calcola posizione in percentuale
+        const xPercent = (x / rect.width) * 100;
+        const yPercent = (y / rect.height) * 100;
+        
+        console.log(`📍 Drop at: ${xPercent.toFixed(2)}%, ${yPercent.toFixed(2)}%`);
+        
+        // Crea l'artwork sul canvas
+        this.placeArtworkOnCanvas(this.draggedArtwork, xPercent, yPercent);
+        
+        // Reset drag state
+        this.draggedArtwork = null;
+    }
+    
+    placeArtworkOnCanvas(artworkData, xPercent, yPercent) {
+        const canvas = document.getElementById('free-drop-canvas');
+        if (!canvas) return;
+        
+        // Trova i dati dell'artwork
+        const artworkIndex = parseInt(artworkData.artworkIndex);
+        const artwork = this.galleryData.images[artworkIndex];
+        
+        if (!artwork) {
+            console.error('❌ Artwork non trovato');
+            return;
+        }
+        
+        // Crea un ID unico per questa istanza
+        const artworkInstanceId = `artwork-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        
+        // Crea l'elemento immagine
+        const artworkElement = document.createElement('div');
+        artworkElement.className = 'placed-artwork-free';
+        artworkElement.dataset.artworkId = artworkInstanceId;
+        artworkElement.dataset.originalId = artwork.id;
+        
+        // Dimensioni iniziali (15% larghezza canvas)
+        const initialWidth = 15;
+        const initialHeight = 20; // Proporzione 3:4
+        
+        artworkElement.style.cssText = `
+            position: absolute;
+            left: ${xPercent - (initialWidth / 2)}%;
+            top: ${yPercent - (initialHeight / 2)}%;
+            width: ${initialWidth}%;
+            height: ${initialHeight}%;
+            cursor: move;
+            z-index: 10;
+            transition: box-shadow 0.2s ease;
+        `;
+        
+        artworkElement.innerHTML = `
+            <img src="${artwork.url}" 
+                 alt="${artwork.title}" 
+                 style="
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                    pointer-events: none;
+                    user-select: none;
+                 ">
+        `;
+        
+        // Event listeners per selezione e movimento
+        artworkElement.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.selectArtworkForResize(artworkElement);
         });
         
-        console.log(`✅ Generate ${roomZones.length} zone FISSE per ${roomId}`);
+        artworkElement.addEventListener('mousedown', (e) => {
+            // BLOCCA IMMEDIATAMENTE se è un resize handle
+            if (e.target.classList.contains('resize-handle')) {
+                console.log('🚫 Mousedown su handle - BLOCCO drag artwork');
+                return;
+            }
+            this.startDragArtwork(e, artworkElement);
+        });
+        
+        canvas.appendChild(artworkElement);
+        
+        // Salva nei placed artworks
+        this.placedArtworks.push({
+            id: artworkInstanceId,
+            element: artworkElement,
+            data: artwork
+        });
+        
+        console.log(`✅ Artwork "${artwork.title}" posizionato a ${xPercent.toFixed(1)}%, ${yPercent.toFixed(1)}%`);
+    }
+    
+    selectArtworkForResize(artworkElement) {
+        console.log(`🎯 selectArtworkForResize chiamato`);
+        console.log(`🎯 this.resizeMode è: ${this.resizeMode}`);
+        
+        // Se non siamo in modalità resize, non fare nulla
+        if (!this.resizeMode) {
+            console.warn('⚠️ Modalità resize NON attiva! Attiva prima il bottone "Ridimensiona"');
+            console.log('💡 Attiva la modalità "Ridimensiona" per modificare le dimensioni');
+            return;
+        }
+        
+        // Deseleziona precedente
+        if (this.selectedArtwork) {
+            console.log('🔄 Deseleziono artwork precedente');
+            this.selectedArtwork.classList.remove('selected-for-resize');
+            this.removeResizeHandles(this.selectedArtwork);
+        }
+        
+        // Seleziona nuovo
+        this.selectedArtwork = artworkElement;
+        artworkElement.classList.add('selected-for-resize');
+        console.log('✅ Classe "selected-for-resize" aggiunta');
+        
+        // Aggiungi handle di resize
+        console.log('🔨 Aggiunta handle di resize...');
+        this.addResizeHandles(artworkElement);
+        
+        console.log('✅ Artwork selezionato per ridimensionamento - Handle dovrebbero essere visibili ora');
+    }
+    
+    addResizeHandles(artworkElement) {
+        // Rimuovi handle esistenti
+        this.removeResizeHandles(artworkElement);
+        
+        // Cambia cursor dell'artwork per indicare che è selezionata
+        artworkElement.style.cursor = 'default';
+        
+        // 8 handle: 4 angoli + 4 lati
+        const handles = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
+        
+        handles.forEach(position => {
+            const handle = document.createElement('div');
+            handle.className = `resize-handle resize-handle-${position}`;
+            handle.dataset.position = position;
+            
+            handle.addEventListener('mousedown', (e) => {
+                // BLOCCA TUTTO IMMEDIATAMENTE
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                e.preventDefault();
+                console.log(`📍 Click su handle ${position} - EVENTO BLOCCATO`);
+                this.startResize(e, artworkElement, position);
+            }, true); // USA CAPTURE PHASE
+            
+            artworkElement.appendChild(handle);
+        });
+        
+        console.log(`✅ ${handles.length} handle aggiunti all'artwork`);
+    }
+    
+    removeResizeHandles(artworkElement) {
+        const handles = artworkElement.querySelectorAll('.resize-handle');
+        handles.forEach(handle => handle.remove());
+        
+        // Ripristina cursor originale
+        artworkElement.style.cursor = 'move';
+        
+        console.log('🗑️ Handle rimossi');
+    }
+    
+    startResize(e, artworkElement, position) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log(`🔧 Inizio resize da handle: ${position}`);
+        console.log(`🔧 Elemento da ridimensionare:`, artworkElement);
+        console.log(`🔧 Classe elemento: "${artworkElement.className}"`);
+        console.log(`🔧 ID elemento: "${artworkElement.id}"`);
+        console.log(`🔧 Dataset artworkId: "${artworkElement.dataset.artworkId || 'NESSUNO!'}"`);
+        console.log(`🔧 TagName:`, artworkElement.tagName);
+        console.log(`🔧 Parent ID:`, artworkElement.parentElement?.id || 'no parent id');
+        
+        // VERIFICA: È davvero un artwork o è il canvas?
+        if (artworkElement.id === 'free-drop-canvas') {
+            console.error('❌❌❌ ERRORE CRITICO: Stai cercando di ridimensionare il CANVAS, non l\'artwork!');
+            console.error('Questo è il bug! artworkElement è il canvas invece dell\'artwork!');
+            return;
+        }
+        
+        // VERIFICA CRITICA: Stiamo modificando l'elemento giusto?
+        if (artworkElement.id !== 'free-drop-canvas' && !artworkElement.classList.contains('placed-artwork-free')) {
+            console.error('❌❌❌ ERRORE: Elemento sbagliato! Non è un artwork!');
+            console.error('Elemento ricevuto:', artworkElement);
+            return; // BLOCCA il resize se non è l'elemento giusto
+        }
+        
+        const canvas = document.getElementById('free-drop-canvas');
+        const canvasRect = canvas.getBoundingClientRect();
+        const artworkRect = artworkElement.getBoundingClientRect();
+        
+        console.log(`📏 Canvas size: ${canvasRect.width}x${canvasRect.height}`);
+        console.log(`📏 Artwork size: ${artworkRect.width}x${artworkRect.height}`);
+        
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startWidth = artworkRect.width;
+        const startHeight = artworkRect.height;
+        const startLeft = artworkRect.left - canvasRect.left;
+        const startTop = artworkRect.top - canvasRect.top;
+        
+        let moveCount = 0;
+        const handleMouseMove = (e) => {
+            moveCount++;
+            if (moveCount === 1) {
+                console.log('✅✅✅ MOUSEMOVE FUNZIONA! ✅✅✅');
+            }
+            
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+            
+            let newWidth = startWidth;
+            let newHeight = startHeight;
+            let newLeft = startLeft;
+            let newTop = startTop;
+            
+            // Calcola nuove dimensioni basate sulla posizione dell'handle
+            if (position.includes('e')) newWidth = startWidth + deltaX;
+            if (position.includes('w')) {
+                newWidth = startWidth - deltaX;
+                newLeft = startLeft + deltaX;
+            }
+            if (position.includes('s')) newHeight = startHeight + deltaY;
+            if (position.includes('n')) {
+                newHeight = startHeight - deltaY;
+                newTop = startTop + deltaY;
+            }
+            
+            // Limiti minimi (50px)
+            if (newWidth > 50 && newHeight > 50) {
+                // MODIFICA SOLO L'ARTWORK ELEMENT
+                artworkElement.style.width = `${newWidth}px`;
+                artworkElement.style.height = `${newHeight}px`;
+                artworkElement.style.left = `${newLeft}px`;
+                artworkElement.style.top = `${newTop}px`;
+            }
+        };
+        
+        const handleMouseUp = (e) => {
+            console.log('🛑 MOUSE UP - Rimozione listeners');
+            console.log('🛑 Mouse UP clientX:', e.clientX, 'clientY:', e.clientY);
+            console.log('🛑 Start X:', startX, 'Start Y:', startY);
+            console.log('🛑 Movimento totale: deltaX:', e.clientX - startX, 'deltaY:', e.clientY - startY);
+            document.removeEventListener('mousemove', handleMouseMove, { capture: true });
+            document.removeEventListener('mouseup', handleMouseUp, { capture: true });
+            console.log('✅ Ridimensionamento completato');
+        };
+        
+        try {
+            console.log('👂 Aggiungendo event listeners...');
+            console.log('handleMouseMove function:', typeof handleMouseMove);
+            console.log('handleMouseUp function:', typeof handleMouseUp);
+            
+            document.addEventListener('mousemove', handleMouseMove, true);
+            document.addEventListener('mouseup', handleMouseUp, true);
+            
+            console.log('✅ LISTENERS AGGIUNTI! Ora muovi il mouse...');
+            
+            // TEST: forza un log dopo 100ms per vedere se i listener sono attivi
+            setTimeout(() => {
+                console.log('⏰ Timeout 100ms: listeners dovrebbero essere attivi');
+            }, 100);
+            
+        } catch(error) {
+            console.error('❌ ERRORE nell\'aggiungere listeners:', error);
+        }
+    }
+    
+    startDragArtwork(e, artworkElement) {
+        // CRITICAL: Non permettere drag se stiamo cliccando su un resize handle
+        if (e.target.classList.contains('resize-handle')) {
+            console.log('🛑 Click su handle - non attivare drag');
+            return;
+        }
+        
+        // Non permettere drag se siamo in modalità resize
+        if (this.resizeMode) {
+            console.log('🛑 Modalità resize attiva - drag disabilitato');
+            return;
+        }
+        
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log('👆 Inizio drag artwork');
+        
+        const canvas = document.getElementById('free-drop-canvas');
+        const canvasRect = canvas.getBoundingClientRect();
+        
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const artworkRect = artworkElement.getBoundingClientRect();
+        const offsetX = startX - artworkRect.left;
+        const offsetY = startY - artworkRect.top;
+        
+        const handleMouseMove = (e) => {
+            const x = e.clientX - canvasRect.left - offsetX;
+            const y = e.clientY - canvasRect.top - offsetY;
+            
+            const xPercent = (x / canvasRect.width) * 100;
+            const yPercent = (y / canvasRect.height) * 100;
+            
+            artworkElement.style.left = `${xPercent}%`;
+            artworkElement.style.top = `${yPercent}%`;
+        };
+        
+        const handleMouseUp = () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+            console.log('✅ Fine drag artwork');
+        };
+        
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    }
+    
+    toggleResizeMode(enabled) {
+        this.resizeMode = enabled;
+        
+        console.log(`🔧 toggleResizeMode chiamato con: ${enabled}`);
+        console.log(`🔧 this.resizeMode ora è: ${this.resizeMode}`);
+        
+        const canvas = document.getElementById('free-drop-canvas');
+        if (canvas) {
+            if (enabled) {
+                canvas.style.cursor = 'default';
+                console.log('✅ Modalità ridimensionamento ATTIVATA - Ora puoi cliccare sulle artwork per selezionarle');
+            } else {
+                canvas.style.cursor = 'crosshair';
+                // Deseleziona artwork
+                if (this.selectedArtwork) {
+                    this.selectedArtwork.classList.remove('selected-for-resize');
+                    this.removeResizeHandles(this.selectedArtwork);
+                    this.selectedArtwork = null;
+                }
+                console.log('✅ Modalità ridimensionamento DISATTIVATA');
+            }
+        } else {
+            console.error('❌ Canvas free-drop-canvas non trovato!');
+        }
+    }
+
+    generateDefaultFrames() {
+        // Metodo deprecato - non più utilizzato con free drop
+        return [];
+    }
+
+    // METODO DEPRECATO - Ora usiamo immagini reali da assets/images/rooms/
+    generateRoomMockupSVG(roomId) {
+        console.warn('⚠️ generateRoomMockupSVG è deprecato - Ora usiamo immagini reali');
+        return ''; // Non più necessario
+    }
+
+    // METODI DEPRECATI - Sistema drop zone fisse non più utilizzato
+    generateArtworkDropZones(roomId, frames) {
+        console.warn('⚠️ generateArtworkDropZones deprecato - Ora si usa free drop system');
+    }
+
+    prePopulateFrames(frames) {
+        console.warn('⚠️ prePopulateFrames deprecato - Ora si usa free drop system');
     }
 
     handleDragStart(e) {
@@ -4145,7 +4397,14 @@ class Gallery3D {
         // Aggiorna cursore e comportamenti
         const mockup = document.querySelector('.room-mockup-canvas');
         if (mockup) {
-            mockup.className = `room-mockup-canvas tool-${tool}`;
+            mockup.className = `room-mockup-canvas free-canvas tool-${tool}`;
+        }
+        
+        // Attiva/disattiva modalità resize
+        if (tool === 'resize') {
+            this.toggleResizeMode(true);
+        } else {
+            this.toggleResizeMode(false);
         }
         
         console.log(`🛠️ Tool attivo: ${tool}`);
@@ -4605,298 +4864,54 @@ class Gallery3D {
         });
     }
 
-    toggleResizeMode(card) {
-        // Disabilita tutti gli altri resize modes
-        this.disableAllResizeModes();
-        
-        // Attiva resize mode su questa carta
-        this.enableResizeMode(card);
-    }
-
-    enableResizeMode(card) {
-        card.classList.add('resizable');
-        
-        // Crea i punti di controllo
-        const handles = this.createResizeHandles();
-        card.appendChild(handles);
-        
-        // Crea toolbar
-        const toolbar = this.createResizeToolbar();
-        card.appendChild(toolbar);
-        
-        // Crea indicatore dimensioni
-        const dimensions = this.createDimensionsIndicator(card);
-        card.appendChild(dimensions);
-        
-        // Attiva listeners per il ridimensionamento
-        this.activateResizeListeners(card);
-        
-        console.log('🎯 Modalità ridimensionamento attivata');
-    }
-
+    // ========================================
+    // METODI DEPRECATI - GRIGLIA 2D
+    // Questi metodi erano per la vecchia griglia 2D
+    // Ora si usa il nuovo sistema free drop (vedi sopra)
+    // ========================================
+    
+    /*
+    toggleResizeMode(card) - DEPRECATO
+    enableResizeMode(card) - DEPRECATO  
+    disableAllResizeModes() - DEPRECATO
+    createResizeHandles() - DEPRECATO (sostituito da addResizeHandles)
+    createResizeToolbar() - DEPRECATO
+    createDimensionsIndicator(card) - DEPRECATO
+    activateResizeListeners(card) - DEPRECATO (sostituito da startResize)
+    */
+    
+    // Placeholder per evitare errori se chiamati
     disableAllResizeModes() {
-        const resizableCards = document.querySelectorAll('.canva-card.resizable');
-        resizableCards.forEach(card => {
-            card.classList.remove('resizable');
-            
-            // Rimuovi elementi di controllo
-            const handles = card.querySelector('.resize-handles');
-            const toolbar = card.querySelector('.resize-toolbar');
-            const dimensions = card.querySelector('.resize-dimensions');
-            
-            if (handles) handles.remove();
-            if (toolbar) toolbar.remove();
-            if (dimensions) dimensions.remove();
-        });
-        
-        // Nascondi griglia di allineamento
-        this.hideAlignmentGrid();
+        console.warn('⚠️ disableAllResizeModes deprecato - non più necessario con free drop system');
     }
-
-    createResizeHandles() {
-        const container = document.createElement('div');
-        container.className = 'resize-handles';
-        
-        // 8 punti di controllo + 1 per rotazione
-        const positions = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w', 'rotate'];
-        
-        positions.forEach(pos => {
-            const handle = document.createElement('div');
-            handle.className = `resize-handle ${pos}`;
-            handle.dataset.position = pos;
-            container.appendChild(handle);
-        });
-        
-        return container;
-    }
-
+    
     createResizeToolbar() {
-        const toolbar = document.createElement('div');
-        toolbar.className = 'resize-toolbar';
-        
-        toolbar.innerHTML = `
-            <button class="resize-tool-btn" data-tool="lock-ratio" title="Mantieni proporzioni">
-                <i class="fas fa-lock"></i>
-            </button>
-            <button class="resize-tool-btn" data-tool="snap" title="Snap alla griglia">
-                <i class="fas fa-th"></i>
-            </button>
-            <button class="resize-tool-btn" data-tool="center" title="Centra">
-                <i class="fas fa-crosshairs"></i>
-            </button>
-            <button class="resize-tool-btn" data-tool="reset" title="Reset dimensioni">
-                <i class="fas fa-undo"></i>
-            </button>
-            <button class="resize-tool-btn" data-tool="done" title="Completa">
-                <i class="fas fa-check"></i>
-            </button>
-        `;
-        
-        return toolbar;
+        console.warn('⚠️ createResizeToolbar deprecato');
+        return document.createElement('div');
     }
-
+    
     createDimensionsIndicator(card) {
-        const indicator = document.createElement('div');
-        indicator.className = 'resize-dimensions';
-        
-        const rect = card.getBoundingClientRect();
-        indicator.textContent = `${Math.round(rect.width)} × ${Math.round(rect.height)}px`;
-        
-        return indicator;
+        console.warn('⚠️ createDimensionsIndicator deprecato');
+        return document.createElement('div');
     }
-
+    
     activateResizeListeners(card) {
-        const handles = card.querySelectorAll('.resize-handle');
-        const toolbar = card.querySelector('.resize-toolbar');
-        
-        // Stato di ridimensionamento
-        this.resizeState = {
-            isResizing: false,
-            startPos: { x: 0, y: 0 },
-            startSize: { width: 0, height: 0 },
-            startPosition: { x: 0, y: 0 },
-            handleType: '',
-            lockRatio: false,
-            snapToGrid: false,
-            originalRatio: 1
-        };
-        
-        // Handle events per mouse e touch
-        handles.forEach(handle => {
-            // Mouse events
-            handle.addEventListener('mousedown', (e) => this.startResize(e, card));
-            
-            // Touch events per mobile
-            handle.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                const touch = e.touches[0];
-                const mouseEvent = new MouseEvent('mousedown', {
-                    clientX: touch.clientX,
-                    clientY: touch.clientY
-                });
-                this.startResize(mouseEvent, card);
-            }, { passive: false });
-        });
-        
-        // Toolbar events
-        toolbar.addEventListener('click', (e) => {
-            const tool = e.target.closest('.resize-tool-btn');
-            if (tool) {
-                this.handleToolbarAction(tool.dataset.tool, card);
-            }
-        });
-        
-        // Mouse events globali
-        document.addEventListener('mousemove', (e) => this.updateResize(e, card));
-        document.addEventListener('mouseup', (e) => this.stopResize(e, card));
-        
-        // Touch events globali per mobile
-        document.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            this.updateResize(mouseEvent, card);
-        }, { passive: false });
-        
-        document.addEventListener('touchend', (e) => {
-            const mouseEvent = new MouseEvent('mouseup', {});
-            this.stopResize(mouseEvent, card);
-        });
+        console.warn('⚠️ activateResizeListeners deprecato - non più necessario con free drop system');
     }
-
-    startResize(e, card) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        const handle = e.target;
-        const cardRect = card.getBoundingClientRect();
-        
-        this.resizeState.isResizing = true;
-        this.resizeState.handleType = handle.dataset.position;
-        this.resizeState.startPos = { x: e.clientX, y: e.clientY };
-        this.resizeState.startSize = { 
-            width: cardRect.width, 
-            height: cardRect.height 
-        };
-        this.resizeState.startPosition = { 
-            x: cardRect.left, 
-            y: cardRect.top 
-        };
-        this.resizeState.originalRatio = cardRect.width / cardRect.height;
-        
-        handle.classList.add('active');
-        document.body.style.cursor = handle.style.cursor;
-        
-        // Mostra griglia se snap è attivo
-        if (this.resizeState.snapToGrid) {
-            this.showAlignmentGrid();
-        }
-        
-        console.log(`🎯 Iniziato resize da handle: ${this.resizeState.handleType}`);
-    }
-
+    
+    // NOTA: Il metodo startResize corretto per il free drop è alla riga ~3611
+    // Questi metodi sotto sono deprecati e non devono essere usati
+    
     updateResize(e, card) {
-        if (!this.resizeState.isResizing) return;
-        
-        e.preventDefault();
-        
-        const deltaX = e.clientX - this.resizeState.startPos.x;
-        const deltaY = e.clientY - this.resizeState.startPos.y;
-        
-        let newWidth = this.resizeState.startSize.width;
-        let newHeight = this.resizeState.startSize.height;
-        let newLeft = this.resizeState.startPosition.x;
-        let newTop = this.resizeState.startPosition.y;
-        
-        // Calcola nuove dimensioni in base al handle
-        switch (this.resizeState.handleType) {
-            case 'nw':
-                newWidth = Math.max(100, this.resizeState.startSize.width - deltaX);
-                newHeight = Math.max(100, this.resizeState.startSize.height - deltaY);
-                newLeft = this.resizeState.startPosition.x + deltaX;
-                newTop = this.resizeState.startPosition.y + deltaY;
-                break;
-            case 'n':
-                newHeight = Math.max(100, this.resizeState.startSize.height - deltaY);
-                newTop = this.resizeState.startPosition.y + deltaY;
-                break;
-            case 'ne':
-                newWidth = Math.max(100, this.resizeState.startSize.width + deltaX);
-                newHeight = Math.max(100, this.resizeState.startSize.height - deltaY);
-                newTop = this.resizeState.startPosition.y + deltaY;
-                break;
-            case 'e':
-                newWidth = Math.max(100, this.resizeState.startSize.width + deltaX);
-                break;
-            case 'se':
-                newWidth = Math.max(100, this.resizeState.startSize.width + deltaX);
-                newHeight = Math.max(100, this.resizeState.startSize.height + deltaY);
-                break;
-            case 's':
-                newHeight = Math.max(100, this.resizeState.startSize.height + deltaY);
-                break;
-            case 'sw':
-                newWidth = Math.max(100, this.resizeState.startSize.width - deltaX);
-                newHeight = Math.max(100, this.resizeState.startSize.height + deltaY);
-                newLeft = this.resizeState.startPosition.x + deltaX;
-                break;
-            case 'w':
-                newWidth = Math.max(100, this.resizeState.startSize.width - deltaX);
-                newLeft = this.resizeState.startPosition.x + deltaX;
-                break;
-            case 'rotate':
-                this.handleRotation(e, card);
-                return;
-        }
-        
-        // Mantieni proporzioni se attivo
-        if (this.resizeState.lockRatio) {
-            const widthRatio = newWidth / this.resizeState.startSize.width;
-            const heightRatio = newHeight / this.resizeState.startSize.height;
-            const ratio = Math.max(widthRatio, heightRatio);
-            
-            newWidth = this.resizeState.startSize.width * ratio;
-            newHeight = this.resizeState.startSize.height * ratio;
-        }
-        
-        // Snap alla griglia se attivo
-        if (this.resizeState.snapToGrid) {
-            const snapSize = 20;
-            newWidth = Math.round(newWidth / snapSize) * snapSize;
-            newHeight = Math.round(newHeight / snapSize) * snapSize;
-        }
-        
-        // Applica le nuove dimensioni
-        this.applyCardSize(card, newWidth, newHeight);
-        
-        // Aggiorna indicatore dimensioni
-        this.updateDimensionsIndicator(card, newWidth, newHeight);
+        console.warn('⚠️ updateResize(card) deprecato - usa il nuovo sistema con artwork');
     }
 
     stopResize(e, card) {
-        if (!this.resizeState.isResizing) return;
-        
-        this.resizeState.isResizing = false;
-        document.body.style.cursor = '';
-        
-        // Rimuovi classe active dai handle
-        const activeHandle = card.querySelector('.resize-handle.active');
-        if (activeHandle) {
-            activeHandle.classList.remove('active');
-        }
-        
-        // Nascondi griglia
-        this.hideAlignmentGrid();
-        
-        console.log('✅ Resize completato');
+        console.warn('⚠️ stopResize(card) deprecato');
     }
 
     applyCardSize(card, width, height) {
-        card.style.width = `${width}px`;
-        card.style.height = `${height}px`;
+        console.warn('⚠️ applyCardSize deprecato');
         
         // Mantieni aspect ratio dell'immagine
         const img = card.querySelector('.card-image');
@@ -4908,88 +4923,27 @@ class Gallery3D {
     }
 
     updateDimensionsIndicator(card, width, height) {
-        const indicator = card.querySelector('.resize-dimensions');
-        if (indicator) {
-            indicator.textContent = `${Math.round(width)} × ${Math.round(height)}px`;
-        }
+        console.warn('⚠️ updateDimensionsIndicator deprecato');
     }
 
     handleToolbarAction(tool, card) {
-        const toolBtn = card.querySelector(`[data-tool="${tool}"]`);
-        
-        switch (tool) {
-            case 'lock-ratio':
-                this.resizeState.lockRatio = !this.resizeState.lockRatio;
-                toolBtn.classList.toggle('active', this.resizeState.lockRatio);
-                break;
-            case 'snap':
-                this.resizeState.snapToGrid = !this.resizeState.snapToGrid;
-                toolBtn.classList.toggle('active', this.resizeState.snapToGrid);
-                break;
-            case 'center':
-                this.centerCard(card);
-                break;
-            case 'reset':
-                this.resetCardSize(card);
-                break;
-            case 'done':
-                this.disableAllResizeModes();
-                break;
-        }
+        console.warn('⚠️ handleToolbarAction deprecato');
     }
 
     centerCard(card) {
-        const container = card.closest('.artworks-grid');
-        const containerRect = container.getBoundingClientRect();
-        const cardRect = card.getBoundingClientRect();
-        
-        const centerX = (containerRect.width - cardRect.width) / 2;
-        const centerY = (containerRect.height - cardRect.height) / 2;
-        
-        card.style.position = 'relative';
-        card.style.left = `${centerX}px`;
-        card.style.top = `${centerY}px`;
+        console.warn('⚠️ centerCard deprecato');
     }
 
     resetCardSize(card) {
-        card.style.width = '';
-        card.style.height = '';
-        card.style.position = '';
-        card.style.left = '';
-        card.style.top = '';
-        
-        this.updateDimensionsIndicator(card, 280, 210); // Dimensioni di default
+        console.warn('⚠️ resetCardSize deprecato');
     }
 
     showAlignmentGrid() {
-        let grid = document.querySelector('.alignment-grid');
-        if (!grid) {
-            grid = document.createElement('div');
-            grid.className = 'alignment-grid';
-            document.body.appendChild(grid);
-            
-            // Crea linee griglia
-            for (let i = 0; i <= 20; i++) {
-                const vLine = document.createElement('div');
-                vLine.className = 'grid-line vertical';
-                vLine.style.left = `${(i / 20) * 100}%`;
-                grid.appendChild(vLine);
-                
-                const hLine = document.createElement('div');
-                hLine.className = 'grid-line horizontal';
-                hLine.style.top = `${(i / 20) * 100}%`;
-                grid.appendChild(hLine);
-            }
-        }
-        
-        grid.classList.add('visible');
+        console.warn('⚠️ showAlignmentGrid deprecato');
     }
 
     hideAlignmentGrid() {
-        const grid = document.querySelector('.alignment-grid');
-        if (grid) {
-            grid.classList.remove('visible');
-        }
+        console.warn('⚠️ hideAlignmentGrid deprecato');
     }
 
     handleRotation(e, card) {
